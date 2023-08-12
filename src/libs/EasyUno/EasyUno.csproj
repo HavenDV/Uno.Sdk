@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
+  <PropertyGroup Label="Nuget">
+    <Description>Easy configuration for Uno projects in 2 lines of code.</Description>
+    <PackageTags>api;client;sdk;dotnet;swagger;openapi;specification;cohere;generated;nswag</PackageTags>
+  </PropertyGroup>
+
+</Project>
