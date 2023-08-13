@@ -3,9 +3,9 @@
     "path": "test.sln",
     "projects": [
       "test.Mobile\\test.Mobile.csproj",
+      "test.Server\\test.Server.csproj",
       "test.Skia.Gtk\\test.Skia.Gtk.csproj",
       "test.Wasm\\test.Wasm.csproj",
-      "test.Server\\test.Server.csproj",
       "test\\test.csproj"
     ]
   }
