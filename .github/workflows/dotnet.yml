@@ -8,5 +8,6 @@ jobs:
     with:
       generate-build-number: false
       conventional-commits-publish-conditions: false
+      enable-caching: false
     secrets:
       nuget-key: ${{ secrets.NUGET_KEY }}
