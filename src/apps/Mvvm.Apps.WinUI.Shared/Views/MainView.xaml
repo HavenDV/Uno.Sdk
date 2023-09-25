@@ -1,0 +1,56 @@
+﻿<Page
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    d:RequestedTheme="Dark"
+    mc:Ignorable="d"
+    x:Class="Mvvm.Apps.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mvvm="using:Mvvm.Navigation"
+    xmlns:viewModels="clr-namespace:Mvvm.Apps.ViewModels;assembly=Mvvm.Apps.Core"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+
+    <Grid ColumnDefinitions="Auto,*">
+        <StackPanel
+            Grid.Column="0"
+            Margin="10"
+            Orientation="Vertical"
+            Spacing="5"
+            >
+            <Button
+                Command="{x:Bind ViewModel.Navigator.NavigateByTypeCommand}"
+                CommandParameter="{mvvm:Type Type=viewModels:BlueViewModel}"
+                Content="Blue"
+                />
+            <Button
+                Command="{x:Bind ViewModel.Navigator.NavigateByTypeCommand}"
+                CommandParameter="{mvvm:Type Type=viewModels:RedViewModel}"
+                Content="Red"
+                />
+            <Button
+                Command="{x:Bind ViewModel.Navigator.NavigateByTypeCommand}"
+                CommandParameter="{mvvm:Type Type=viewModels:GreenViewModel}"
+                Content="Green"
+                />
+            <Button
+                Command="{x:Bind ViewModel.SetViewModelExplicitlyCommand}"
+                Content="Random"
+                />
+        </StackPanel>
+        <ContentControl
+            Grid.Column="1"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            mvvm:Properties.Navigator="{x:Bind ViewModel.Navigator}"
+            mvvm:Properties.ViewModel="{x:Bind ViewModel.ViewModel, Mode=OneWay}"
+            >
+            <TextBlock
+                HorizontalAlignment="Center"
+                Text="Select color"
+                VerticalAlignment="Center"
+                />
+        </ContentControl>
+    </Grid>
+
+</Page>
