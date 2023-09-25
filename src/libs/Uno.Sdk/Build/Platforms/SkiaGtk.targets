@@ -1,0 +1,23 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
+        <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <EmbeddedResource Include="Package.appxmanifest" />
+        <Manifest Include="$(ApplicationManifest)" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
+        <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.6" IsImplicitlyDefined="true" />
+        <PackageReference Include="SkiaSharp.Skottie" Version="2.88.6" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" IsImplicitlyDefined="true" Condition="'$(Configuration)'=='Debug'" />
+        <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+    </ItemGroup>
+    
+</Project>

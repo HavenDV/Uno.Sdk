@@ -1,0 +1,8 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <Import Project="$(MSBuildThisFileDirectory)Platforms\Mobile.targets" Condition="$(UseUnoMobile)"/>
+    <Import Project="$(MSBuildThisFileDirectory)Platforms\SkiaGtk.targets" Condition="$(UseSkiaGtk)"/>
+    <Import Project="$(MSBuildThisFileDirectory)Platforms\WebAssembly.targets" Condition="$(UseWebAssembly)"/>
+    <Import Project="$(MSBuildThisFileDirectory)Platforms\Windows.targets" Condition="$(UseWindows)"/>
+    
+</Project>

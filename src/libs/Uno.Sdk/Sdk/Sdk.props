@@ -14,28 +14,7 @@
     <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
 
     <DefaultLanguage>en</DefaultLanguage>
-  </PropertyGroup>
-  
-  <PropertyGroup>
-    <SingleProject>true</SingleProject>
-    <OutputType>Exe</OutputType>
-    <!-- Display name -->
-    <ApplicationTitle>Uno</ApplicationTitle>
-    <!-- App Identifier -->
-    <ApplicationId>com.companyname.uno</ApplicationId>
-    <ApplicationIdGuid>85713610-D897-46B8-A4B8-465E6A43702E</ApplicationIdGuid>
-    <!-- Versions -->
-    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-    <ApplicationVersion>1</ApplicationVersion>
-
-    <AndroidManifest>Android\AndroidManifest.xml</AndroidManifest>
-
-    <!-- Debugger workaround https://github.com/dotnet/maui-samples/blob/8aa6b8780b12e97b157514c3bdc54bb4a13001cd/HelloMacCatalyst/HelloMacCatalyst.csproj#L7 -->
-    <!-- <MtouchExtraArgs Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">$(MtouchExtraArgs) -setenv:MONO_THREADS_SUSPEND=preemptive</MtouchExtraArgs> -->
-    <!-- Required for C# Hot Reload -->
-    <UseInterpreter Condition="'$(Configuration)' == 'Debug' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'maccatalyst'">True</UseInterpreter>
-    <IsUnoHead>true</IsUnoHead>
-    <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
+    
     <UnoVersion>4.10.22</UnoVersion>
   </PropertyGroup>
 
@@ -52,34 +31,46 @@
     <IsWinAppSdk>false</IsWinAppSdk>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <UseUnoMobile>false</UseUnoMobile>
+    <UseUnoSkiaGtk>false</UseUnoSkiaGtk>
+    <UseUnoWebAssembly>false</UseUnoWebAssembly>
+    <UseUnoWindows>false</UseUnoWindows>
+  </PropertyGroup>
+
   <Choose>
     <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
       <PropertyGroup>
         <IsAndroid>true</IsAndroid>
+        <UseUnoMobile>true</UseUnoMobile>
         <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
       </PropertyGroup>
     </When>
     <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
       <PropertyGroup>
         <IsIOS>true</IsIOS>
+        <UseUnoMobile>true</UseUnoMobile>
         <SupportedOSPlatformVersion>14.2</SupportedOSPlatformVersion>
       </PropertyGroup>
     </When>
     <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'macos'">
       <PropertyGroup>
         <IsMac>true</IsMac>
+        <UseUnoMobile>true</UseUnoMobile>
         <SupportedOSPlatformVersion>10.14</SupportedOSPlatformVersion>
       </PropertyGroup>
     </When>
     <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
       <PropertyGroup>
         <IsMacCatalyst>true</IsMacCatalyst>
+        <UseUnoMobile>true</UseUnoMobile>
         <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
       </PropertyGroup>
     </When>
     <When Condition="$(TargetFramework.Contains('windows10'))">
       <PropertyGroup>
         <IsWinAppSdk>true</IsWinAppSdk>
+        <UseUnoWindows>true</UseUnoWindows>
         <SupportedOSPlatformVersion>10.0.18362.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
       </PropertyGroup>
@@ -87,88 +78,28 @@
   </Choose>
   
   <ItemGroup>
-    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-    <PackageVersion Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
-    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.3.230602002" />
-    <PackageVersion Include="SkiaSharp.Skottie" Version="2.88.3" />
-    <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.3" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
-    <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" />
-    <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" />
-    <PackageVersion Include="Uno.Resizetizer" Version="1.1.0" />
-    <PackageVersion Include="Uno.UniversalImageLoader" Version="1.9.36" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="7.0.23" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="7.0.23" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap.Server" Version="7.0.23" />
-    <PackageVersion Include="Uno.WinUI" Version="$(UnoVersion)" />
-    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" />
-    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" />
-    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" />
-    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" />
-    <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.8.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Microsoft.Windows.Compatibility" Version="7.0.0" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.3.230602002" IsImplicitlyDefined="true" />
+    <PackageVersion Include="SkiaSharp.Skottie" Version="2.88.3" IsImplicitlyDefined="true" />
+    <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.3" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.Resizetizer" Version="1.1.0" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.UniversalImageLoader" Version="1.9.36" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="7.0.23" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="7.0.23" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap.Server" Version="7.0.23" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+    <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.8.0" IsImplicitlyDefined="true" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-    <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.6.0" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" />
-    <PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(Configuration)'=='Debug'" Version="$(UnoVersion)" />
-  </ItemGroup>
-
-  <!-- https://github.com/xamarin/xamarin-macios/issues/15897 -->
-  <Target Name="_SetPublishFolderTypeNoneOnDocFileItems" BeforeTargets="_ComputePublishLocation">
-    <ItemGroup>
-      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.xml' And '%(ResolvedFileToPublish.PublishFolderType)' == ''" PublishFolderType="None" />
-      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.uprimarker' And '%(ResolvedFileToPublish.PublishFolderType)' == ''" PublishFolderType="None" />
-    </ItemGroup>
-  </Target>
-
-  <Choose>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-      <PropertyGroup>
-        <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
-      </PropertyGroup>
-      <ItemGroup>
-        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.9.0.3" />
-        <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
-      </ItemGroup>
-      <ItemGroup>
-        <AndroidEnvironment Include="Android/environment.conf" />
-      </ItemGroup>
-    </When>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
-      <PropertyGroup>
-        <SupportedOSPlatformVersion>14.2</SupportedOSPlatformVersion>
-        <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
-        <!-- See https://github.com/unoplatform/uno/issues/9430 for more details. -->
-        <MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
-        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'==''">iossimulator-x64</RuntimeIdentifier>
-      </PropertyGroup>
-      <PropertyGroup Condition="'$(Configuration)'=='Release'">
-        <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
-        <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
-      </PropertyGroup>
-    </When>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
-      <PropertyGroup>
-        <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
-        <!-- Configure the GC -->
-        <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
-        <!-- Required for unknown crash as of .NET 6 Mobile Preview 13 -->
-        <MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
-        <!-- Full globalization is required for Uno -->
-        <InvariantGlobalization>false</InvariantGlobalization>
-        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'==''">maccatalyst-x64</RuntimeIdentifier>
-      </PropertyGroup>
-      <PropertyGroup Condition="'$(Configuration)'=='Release'">
-        <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
-        <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
-      </PropertyGroup>
-    </When>
-  </Choose>
   
   <!--
     Detect the SDK version. For now, we have to check the NETCoreSdkVersion
@@ -182,5 +113,7 @@
     <_SdkNETCoreSdkVersion Condition="'$(_SdkNETCoreSdkVersion)' == ''">$(BundledNETCoreAppTargetFrameworkVersion)</_SdkNETCoreSdkVersion>
     <_SdkNETCoreSdkVersion Condition="'$(_SdkNETCoreSdkVersion)' == ''">1.0</_SdkNETCoreSdkVersion>
   </PropertyGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)..\Build\Core.props"/>
 
 </Project>
