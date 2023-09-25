@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
+  <PropertyGroup Label="Nuget">
+    <PackageId>H.Uno.Sdk</PackageId>
+    <NoWarn>$(NoWarn);NU5128;CA1724</NoWarn>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <Description>Easy configuration for Uno projects in 2 lines of code.</Description>
+    <PackageTags>uno;sdk;single;project;config;configuration;one;simple;easy;single-project;one-project</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="H.$(AssemblyName).props" Pack="true" PackagePath="build" />
+    <None Include="../$(AssemblyName).Attributes/*.cs" Pack="true" PackagePath="build" Visible="false" />
+  </ItemGroup>
+
+</Project>

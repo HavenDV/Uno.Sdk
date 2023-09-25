@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{61E7E11E-4
 		src\libs\Directory.Build.props = src\libs\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyUno", "src\libs\EasyUno\EasyUno.csproj", "{0028BC85-0064-4CE8-A21A-C1F5E922BD59}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk", "src\libs\Uno.Sdk\Uno.Sdk.csproj", "{C60290EE-4FAE-4E77-9676-ACA3AFC50CE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,16 +25,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0028BC85-0064-4CE8-A21A-C1F5E922BD59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0028BC85-0064-4CE8-A21A-C1F5E922BD59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0028BC85-0064-4CE8-A21A-C1F5E922BD59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0028BC85-0064-4CE8-A21A-C1F5E922BD59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C60290EE-4FAE-4E77-9676-ACA3AFC50CE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C60290EE-4FAE-4E77-9676-ACA3AFC50CE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C60290EE-4FAE-4E77-9676-ACA3AFC50CE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C60290EE-4FAE-4E77-9676-ACA3AFC50CE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0028BC85-0064-4CE8-A21A-C1F5E922BD59} = {61E7E11E-4558-434C-ACE8-06316A3097B3}
+		{C60290EE-4FAE-4E77-9676-ACA3AFC50CE0} = {61E7E11E-4558-434C-ACE8-06316A3097B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CED9A020-DBA5-4BE6-8096-75E528648EC1}
