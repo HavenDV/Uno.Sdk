@@ -1,0 +1,19 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <ApplicationManifest Condition="Exists('app.manifest')">app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="Exists('SkiaGtk\app.manifest')">SkiaGtk\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="Exists('Platforms\SkiaGtk\app.manifest')">Platforms\SkiaGtk\app.manifest</ApplicationManifest>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Manifest Include="$(ApplicationManifest)" Condition="Exists('$(ApplicationManifest)')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Package.appxmanifest" Condition="Exists('Package.appxmanifest')" />
+        <EmbeddedResource Include="SkiaGtk\Package.appxmanifest" Condition="Exists('SkiaGtk\Package.appxmanifest')" />
+        <EmbeddedResource Include="Platforms\SkiaGtk\Package.appxmanifest" Condition="Exists('Platforms\SkiaGtk\Package.appxmanifest')" />
+    </ItemGroup>
+
+</Project>
