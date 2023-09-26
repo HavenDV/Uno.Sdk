@@ -5,20 +5,19 @@
 [![License: MIT](https://img.shields.io/github/license/HavenDV/Uno.Sdk)](https://github.com/HavenDV/Uno.Sdk/blob/main/LICENSE.txt)
 [![Discord](https://img.shields.io/discord/1115206893015662663?label=Discord&logo=discord&logoColor=white&color=d82679)](https://discord.gg/Ca2xhfBf3v)
 
-Easy configuration for Uno projects in 2 lines of code
+Easy configuration for Uno projects in 2 lines of code.
+Now is only there platforms are supported:
+- Mobile
+- SkiaGtk
 
 ### Usage
 ```xml
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="H.Uno.Sdk/0.4.0">
 
     <PropertyGroup>
-        <TargetFramework>net7.0-windows10.0.19041.0;net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0</TargetFramework>
-        <!-- <UseUnoUwp>true</UseUnoUwp> -->
+        <TargetFramework>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0</TargetFramework>
+        <UseUnoSkiaGtk Condition="'$(TargetFramework)' == 'net7.0'">true</UseUnoSkiaGtk>
     </PropertyGroup>
-    
-    <ItemGroup>
-        <PackageReference Include="H.Uno.Sdk" Version="4.9.45" />
-    </ItemGroup>
 
 </Project>
 ```

@@ -14,8 +14,6 @@
     <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
 
     <DefaultLanguage>en</DefaultLanguage>
-    
-    <UnoVersion>4.10.22</UnoVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -76,30 +74,6 @@
       </PropertyGroup>
     </When>
   </Choose>
-  
-  <ItemGroup>
-    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Microsoft.Windows.Compatibility" Version="7.0.0" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.3.230602002" IsImplicitlyDefined="true" />
-    <PackageVersion Include="SkiaSharp.Skottie" Version="2.88.3" IsImplicitlyDefined="true" />
-    <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.3" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.Resizetizer" Version="1.1.0" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.UniversalImageLoader" Version="1.9.36" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="7.0.23" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="7.0.23" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.Wasm.Bootstrap.Server" Version="7.0.23" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-    <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.8.0" IsImplicitlyDefined="true" />
-  </ItemGroup>
   
   <!--
     Detect the SDK version. For now, we have to check the NETCoreSdkVersion

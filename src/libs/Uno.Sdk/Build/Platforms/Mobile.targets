@@ -27,13 +27,6 @@
             <PropertyGroup>
                 <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
             </PropertyGroup>
-            <ItemGroup>
-                <PackageReference Include="Xamarin.Google.Android.Material" Version="1.9.0.3" />
-                <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
-            </ItemGroup>
-            <ItemGroup>
-                <AndroidEnvironment Include="Android/environment.conf" />
-            </ItemGroup>
         </When>
         <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
             <PropertyGroup>
@@ -65,14 +58,6 @@
             </PropertyGroup>
         </When>
     </Choose>
-
-    <ItemGroup>
-        <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.6.0" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(Configuration)'=='Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-    </ItemGroup>
 
     <!-- https://github.com/xamarin/xamarin-macios/issues/15897 -->
     <Target Name="_SetPublishFolderTypeNoneOnDocFileItems" BeforeTargets="_ComputePublishLocation" Condition="$(UseUnoMobile)">
