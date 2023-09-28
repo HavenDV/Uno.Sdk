@@ -16,9 +16,9 @@
                  ForegroundScale="0.65"
                  Color="#00000000"
                  Condition="Exists('Resources\Icons\iconapp.svg')" />
-        <UnoIcon Update="Resources\Icons\iconapp.svg"
-                 ForegroundFile="Resources\Icons\appconfig.svg"
-                 Condition="Exists('Resources\Icons\iconapp.svg') AND Exists('Resources\Icons\appconfig.svg')" />
+        <UnoIcon Update="Resources/Icons/iconapp.svg"
+                 ForegroundFile="Resources/Icons/appconfig.svg"
+                 Condition="Exists('Resources/Icons/iconapp.svg') AND Exists('Resources/Icons/appconfig.svg')" />
         <UnoSplashScreen
                 Include="Resources\Splash\splash_screen.svg"
                 BaseSize="128,128"
