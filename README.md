@@ -9,14 +9,15 @@ Easy configuration for Uno projects in 2 lines of code.
 Now is only there platforms are supported:
 - Mobile
 - Skia
+- WebAssembly
 
 ### Usage
 ```xml
-<Project Sdk="H.Uno.Sdk/0.5.0">
+<Project Sdk="H.Uno.Sdk/0.6.0">
 
     <PropertyGroup>
-        <TargetFramework>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-skia</TargetFramework>
-        <!-- Still unsupported: ;net7.0-webassembly;net7.0-windows10.0.19041.0 -->
+        <TargetFramework>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-skia;net7.0-webassembly</TargetFramework>
+        <!-- Still unsupported: ;net7.0-windows10.0.19041.0 -->
     </PropertyGroup>
 
 </Project>

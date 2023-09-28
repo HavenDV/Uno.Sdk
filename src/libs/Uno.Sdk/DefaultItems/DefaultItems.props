@@ -2,9 +2,9 @@
 
   <Import Project="$(MSBuildThisFileDirectory)Platforms\Common.props"/>
 
-  <Import Project="$(MSBuildThisFileDirectory)Platforms\Mobile.props" Condition="'$(UseUnoMobile)' == 'true'"/>
-  <Import Project="$(MSBuildThisFileDirectory)Platforms\Skia.props" Condition="'$(UseUnoSkia)' == 'true'"/>
-  <Import Project="$(MSBuildThisFileDirectory)Platforms\WebAssembly.props" Condition="'$(UseUnoWebAssembly)' == 'true'"/>
-  <Import Project="$(MSBuildThisFileDirectory)Platforms\Windows.props" Condition="'$(UseUnoWindows)' == 'true'"/>
+  <Import Project="$(MSBuildThisFileDirectory)Platforms\Mobile.props"/>
+  <Import Project="$(MSBuildThisFileDirectory)Platforms\Skia.props"/>
+  <Import Project="$(MSBuildThisFileDirectory)Platforms\WebAssembly.props"/>
+  <Import Project="$(MSBuildThisFileDirectory)Platforms\Windows.props"/>
 
 </Project>

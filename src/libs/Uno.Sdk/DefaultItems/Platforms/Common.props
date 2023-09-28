@@ -42,5 +42,11 @@
         <Compile Remove="**\skia\**\*.cs" />
         <None Include="**\skia\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.Contains('-webassembly')) != true ">
+        <Compile Remove="**\*.webassembly.cs" />
+        <None Include="**\*.webassembly.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\webassembly\**\*.cs" />
+        <None Include="**\webassembly\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
 
 </Project>
