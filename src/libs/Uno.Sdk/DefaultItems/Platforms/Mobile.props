@@ -1,11 +1,12 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+    <PropertyGroup>
+        <AndroidManifest Condition="Exists('Android\AndroidManifest.xml')">Android\AndroidManifest.xml</AndroidManifest>
+        <AndroidManifest Condition="Exists('Platforms\Android\AndroidManifest.xml')">Platforms\Android\AndroidManifest.xml</AndroidManifest>
+    </PropertyGroup>
+    
     <Choose>
         <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-            <PropertyGroup>
-                <AndroidManifest Condition="Exists('Android\AndroidManifest.xml')">Android\AndroidManifest.xml</AndroidManifest>
-                <AndroidManifest Condition="Exists('Platforms\Android\AndroidManifest.xml')">Platforms\Android\AndroidManifest.xml</AndroidManifest>
-            </PropertyGroup>
             <ItemGroup>
                 <AndroidEnvironment Include="Android/environment.conf" Condition="Exists('Android/environment.conf')" />
                 <AndroidEnvironment Include="Platforms/Android/environment.conf" Condition="Exists('Platforms/Android/environment.conf')" />
