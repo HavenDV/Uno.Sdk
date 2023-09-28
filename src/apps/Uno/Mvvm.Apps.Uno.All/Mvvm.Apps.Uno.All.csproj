@@ -3,8 +3,7 @@
 	<Import Project="$(MSBuildThisFileDirectory)..\..\..\libs\Uno.Sdk\Sdk\Sdk.props" />
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-ios;net7.0-android;net7.0-maccatalyst;net7.0</TargetFrameworks>
-		<UseUnoSkiaGtk Condition="'$(TargetFramework)' == 'net7.0'">true</UseUnoSkiaGtk>
+		<TargetFrameworks>net7.0-maccatalyst;net7.0-skia</TargetFrameworks> <!-- net7.0;net7.0-ios;net7.0-android; -->
 	</PropertyGroup>
 	
 	<Target Name="DisableAnalyzers"

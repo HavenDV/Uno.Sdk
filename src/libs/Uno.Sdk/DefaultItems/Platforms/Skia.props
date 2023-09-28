@@ -1,0 +1,19 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <ApplicationManifest Condition="Exists('app.manifest')">app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="Exists('Skia\app.manifest')">Skia\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="Exists('Platforms\Skia\app.manifest')">Platforms\Skia\app.manifest</ApplicationManifest>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Manifest Include="$(ApplicationManifest)" Condition="Exists('$(ApplicationManifest)')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Package.appxmanifest" Condition="Exists('Package.appxmanifest')" />
+        <EmbeddedResource Include="Skia\Package.appxmanifest" Condition="Exists('Skia\Package.appxmanifest')" />
+        <EmbeddedResource Include="Platforms\Skia\Package.appxmanifest" Condition="Exists('Platforms\Skia\Package.appxmanifest')" />
+    </ItemGroup>
+
+</Project>

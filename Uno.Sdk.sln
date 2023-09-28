@@ -26,6 +26,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Apps.Core.DesignTime", "src\apps\Mvvm.Apps.Core.DesignTime\Mvvm.Apps.Core.DesignTime.csproj", "{9967AD36-6ED3-45EF-87A1-B7C3B6DDA22C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Uno", "Uno", "{FB6D21B5-DD1D-49EC-92C6-1935008579DA}"
+	ProjectSection(SolutionItems) = preProject
+		src\apps\Mvvm.Apps.Shared\Mvvm.Apps.Shared.props = src\apps\Mvvm.Apps.Shared\Mvvm.Apps.Shared.props
+		src\apps\Uno\Mvvm.Apps.Uno.Shared\Mvvm.Apps.Uno.Shared.props = src\apps\Uno\Mvvm.Apps.Uno.Shared\Mvvm.Apps.Uno.Shared.props
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Apps.Uno", "src\apps\Uno\Mvvm.Apps.Uno\Mvvm.Apps.Uno.csproj", "{4CEBF8A2-503C-44F3-A35F-674B42339BEF}"
 EndProject

@@ -36,11 +36,11 @@
         <Compile Remove="**\tizen\**\*.cs" />
         <None Include="**\tizen\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
-    <ItemGroup Condition="!($(TargetFramework.StartsWith('net')) == true AND $(TargetFramework.EndsWith('.0')) == true AND $(TargetFramework.Contains('-')) != true)"> <!-- e.g net6.0 or net7.0 -->
-        <Compile Remove="**\*.skiagtk.cs" />
-        <None Include="**\*.skiagtk.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
-        <Compile Remove="**\skiagtk\**\*.cs" />
-        <None Include="**\skiagtk\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <ItemGroup Condition="$(TargetFramework.Contains('-skia')) != true ">
+        <Compile Remove="**\*.skia.cs" />
+        <None Include="**\*.skia.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\skia\**\*.cs" />
+        <None Include="**\skia\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
 
 </Project>

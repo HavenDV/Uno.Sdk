@@ -4,7 +4,7 @@
 	
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
-		<UseUnoSkiaGtk>true</UseUnoSkiaGtk>
+		<UseUnoSkia>true</UseUnoSkia>
 	</PropertyGroup>
 	
 	<Target Name="DisableAnalyzers"

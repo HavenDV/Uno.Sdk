@@ -8,30 +8,33 @@
 Easy configuration for Uno projects in 2 lines of code.
 Now is only there platforms are supported:
 - Mobile
-- SkiaGtk
+- Skia
 
 ### Usage
 ```xml
-<Project Sdk="H.Uno.Sdk/0.4.0">
+<Project Sdk="H.Uno.Sdk/0.5.0">
 
     <PropertyGroup>
-        <TargetFramework>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0</TargetFramework>
-        <UseUnoSkiaGtk Condition="'$(TargetFramework)' == 'net7.0'">true</UseUnoSkiaGtk>
+        <TargetFramework>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-skia</TargetFramework>
+        <!-- Still unsupported: ;net7.0-webassembly;net7.0-windows10.0.19041.0 -->
     </PropertyGroup>
 
 </Project>
 ```
 
-### Possible future of this package
-One project with:
-```xml
-<Project Sdk="Uno.Sdk/5.0.0">
-
-    <PropertyGroup>
-        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-windows10.0.19041.0;net7.0-webassembly;net7.0-skia-gtk</TargetFrameworks>
-    </PropertyGroup>
-
-</Project>
+### Install
+To support custom target frameworks, you need to install the appropriate workloads:
+- On Linux / macOS:
+```
+curl -sSL https://raw.githubusercontent.com/HavenDV/Skia/main/scripts/workload-install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/HavenDV/WebAssembly/main/scripts/workload-install.sh | sudo bash
+```
+- On Windows:
+```
+Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/Skia/main/workload/scripts/workload-install.ps1' -OutFile 'workload-install.ps1';
+./workload-install.ps1
+Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/WebAssembly/main/workload/scripts/workload-install.ps1' -OutFile 'workload-install.ps1';
+./workload-install.ps1
 ```
 
 ## Support

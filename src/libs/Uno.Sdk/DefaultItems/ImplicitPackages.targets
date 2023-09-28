@@ -49,7 +49,7 @@
         </When>
     </Choose>
 
-    <ItemGroup Condition="'$(UseUnoSkiaGtk)' == 'true'">
+    <ItemGroup Condition="'$(UseUnoSkia)' == 'true'">
         <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
         <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.6" IsImplicitlyDefined="true" />

@@ -3,7 +3,7 @@
   <Import Project="$(MSBuildThisFileDirectory)Platforms\Common.props"/>
 
   <Import Project="$(MSBuildThisFileDirectory)Platforms\Mobile.props" Condition="'$(UseUnoMobile)' == 'true'"/>
-  <Import Project="$(MSBuildThisFileDirectory)Platforms\SkiaGtk.props" Condition="'$(UseUnoSkiaGtk)' == 'true'"/>
+  <Import Project="$(MSBuildThisFileDirectory)Platforms\Skia.props" Condition="'$(UseUnoSkia)' == 'true'"/>
   <Import Project="$(MSBuildThisFileDirectory)Platforms\WebAssembly.props" Condition="'$(UseUnoWebAssembly)' == 'true'"/>
   <Import Project="$(MSBuildThisFileDirectory)Platforms\Windows.props" Condition="'$(UseUnoWindows)' == 'true'"/>
 

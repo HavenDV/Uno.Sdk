@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
     <Import Project="$(MSBuildThisFileDirectory)Platforms\Mobile.targets" Condition="'$(UseUnoMobile)' == 'true'"/>
-    <Import Project="$(MSBuildThisFileDirectory)Platforms\SkiaGtk.targets" Condition="'$(UseUnoSkiaGtk)' == 'true'"/>
+    <Import Project="$(MSBuildThisFileDirectory)Platforms\Skia.targets" Condition="'$(UseUnoSkia)' == 'true'"/>
     <Import Project="$(MSBuildThisFileDirectory)Platforms\WebAssembly.targets" Condition="'$(UseUnoWebAssembly)' == 'true'"/>
     <Import Project="$(MSBuildThisFileDirectory)Platforms\Windows.targets" Condition="'$(UseUnoWindows)' == 'true'"/>
     

@@ -2,6 +2,29 @@
 
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk"/>
 
+<!--  <ItemGroup>-->
+<!--    <SupportedTest Include=".NETCoreApp,Version=v7.0" DisplayName=".NET 7.0 Skia Gtk" Alias="net7.0-skia-gtk" />-->
+<!--  </ItemGroup>-->
+<!--  -->
+<!--  <ItemGroup>-->
+<!--    <SupportedTargetFramework Include="@(SupportedTest)" />-->
+<!--    <TargetPlatformVersionSupported>true</TargetPlatformVersionSupported>-->
+<!--  </ItemGroup>-->
+
+<!--  <PropertyGroup>-->
+<!--    <_DefaultTargetPlatformVersion>7.0</_DefaultTargetPlatformVersion>-->
+<!--    <TargetPlatformSupported>true</TargetPlatformSupported>-->
+<!--    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">$(_DefaultTargetPlatformVersion)</TargetPlatformVersion>-->
+<!--    <_TargetFramework Condition="$(TargetFramework.EndsWith('tizen'))">$(TargetFramework)$(_DefaultTargetPlatformVersion)</_TargetFramework>-->
+<!--    <_TargetFramework Condition="!$(TargetFramework.EndsWith('tizen'))">$(TargetFramework)</_TargetFramework>-->
+<!--  </PropertyGroup>-->
+<!--  -->
+<!--  <ItemGroup>-->
+<!--    <SupportedPlatform Include="skia" />-->
+<!--    <SupportedPlatform Include="skia-gtk" />-->
+<!--    <SdkSupportedTargetPlatformVersion Include="7.0" />-->
+<!--  </ItemGroup>-->
+  
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -31,7 +54,7 @@
 
   <PropertyGroup>
     <UseUnoMobile>false</UseUnoMobile>
-    <UseUnoSkiaGtk>false</UseUnoSkiaGtk>
+    <UseUnoSkia>false</UseUnoSkia>
     <UseUnoWebAssembly>false</UseUnoWebAssembly>
     <UseUnoWindows>false</UseUnoWindows>
   </PropertyGroup>
@@ -63,6 +86,12 @@
         <IsMacCatalyst>true</IsMacCatalyst>
         <UseUnoMobile>true</UseUnoMobile>
         <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'skia'">
+      <PropertyGroup>
+        <IsSkia>true</IsSkia>
+        <UseUnoSkia>true</UseUnoSkia>
       </PropertyGroup>
     </When>
     <When Condition="$(TargetFramework.Contains('windows10'))">
