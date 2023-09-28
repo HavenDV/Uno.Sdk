@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Mvvm.Apps.Uno.All.WebAssembly" type="DotNetProject" factoryName=".NET Project">
+  <configuration default="false" name="Uno.Sdk.Apps.Uno.All.WebAssembly" type="DotNetProject" factoryName=".NET Project">
     <option name="EXE_PATH" value="$USER_HOME$/.nuget/packages/uno.wasm.bootstrap.devserver/7.0.29/tools/server/net7.0/dotnet-unowasm.dll" />
-    <option name="PROGRAM_PARAMETERS" value="serve --pathbase $PROJECT_DIR$/src/apps/Uno/Mvvm.Apps.Uno.All/bin/Debug/net7.0-webassembly/dist --configuration Debug --targetframework net7.0 --intermediateoutputpath obj\Debug/net7.0//" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/apps/Uno/Mvvm.Apps.Uno.All" />
+    <option name="PROGRAM_PARAMETERS" value="serve --pathbase $PROJECT_DIR$/src/apps/Uno/Uno.Sdk.Apps.Uno.All/bin/Debug/net7.0-webassembly/dist --configuration Debug --targetframework net7.0 --intermediateoutputpath obj\Debug/net7.0//" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/apps/Uno/Uno.Sdk.Apps.Uno.All" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <envs>
       <env name="ASPNETCORE_URLS" value="http://localhost:5000" />
@@ -11,7 +11,7 @@
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
     <option name="USE_MONO" value="0" />
     <option name="RUNTIME_ARGUMENTS" value="" />
-    <option name="PROJECT_PATH" value="$PROJECT_DIR$/src/apps/Uno/Mvvm.Apps.Uno.All/Mvvm.Apps.Uno.All.csproj" />
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/src/apps/Uno/Uno.Sdk.Apps.Uno.All/Uno.Sdk.Apps.Uno.All.csproj" />
     <option name="PROJECT_EXE_PATH_TRACKING" value="0" />
     <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
     <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />

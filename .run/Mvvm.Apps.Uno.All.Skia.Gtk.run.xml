@@ -1,13 +1,13 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Mvvm.Apps.Uno.All.Skia.Gtk" type="DotNetProject" factoryName=".NET Project">
-    <option name="EXE_PATH" value="$PROJECT_DIR$/src/apps/Uno/Mvvm.Apps.Uno.All/bin/Debug/net7.0-skia/Mvvm.Apps.Uno.All.dll" />
+  <configuration default="false" name="Uno.Sdk.Apps.Uno.All.Skia.Gtk" type="DotNetProject" factoryName=".NET Project">
+    <option name="EXE_PATH" value="$PROJECT_DIR$/src/apps/Uno/Uno.Sdk.Apps.Uno.All/bin/Debug/net7.0-skia/Uno.Sdk.Apps.Uno.All.dll" />
     <option name="PROGRAM_PARAMETERS" value="" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/apps/Uno/Mvvm.Apps.Uno.All/bin/Debug/net7.0-skia" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/apps/Uno/Uno.Sdk.Apps.Uno.All/bin/Debug/net7.0-skia" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
     <option name="USE_MONO" value="0" />
     <option name="RUNTIME_ARGUMENTS" value="" />
-    <option name="PROJECT_PATH" value="$PROJECT_DIR$/src/apps/Uno/Mvvm.Apps.Uno.All/Mvvm.Apps.Uno.All.csproj" />
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/src/apps/Uno/Uno.Sdk.Apps.Uno.All/Uno.Sdk.Apps.Uno.All.csproj" />
     <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
     <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
     <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />

@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "Uno.Sdk.Apps.Uno",
+  "display": "standalone",
+  "name": "Uno.Sdk.Apps.Uno",
+  "short_name": "Uno.Sdk.Apps.Uno",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}

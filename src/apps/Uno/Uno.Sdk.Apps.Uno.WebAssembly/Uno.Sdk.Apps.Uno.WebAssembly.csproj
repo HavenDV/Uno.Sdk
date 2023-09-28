@@ -1,0 +1,18 @@
+<Project>
+
+	<Import Project="$(MSBuildThisFileDirectory)..\..\..\libs\Uno.Sdk\Sdk\Sdk.props" />
+	
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<UseUnoWebAssembly>true</UseUnoWebAssembly>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\Uno.Sdk.Apps.Uno\Uno.Sdk.Apps.Uno.csproj" />
+	</ItemGroup>
+	
+	<Import Project="..\Uno.Sdk.Apps.Uno.Shared\Uno.Sdk.Apps.Uno.Shared.props" />
+
+	<Import Project="$(MSBuildThisFileDirectory)..\..\..\libs\Uno.Sdk\Sdk\Sdk.targets" />
+	
+</Project>

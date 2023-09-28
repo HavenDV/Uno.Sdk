@@ -21,25 +21,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk", "src\libs\Uno.Sdk
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{4CA75328-5D8C-46F5-9B4C-E84A50145139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Apps.Core", "src\apps\Mvvm.Apps.Core\Mvvm.Apps.Core.csproj", "{30D0F15F-3DA2-4AD8-9E4F-433E61A5DB6D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Apps.Core.DesignTime", "src\apps\Mvvm.Apps.Core.DesignTime\Mvvm.Apps.Core.DesignTime.csproj", "{9967AD36-6ED3-45EF-87A1-B7C3B6DDA22C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Uno", "Uno", "{FB6D21B5-DD1D-49EC-92C6-1935008579DA}"
 	ProjectSection(SolutionItems) = preProject
-		src\apps\Mvvm.Apps.Shared\Mvvm.Apps.Shared.props = src\apps\Mvvm.Apps.Shared\Mvvm.Apps.Shared.props
-		src\apps\Uno\Mvvm.Apps.Uno.Shared\Mvvm.Apps.Uno.Shared.props = src\apps\Uno\Mvvm.Apps.Uno.Shared\Mvvm.Apps.Uno.Shared.props
+		src\apps\Uno.Sdk.Apps.Shared\Uno.Sdk.Apps.Shared.props = src\apps\Uno.Sdk.Apps.Shared\Uno.Sdk.Apps.Shared.props
+		src\apps\Uno\Uno.Sdk.Apps.Uno.Shared\Uno.Sdk.Apps.Uno.Shared.props = src\apps\Uno\Uno.Sdk.Apps.Uno.Shared\Uno.Sdk.Apps.Uno.Shared.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Apps.Uno", "src\apps\Uno\Mvvm.Apps.Uno\Mvvm.Apps.Uno.csproj", "{4CEBF8A2-503C-44F3-A35F-674B42339BEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Apps.Uno", "src\apps\Uno\Uno.Sdk.Apps.Uno\Uno.Sdk.Apps.Uno.csproj", "{4CEBF8A2-503C-44F3-A35F-674B42339BEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Apps.Uno.Skia.Gtk", "src\apps\Uno\Mvvm.Apps.Uno.Skia.Gtk\Mvvm.Apps.Uno.Skia.Gtk.csproj", "{4E1B9166-1A1A-42D5-839B-D8A71291BB1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Apps.Uno.Skia.Gtk", "src\apps\Uno\Uno.Sdk.Apps.Uno.Skia.Gtk\Uno.Sdk.Apps.Uno.Skia.Gtk.csproj", "{4E1B9166-1A1A-42D5-839B-D8A71291BB1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Apps.Uno.Mobile", "src\apps\Uno\Mvvm.Apps.Uno.Mobile\Mvvm.Apps.Uno.Mobile.csproj", "{BABE3D49-D72D-4F55-A044-464E540F534A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Apps.Uno.Mobile", "src\apps\Uno\Uno.Sdk.Apps.Uno.Mobile\Uno.Sdk.Apps.Uno.Mobile.csproj", "{BABE3D49-D72D-4F55-A044-464E540F534A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Apps.Uno.WebAssembly", "src\apps\Uno\Mvvm.Apps.Uno.WebAssembly\Mvvm.Apps.Uno.WebAssembly.csproj", "{9283AE83-D8CA-4C61-92A2-57CB06A4F975}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Apps.Uno.WebAssembly", "src\apps\Uno\Uno.Sdk.Apps.Uno.WebAssembly\Uno.Sdk.Apps.Uno.WebAssembly.csproj", "{9283AE83-D8CA-4C61-92A2-57CB06A4F975}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Apps.Uno.All", "src\apps\Uno\Mvvm.Apps.Uno.All\Mvvm.Apps.Uno.All.csproj", "{86BCDC09-800F-43BD-AB08-0BA5A953B439}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Apps.Uno.All", "src\apps\Uno\Uno.Sdk.Apps.Uno.All\Uno.Sdk.Apps.Uno.All.csproj", "{86BCDC09-800F-43BD-AB08-0BA5A953B439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,14 +47,6 @@ Global
 		{C60290EE-4FAE-4E77-9676-ACA3AFC50CE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C60290EE-4FAE-4E77-9676-ACA3AFC50CE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C60290EE-4FAE-4E77-9676-ACA3AFC50CE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{30D0F15F-3DA2-4AD8-9E4F-433E61A5DB6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30D0F15F-3DA2-4AD8-9E4F-433E61A5DB6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30D0F15F-3DA2-4AD8-9E4F-433E61A5DB6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30D0F15F-3DA2-4AD8-9E4F-433E61A5DB6D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9967AD36-6ED3-45EF-87A1-B7C3B6DDA22C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9967AD36-6ED3-45EF-87A1-B7C3B6DDA22C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9967AD36-6ED3-45EF-87A1-B7C3B6DDA22C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9967AD36-6ED3-45EF-87A1-B7C3B6DDA22C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4CEBF8A2-503C-44F3-A35F-674B42339BEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CEBF8A2-503C-44F3-A35F-674B42339BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CEBF8A2-503C-44F3-A35F-674B42339BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -85,8 +73,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C60290EE-4FAE-4E77-9676-ACA3AFC50CE0} = {61E7E11E-4558-434C-ACE8-06316A3097B3}
-		{30D0F15F-3DA2-4AD8-9E4F-433E61A5DB6D} = {4CA75328-5D8C-46F5-9B4C-E84A50145139}
-		{9967AD36-6ED3-45EF-87A1-B7C3B6DDA22C} = {4CA75328-5D8C-46F5-9B4C-E84A50145139}
 		{FB6D21B5-DD1D-49EC-92C6-1935008579DA} = {4CA75328-5D8C-46F5-9B4C-E84A50145139}
 		{4CEBF8A2-503C-44F3-A35F-674B42339BEF} = {FB6D21B5-DD1D-49EC-92C6-1935008579DA}
 		{4E1B9166-1A1A-42D5-839B-D8A71291BB1B} = {FB6D21B5-DD1D-49EC-92C6-1935008579DA}

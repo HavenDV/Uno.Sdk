@@ -1,0 +1,18 @@
+<local:App
+    mc:Ignorable="wasm"
+    x:Class="Uno.Sdk.Apps.Uno.AppHead"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:local="using:Uno.Sdk.Apps.Uno"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wasm="http://platform.uno/wasm"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <local:App.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Uno.Sdk.Apps.Uno/AppResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:App.Resources>
+
+</local:App>
