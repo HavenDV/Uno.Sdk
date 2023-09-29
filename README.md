@@ -13,7 +13,7 @@ Now is only there platforms are supported:
 
 ### Usage
 ```xml
-<Project Sdk="H.Uno.Sdk/0.7.0">
+<Project Sdk="H.Uno.Sdk/0.8.0">
 
     <PropertyGroup>
         <TargetFramework>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-skia;net7.0-webassembly</TargetFramework>
@@ -36,6 +36,12 @@ Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/Skia/main/workload/
 ./workload-install.ps1
 Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/WebAssembly/main/workload/scripts/workload-install.ps1' -OutFile 'workload-install.ps1';
 ./workload-install.ps1
+```
+
+### Uninstall
+```
+dotnet workload uninstall skia
+dotnet workload uninstall webassembly
 ```
 
 ## Support
