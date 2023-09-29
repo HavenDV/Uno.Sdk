@@ -2,29 +2,6 @@
 
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk.Web" Condition="'$(TargetFramework)' == '' OR '$(TargetFramework)' == 'net7.0' OR '$(TargetFramework)' == 'net7.0-webassembly'"/>
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" Condition="'$(TargetFramework)' != '' AND '$(TargetFramework)' != 'net7.0' AND '$(TargetFramework)' != 'net7.0-webassembly'"/>
-
-<!--  <ItemGroup>-->
-<!--    <SupportedTest Include=".NETCoreApp,Version=v7.0" DisplayName=".NET 7.0 Skia Gtk" Alias="net7.0-skia-gtk" />-->
-<!--  </ItemGroup>-->
-<!--  -->
-<!--  <ItemGroup>-->
-<!--    <SupportedTargetFramework Include="@(SupportedTest)" />-->
-<!--    <TargetPlatformVersionSupported>true</TargetPlatformVersionSupported>-->
-<!--  </ItemGroup>-->
-
-<!--  <PropertyGroup>-->
-<!--    <_DefaultTargetPlatformVersion>7.0</_DefaultTargetPlatformVersion>-->
-<!--    <TargetPlatformSupported>true</TargetPlatformSupported>-->
-<!--    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">$(_DefaultTargetPlatformVersion)</TargetPlatformVersion>-->
-<!--    <_TargetFramework Condition="$(TargetFramework.EndsWith('tizen'))">$(TargetFramework)$(_DefaultTargetPlatformVersion)</_TargetFramework>-->
-<!--    <_TargetFramework Condition="!$(TargetFramework.EndsWith('tizen'))">$(TargetFramework)</_TargetFramework>-->
-<!--  </PropertyGroup>-->
-<!--  -->
-<!--  <ItemGroup>-->
-<!--    <SupportedPlatform Include="skia" />-->
-<!--    <SupportedPlatform Include="skia-gtk" />-->
-<!--    <SdkSupportedTargetPlatformVersion Include="7.0" />-->
-<!--  </ItemGroup>-->
   
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -110,19 +87,6 @@
       </PropertyGroup>
     </When>
   </Choose>
-  
-  <!--
-    Detect the SDK version. For now, we have to check the NETCoreSdkVersion
-    else check BundledNETCoreAppTargetFrameworkVersion property for Sdk <= 2.1.300
-    else Give 1.0 version since that property doesn't exist in 1.x Sdks
-  -->
-  <PropertyGroup>
-    <_SdkNETCoreSdkVersion>$(NETCoreSdkVersion)</_SdkNETCoreSdkVersion>
-    <!--  Handle SemVer version like 2.1.300-preview, since MSBuild doesn't compare versions with alpha-numeric chars! -->
-    <_SdkNETCoreSdkVersion Condition="$(_SdkNETCoreSdkVersion.Contains('-'))">$(_SdkNETCoreSdkVersion.Split('-')[0])</_SdkNETCoreSdkVersion>
-    <_SdkNETCoreSdkVersion Condition="'$(_SdkNETCoreSdkVersion)' == ''">$(BundledNETCoreAppTargetFrameworkVersion)</_SdkNETCoreSdkVersion>
-    <_SdkNETCoreSdkVersion Condition="'$(_SdkNETCoreSdkVersion)' == ''">1.0</_SdkNETCoreSdkVersion>
-  </PropertyGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)..\Build\Core.props"/>
 

@@ -4,23 +4,6 @@
         <IsMultiTargetingBuild>true</IsMultiTargetingBuild>
     </PropertyGroup>
     
-<!--    <PropertyGroup Condition="'$(IsMultiTargetingBuild)' == 'true'">-->
-<!--        <TargetFrameworks>$(TargetFrameworks.Replace('net7.0-skia-gtk', 'net7.0'))</TargetFrameworks>-->
-<!--    </PropertyGroup>-->
-    
-<!--    <ImportGroup Condition="'$(IsMultiTargetingBuild)' != 'true'">-->
-<!--        <Import Project="$(MSBuildThisFileDirectory)Inference.targets"-->
-<!--                Condition="'$(TargetFramework)' != '' AND !($(TargetFramework.Contains(',')) OR $(TargetFramework.Contains(';')))"/>-->
-<!--    </ImportGroup>-->
-
-<!--    <PropertyGroup Condition="'$(IsMultiTargetingBuild)' == 'true' OR '$(TargetFramework)' == 'net7.0-skia-gtk'">-->
-<!--        <TargetPlatformVersion>7.0</TargetPlatformVersion>-->
-<!--        <TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>-->
-<!--        <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>-->
-<!--        <TargetPlatformIdentifier>.NETCoreApp</TargetPlatformIdentifier>-->
-<!--        <NugetTargetMoniker>.NETCoreApp,Version=v7.0</NugetTargetMoniker>-->
-<!--    </PropertyGroup>-->
-    
     <Import Project="$(MSBuildThisFileDirectory)Platforms.targets"/>
     
 </Project>
