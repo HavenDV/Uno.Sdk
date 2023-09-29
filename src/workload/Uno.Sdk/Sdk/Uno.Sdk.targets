@@ -10,7 +10,7 @@
 		<AfterMicrosoftNETSdkTargets>$(AfterMicrosoftNETSdkTargets);$(MSBuildThisFileDirectory)Uno.Sdk.After.targets</AfterMicrosoftNETSdkTargets>
 	</PropertyGroup>
 
-<!--    <Import Project="Uno.Sdk.Versions.targets" />-->
+    <Import Project="Uno.Sdk.Platforms.targets" />
     <Import Project="Uno.Sdk.DefaultProperties.targets" />
 
 </Project>

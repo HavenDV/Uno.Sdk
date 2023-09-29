@@ -1,0 +1,33 @@
+<Project>
+
+  <PropertyGroup>
+    <_DefaultTargetPlatformVersion>1.0</_DefaultTargetPlatformVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetPlatformSupported>true</TargetPlatformSupported>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' and ($(TargetFramework.EndsWith('skia')) or $(TargetFramework.EndsWith('webassembly')))">$(_DefaultTargetPlatformVersion)</TargetPlatformVersion>
+    <_TargetFramework Condition="$(TargetFramework.EndsWith('skia'))">$(TargetFramework)$(_DefaultTargetPlatformVersion)</_TargetFramework>
+    <_TargetFramework Condition="!$(TargetFramework.EndsWith('skia'))">$(TargetFramework)</_TargetFramework>
+    <_TargetFramework Condition="$(TargetFramework.EndsWith('webassembly'))">$(TargetFramework)$(_DefaultTargetPlatformVersion)</_TargetFramework>
+    <_TargetFramework Condition="!$(TargetFramework.EndsWith('webassembly'))">$(TargetFramework)</_TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="skia" />
+    <SupportedPlatform Include="webassembly" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.EndsWith('skia')) or $(TargetFramework.EndsWith('webassembly'))">
+    <SupportedAPILevel Include="v1.0" MappedAPIVersion="1.0"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.EndsWith('skia')) or $(TargetFramework.EndsWith('webassembly'))">
+    <UnoSdkSupportedTargetPlatformVersion Include="1.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.EndsWith('skia')) or $(TargetFramework.EndsWith('webassembly'))">
+    <SdkSupportedTargetPlatformVersion Include="@(UnoSdkSupportedTargetPlatformVersion)" />
+  </ItemGroup>
+
+</Project>

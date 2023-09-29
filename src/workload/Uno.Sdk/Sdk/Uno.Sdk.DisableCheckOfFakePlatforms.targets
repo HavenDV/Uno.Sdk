@@ -1,0 +1,14 @@
+<Project>
+  
+  <Target Name="_CheckForMissingWorkload"
+          BeforeTargets="_CheckForInvalidConfigurationAndPlatform;_CheckForUnsupportedTargetPlatformIdentifier"
+          Condition="'@(MissingWorkloadPack)' != '' And '$(DesignTimeBuild)' != 'true'">
+
+    <ShowMissingWorkloads MissingWorkloadPacks="@(MissingWorkloadPack)"
+                          NetCoreRoot="$(NetCoreRoot)"
+                          NETCoreSdkVersion="$(NETCoreSdkVersion)"
+                          GenerateErrorsForMissingWorkloads="true"
+                          Condition="'@(MissingWorkloadPack)' != 'Skia.Sdk' and '@(MissingWorkloadPack)' != 'WebAssembly.Sdk'"/>
+  </Target>
+
+</Project>
