@@ -1,0 +1,11 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
+
+        <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+        <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    </PropertyGroup>
+    
+</Project>

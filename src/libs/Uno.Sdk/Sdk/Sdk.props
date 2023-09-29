@@ -35,6 +35,7 @@
     <UseUnoSkia>false</UseUnoSkia>
     <UseUnoWebAssembly>false</UseUnoWebAssembly>
     <UseUnoWindows>false</UseUnoWindows>
+    <UseUnoLibrary>false</UseUnoLibrary>
   </PropertyGroup>
 
   <Choose>
