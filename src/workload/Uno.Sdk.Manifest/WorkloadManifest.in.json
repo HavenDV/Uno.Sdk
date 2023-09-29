@@ -4,8 +4,8 @@
     "uno": {
       "description": ".NET SDK Workload for building Uno applications.",
       "packs": [
-        "Uno.Sdk",
-        "Uno.Templates"
+        "H.Uno.Sdk",
+        "H.Uno.Templates"
       ]
     }
   },

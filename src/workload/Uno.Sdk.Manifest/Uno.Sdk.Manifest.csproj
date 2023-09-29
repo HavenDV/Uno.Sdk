@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Uno.Sdk\Uno.Sdk.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Uno.Templates\Uno.Templates.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="*.cs" />
     <None Include="WorkloadManifest.targets" Pack="true" PackagePath="data" />
   </ItemGroup>
