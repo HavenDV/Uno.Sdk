@@ -1,16 +1,14 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Mvvm.Apps.Views;
+using Uno.Sdk.Apps.Views;
 #if !HAS_WPF
 using Windows.ApplicationModel.Activation;
 #endif
 
 #nullable enable
 
-namespace Mvvm.Apps;
+namespace Uno.Sdk.Apps;
 
 public sealed partial class App : Application
 {
@@ -34,14 +32,8 @@ public sealed partial class App : Application
                 context.ClearProviders();
 #endif
             })
-            .ConfigureServices(static services =>
-            {
-                services.AddMvvmNavigation();
-            })
             .Build();
 
-        Ioc.Default.ConfigureServices(AppHost.Services);
-        
 #if !HAS_WPF
         InitializeComponent();
 #endif
@@ -86,10 +78,7 @@ public sealed partial class App : Application
 
         if (frame.Content is null)
         {
-            frame.Content = new MainView
-            {
-                ViewModel = AppHost.Services.GetRequiredService<MainViewModel>(),
-            };
+            frame.Content = new MainView();
         }
 
         window.Activate();

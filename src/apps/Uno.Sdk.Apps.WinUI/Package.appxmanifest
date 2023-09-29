@@ -7,13 +7,13 @@
 	IgnorableNamespaces="uap rescap">
 
 	<Identity
-		Name="Mvvm.Apps.WinUI"
-		Publisher="O=Mvvm.Apps.WinUI"
+		Name="Uno.Sdk.Apps.WinUI"
+		Publisher="O=Uno.Sdk.Apps.WinUI"
 		Version="1.0.0.0" />
 
 	<Properties>
-		<DisplayName>Mvvm.Apps.Uno</DisplayName>
-		<PublisherDisplayName>Mvvm.Apps.Uno</PublisherDisplayName>
+		<DisplayName>Uno.Sdk.Apps.Uno</DisplayName>
+		<PublisherDisplayName>Uno.Sdk.Apps.Uno</PublisherDisplayName>
 	</Properties>
 
 	<Dependencies>
@@ -30,8 +30,8 @@
 			Executable="$targetnametoken$.exe"
 			EntryPoint="$targetentrypoint$">
 			<uap:VisualElements
-				DisplayName="Mvvm.Apps.WinUI"
-				Description="Mvvm.Apps.WinUI">
+				DisplayName="Uno.Sdk.Apps.WinUI"
+				Description="Uno.Sdk.Apps.WinUI">
 				<uap:SplashScreen />
 			</uap:VisualElements>
 		</Application>

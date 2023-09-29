@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Apps.Uno.WebAssembl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Apps.Uno.All", "src\apps\Uno\Uno.Sdk.Apps.Uno.All\Uno.Sdk.Apps.Uno.All.csproj", "{86BCDC09-800F-43BD-AB08-0BA5A953B439}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Apps.WinUI", "src\apps\Uno.Sdk.Apps.WinUI\Uno.Sdk.Apps.WinUI.csproj", "{05E0BCA3-AF12-4DE0-94F0-17A8CFBB7DBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{86BCDC09-800F-43BD-AB08-0BA5A953B439}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86BCDC09-800F-43BD-AB08-0BA5A953B439}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{86BCDC09-800F-43BD-AB08-0BA5A953B439}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{05E0BCA3-AF12-4DE0-94F0-17A8CFBB7DBA}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{05E0BCA3-AF12-4DE0-94F0-17A8CFBB7DBA}.Debug|Any CPU.Build.0 = Debug|x86
+		{05E0BCA3-AF12-4DE0-94F0-17A8CFBB7DBA}.Release|Any CPU.ActiveCfg = Release|x86
+		{05E0BCA3-AF12-4DE0-94F0-17A8CFBB7DBA}.Release|Any CPU.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{BABE3D49-D72D-4F55-A044-464E540F534A} = {FB6D21B5-DD1D-49EC-92C6-1935008579DA}
 		{9283AE83-D8CA-4C61-92A2-57CB06A4F975} = {FB6D21B5-DD1D-49EC-92C6-1935008579DA}
 		{86BCDC09-800F-43BD-AB08-0BA5A953B439} = {FB6D21B5-DD1D-49EC-92C6-1935008579DA}
+		{05E0BCA3-AF12-4DE0-94F0-17A8CFBB7DBA} = {4CA75328-5D8C-46F5-9B4C-E84A50145139}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CED9A020-DBA5-4BE6-8096-75E528648EC1}
