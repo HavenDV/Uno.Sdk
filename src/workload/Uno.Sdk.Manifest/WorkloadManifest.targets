@@ -1,0 +1,24 @@
+<Project>
+
+  <!--
+      .NET Uno telemetry and failure tracking. These are used to detect when the user specified one of the
+      various <UseUno*> properties, but for some reason the workload was not installed correctly.
+  -->
+  <ItemGroup>
+    <ProjectCapability Condition=" '$(UseUno)' == 'true' " Include="UseUno" />
+    <ProjectCapability Condition=" '$(UseUnoAssets)' == 'true' " Include="UseUnoAssets" />
+  </ItemGroup>
+
+  <!--
+      Specifying any of the <UseUno*> properties will enable the uno workload. BundledVersions.targets enables
+      the specific parts of .NET Uno SDK.
+      
+      We can't use this approach yet because WebAssembly uses Microsoft.NET.Sdk.Web, 
+      and we can separate the use of regular Sdk and Web Sdk only through the Project Sdk property
+  -->
+<!--  <Import-->
+<!--          Condition=" ('$(UseUno)' == 'true' or '$(UseUnoAssets)' == 'true') and ('$(SkipUnoWorkloadManifest)' != 'true') "-->
+<!--          Project="Sdk.targets" Sdk="Uno.Sdk"-->
+<!--  />-->
+  
+</Project>

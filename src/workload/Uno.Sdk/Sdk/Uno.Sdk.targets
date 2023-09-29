@@ -1,0 +1,16 @@
+<Project>
+    
+    <PropertyGroup>
+        <UsingUnoSdk>true</UsingUnoSdk>
+    </PropertyGroup>
+
+    <Import Project="Uno.Sdk.Before.targets" />
+
+	<PropertyGroup>
+		<AfterMicrosoftNETSdkTargets>$(AfterMicrosoftNETSdkTargets);$(MSBuildThisFileDirectory)Uno.Sdk.After.targets</AfterMicrosoftNETSdkTargets>
+	</PropertyGroup>
+
+<!--    <Import Project="Uno.Sdk.Versions.targets" />-->
+    <Import Project="Uno.Sdk.DefaultProperties.targets" />
+
+</Project>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.Build.NoTargets/3.7.0">
+
+  <PropertyGroup>
+    <PackageId>H.Uno.Templates</PackageId>
+    <Description>Templates for Uno platforms.</Description>
+    <PackageTags>uno;sdk;templates</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="uno/**" Pack="true" PackagePath="content/uno" />
+  </ItemGroup>
+
+</Project>

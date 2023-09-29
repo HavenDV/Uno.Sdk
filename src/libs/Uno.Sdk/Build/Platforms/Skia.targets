@@ -1,8 +1,0 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-    <PropertyGroup>
-        <OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
-        <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
-    </PropertyGroup>
-    
-</Project>

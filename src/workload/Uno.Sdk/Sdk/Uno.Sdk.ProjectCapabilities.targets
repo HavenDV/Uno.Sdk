@@ -1,0 +1,34 @@
+<!--
+***********************************************************************************************
+Microsoft.Uno.Sdk.ProjectCapabilities.targets
+
+The IDE uses the @(ProjectCapability) items to activate various features.
+
+Docs about @(ProjectCapability):
+
+* https://github.com/microsoft/VSProjectSystem/blob/3312e0a7fc4ba0acb67ad64b0bf8564db082e8f1/doc/overview/about_project_capabilities.md
+* https://github.com/microsoft/VSProjectSystem/blob/3312e0a7fc4ba0acb67ad64b0bf8564db082e8f1/doc/overview/project_capabilities.md
+
+***********************************************************************************************
+-->
+<Project>
+
+    <!-- .NET Uno features -->
+    <ItemGroup>
+        <ProjectCapability Include="Uno"           Condition=" '$(UseUno)' == 'true' " />
+        <ProjectCapability Include="UnoAssets"     Condition=" '$(UseUno)' == 'true' or '$(UseUnoAssets)' == 'true' " />
+    </ItemGroup>
+
+    <!-- SingleProject-specific features -->
+    <ItemGroup Condition=" '$(SingleProject)' == 'true' ">
+        <ProjectCapability Include="Msix" />
+        <ProjectCapability Include="UnoSingleProject" />
+        <ProjectCapability Include="LaunchProfiles" />
+        <!-- If VS is older than Dev17 -->
+        <ProjectCapability Include="XamarinStaticLaunchProfiles" Condition=" '$(VisualStudioVersion)' != '' and '$(VisualStudioVersion)' &lt; '17.0' " />
+        <!-- Otherwise define LaunchProfilesGroupByPlatformFilters by default -->
+        <ProjectCapability Include="LaunchProfilesGroupByPlatformFilters" Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &gt;= '17.0' " />
+        <ProjectCapability Include="SingleTargetBuildForStartupProjects" Condition=" '$(EnableSingleTargetBuildForStartupProjects)' != 'false' " />
+    </ItemGroup>
+
+</Project>

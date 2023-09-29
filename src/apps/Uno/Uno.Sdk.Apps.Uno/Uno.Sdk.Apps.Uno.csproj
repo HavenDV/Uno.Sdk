@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>$(TargetFrameworks);net7.0;net7.0-ios;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
 		<DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
+		<Nullable>enable</Nullable>
 
 		<!-- Ensures the .xr.xml files are generated in a proper layout folder -->
 		<GenerateLibraryLayout>true</GenerateLibraryLayout>

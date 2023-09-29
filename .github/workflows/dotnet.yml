@@ -9,6 +9,6 @@ jobs:
       generate-build-number: false
       conventional-commits-publish-conditions: false
       enable-caching: false
-      project-path: src/libs/Uno.Sdk
+      project-path: src/workload
     secrets:
       nuget-key: ${{ secrets.NUGET_KEY }}

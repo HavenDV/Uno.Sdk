@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.Build.NoTargets/3.7.0">
+
+  <PropertyGroup>
+    <PackageId>H.Uno.Sdk</PackageId>
+    <Description>The MSBuild props/targets for buliding Uno .NET projects</Description>
+    <PackageTags>uno;sdk</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Sdk/*" Pack="true" PackagePath="Sdk" />
+  </ItemGroup>
+
+</Project>

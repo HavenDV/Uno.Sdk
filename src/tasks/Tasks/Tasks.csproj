@@ -1,0 +1,75 @@
+<Project Sdk="Microsoft.Build.NoTargets/3.7.0">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Parameters">
+    <DotnetVersion>7.0.400</DotnetVersion>
+    <DotnetInstallUrl>https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh</DotnetInstallUrl>
+    <UseCurrentDotnet>true</UseCurrentDotnet>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Paths">
+    <SolutionDir>$(MSBuildThisFileDirectory)../../../</SolutionDir>
+    <OutDir>$(SolutionDir)out/</OutDir>
+    <TmpDir>$(SolutionDir).tmp/</TmpDir>
+    <TestDir>$(TmpDir)test/</TestDir>
+    <WorkloadDir>$(SolutionDir)src/workload/</WorkloadDir>
+    <WorkloadPacksOutDir>$(OutDir)nuget-unsigned/</WorkloadPacksOutDir>
+    <DotnetDestDir>$(OutDir)dotnet/</DotnetDestDir>
+    <DotnetDestDir Condition="'$(UseCurrentDotnet)' == 'true'">/usr/local/share/dotnet/</DotnetDestDir>
+    <DotnetExe>$(DotnetDestDir)dotnet</DotnetExe>
+    <DotnetManifestsDestDir>$(DotnetDestDir)sdk-manifests/$(DotnetVersion)/uno.sdk.manifest/</DotnetManifestsDestDir>
+  </PropertyGroup>
+
+  <Target Name="BuildPackages">
+    <ItemGroup>
+      <ProjectReferences Include="$(WorkloadDir)*/*.csproj" />
+    </ItemGroup>
+    
+    <MSBuild Projects="@(ProjectReferences)" Targets="Build">
+      <Output TaskParameter="TargetOutputs"
+              ItemName="AssembliesBuiltByChildProjects" />
+    </MSBuild>
+  </Target>
+  
+  <Target Name="DownloadDotnetInstall" Condition="'$(UseCurrentDotnet)' != 'true'">
+    <DownloadFile
+            SourceUrl="$(DotnetInstallUrl)"
+            DestinationFolder="$(TmpDir)">
+      <Output TaskParameter="DownloadedFile" ItemName="Content" />
+    </DownloadFile>
+  </Target>
+
+  <Target Name="DotnetInstall" DependsOnTargets="DownloadDotnetInstall;BuildPackages" Condition="'$(UseCurrentDotnet)' != 'true'">
+    <Exec Command="sh $(TmpDir)dotnet-install.sh --version $(DotnetVersion) --install-dir $(DotnetDestDir)" ConsoleToMSBuild="true"/>
+  </Target>
+
+  <Target Name="WorkloadInstall" DependsOnTargets="DotnetInstall;BuildPackages">
+    <ItemGroup>
+      <_SourceFiles Include="$(WorkloadDir)Uno.Sdk.Manifest/WorkloadManifest.targets"/>
+      <_SourceFiles Include="$(WorkloadPacksOutDir)workload-manifest/WorkloadManifest.json"/>
+    </ItemGroup>
+    
+    <Copy SourceFiles="@(_SourceFiles)" DestinationFolder="$(DotnetManifestsDestDir)"/>
+    <Exec Command="$(DotnetExe) workload install uno --skip-manifest-update --source $(WorkloadPacksOutDir) --temp-dir=$(TmpDir)" ConsoleToMSBuild="true"/>
+  </Target>
+
+  <Target Name="WorkloadUninstall">
+    <Exec Command="$(DotnetExe) workload uninstall uno" ConsoleToMSBuild="true"/>
+  </Target>
+
+  <Target Name="TestWorkload" DependsOnTargets="WorkloadInstall">
+    <RemoveDir Directories="$(TestDir)" />
+    <MakeDir Directories="$(TestDir)" />
+    <Exec Command="$(DotnetExe) new uno --output $(TestDir)" ConsoleToMSBuild="true"/>
+    <Exec Command="$(DotnetExe) build $(TestDir)" ConsoleToMSBuild="true"/>
+  </Target>
+
+  <Target Name="CleanArtifactsAndTemporaryFiles">
+    <RemoveDir Directories="$(OutDir)" />
+    <RemoveDir Directories="$(TmpDir)" />
+  </Target>
+
+</Project>

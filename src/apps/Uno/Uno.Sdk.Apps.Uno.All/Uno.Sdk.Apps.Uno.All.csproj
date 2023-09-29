@@ -1,6 +1,6 @@
 <Project>
 
-	<Import Project="$(MSBuildThisFileDirectory)..\..\..\libs\Uno.Sdk\Sdk\Sdk.props" />
+	<Import Project="$(MSBuildThisFileDirectory)..\..\..\workload\Uno.Sdk\Sdk\Sdk.props" />
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-ios;net7.0-android;net7.0-maccatalyst;net7.0-skia;net7.0-webassembly</TargetFrameworks>
@@ -10,6 +10,6 @@
 		<ProjectReference Include="..\Uno.Sdk.Apps.Uno\Uno.Sdk.Apps.Uno.csproj" />
 	</ItemGroup>
 
-	<Import Project="$(MSBuildThisFileDirectory)..\..\..\libs\Uno.Sdk\Sdk\Sdk.targets" />
+	<Import Project="$(MSBuildThisFileDirectory)..\..\..\workload\Uno.Sdk\Sdk\Sdk.targets" />
 	
 </Project>

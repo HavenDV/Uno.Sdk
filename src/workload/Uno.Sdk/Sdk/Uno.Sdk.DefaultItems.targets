@@ -1,0 +1,175 @@
+<Project>
+
+    <!-- 
+      There are two approaches described for the default items:
+      - Via AutoImport.props, described here: https://github.com/dotnet/designs/blob/main/accepted/2020/workloads/workload-resolvers.md#workload-props-files
+      - Via this file according: https://github.com/dotnet/maui/blob/main/src/Workload/Microsoft.Uno.Sdk/Sdk/Microsoft.Uno.Sdk.DefaultItems.targets
+      At the moment we are trying to use the MAUI approach
+    -->
+
+    <!--
+    Enable the default xaml globs and nesting.
+    -->
+    <PropertyGroup>
+        <EnableDefaultUnoItems Condition=" '$(EnableDefaultUnoItems)' == '' ">$(EnableDefaultItems)</EnableDefaultUnoItems>
+        <EnableDefaultXamlItems Condition=" '$(EnableDefaultXamlItems)' == '' ">$(EnableDefaultUnoItems)</EnableDefaultXamlItems>
+        <EnableDefaultEmbeddedResourceItems Condition=" '$(EnableDefaultEmbeddedResourceItems)' == '' ">$(EnableDefaultUnoItems)</EnableDefaultEmbeddedResourceItems>
+    </PropertyGroup>
+    
+    <!--
+    Set up some basic structuring.
+    
+    This file does two things:
+        - Move all the .xaml.cs files under their .xaml files.
+        - Remove the .xaml from the @(None) item group.
+    
+    These are in the workload so they can run when the NuGet packages are not yet restored.
+    -->
+    <ItemGroup Condition="'$(EnableDefaultItems)'=='True' And '$(EnableDefaultXamlItems)'=='True' And '$(EnableDefaultEmbeddedResourceItems)'=='True'">
+        <Compile Update="**\*.xaml$(DefaultLanguageSourceExtension)" DependentUpon="%(Filename)" SubType="Code" />
+        <None Remove="**\*.xaml" Condition="'$(EnableDefaultNoneItems)'=='True'" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ApplicationDefinition Include="AppHead.xaml"
+                               SubType="Designer"
+                               XamlRuntime="WinUI"
+                               Generator="MSBuild:Compile"
+                               Link="AppHead.xaml"
+                               Condition="Exists('AppHead.xaml')" />
+        <Compile Update="AppHead.xaml.cs"
+                 XamlRuntime="WinUI"
+                 DependentUpon="AppHead.xaml"
+                 Link="AppHead.xaml.cs"
+                 Condition="Exists('AppHead.xaml.cs')" />
+        <UnoIcon Include="Resources\Icons\iconapp.svg"
+                 ForegroundScale="0.65"
+                 Color="#00000000"
+                 Condition="Exists('Resources\Icons\iconapp.svg')" />
+        <UnoIcon Update="Resources/Icons/iconapp.svg"
+                 ForegroundFile="Resources/Icons/appconfig.svg"
+                 Condition="Exists('Resources/Icons/iconapp.svg') AND Exists('Resources/Icons/appconfig.svg')" />
+        <UnoSplashScreen
+                Include="Resources\Splash\splash_screen.svg"
+                BaseSize="128,128"
+                Color="#086AD1"
+                Condition="Exists('Resources\Splash\splash_screen.svg')" />
+    </ItemGroup>
+
+    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-ios')) != true">
+        <Compile Remove="**\**\*.ios.cs" />
+        <None Include="**\**\*.ios.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\ios\**\*.cs" />
+        <None Include="**\ios\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-maccatalyst')) != true ">
+        <Compile Remove="**\*.maccatalyst.cs" />
+        <None Include="**\*.maccatalyst.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\maccatalyst\**\*.cs" />
+        <None Include="**\maccatalyst\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-ios')) != true AND $(TargetFramework.StartsWith('net7.0-maccatalyst')) != true">
+        <Compile Remove="**\*.macios.cs" />
+        <None Include="**\*.macios.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\macios\**\*.cs" />
+        <None Include="**\macios\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-android')) != true ">
+        <Compile Remove="**\**\*.android.cs" />
+        <None Include="**\**\*.android.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\android\**\*.cs" />
+        <None Include="**\android\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.Contains('-windows')) != true ">
+        <Compile Remove="**\*.windows.cs" />
+        <None Include="**\*.windows.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\windows\**\*.cs" />
+        <None Include="**\windows\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.Contains('-tizen')) != true ">
+        <Compile Remove="**\*.tizen.cs" />
+        <None Include="**\*.tizen.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\tizen\**\*.cs" />
+        <None Include="**\tizen\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.Contains('-skia')) != true ">
+        <Compile Remove="**\*.skia.cs" />
+        <None Include="**\*.skia.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\skia\**\*.cs" />
+        <None Include="**\skia\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.Contains('-webassembly')) != true ">
+        <Compile Remove="**\*.webassembly.cs" />
+        <None Include="**\*.webassembly.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\webassembly\**\*.cs" />
+        <None Include="**\webassembly\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+
+
+    <PropertyGroup>
+        <AndroidManifest Condition="'$(AndroidManifest)' == '' and Exists('Platforms\Android\AndroidManifest.xml')">Platforms\Android\AndroidManifest.xml</AndroidManifest>
+        <AndroidManifest Condition="'$(AndroidManifest)' == '' and Exists('Android\AndroidManifest.xml')">Android\AndroidManifest.xml</AndroidManifest>
+    </PropertyGroup>
+
+    <Choose>
+        <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+            <ItemGroup>
+                <AndroidEnvironment Include="Android/environment.conf" Condition="Exists('Android/environment.conf')" />
+                <AndroidEnvironment Include="Platforms/Android/environment.conf" Condition="Exists('Platforms/Android/environment.conf')" />
+            </ItemGroup>
+        </When>
+        <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+        </When>
+        <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+        </When>
+    </Choose>
+
+
+    <PropertyGroup>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\Skia\app.manifest')">Platforms\Skia\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Skia\app.manifest')">Skia\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('app.manifest')">app.manifest</ApplicationManifest>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Manifest Include="$(ApplicationManifest)" Condition="Exists('$(ApplicationManifest)')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Package.appxmanifest" Condition="Exists('Package.appxmanifest')" />
+        <EmbeddedResource Include="Skia\Package.appxmanifest" Condition="Exists('Skia\Package.appxmanifest')" />
+        <EmbeddedResource Include="Platforms\Skia\Package.appxmanifest" Condition="Exists('Platforms\Skia\Package.appxmanifest')" />
+    </ItemGroup>
+
+
+    <PropertyGroup>
+        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('Platforms\WebAssembly\manifest.webmanifest')">Platforms\Skia\manifest.webmanifest</WasmPWAManifestFile>
+        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('WebAssembly\manifest.webmanifest')">Skia\manifest.webmanifest</WasmPWAManifestFile>
+        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('manifest.webmanifest')">manifest.webmanifest</WasmPWAManifestFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="manifest.webmanifest" Condition="Exists('manifest.webmanifest')" />
+        <Content Include="WebAssembly\manifest.webmanifest" Condition="Exists('WebAssembly\manifest.webmanifest')" />
+        <Content Include="Platforms\WebAssembly\manifest.webmanifest" Condition="Exists('Platforms\WebAssembly\manifest.webmanifest')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <LinkerDescriptor Include="LinkerConfig.xml" Condition="Exists('LinkerConfig.xml')" />
+        <LinkerDescriptor Include="WebAssembly\LinkerConfig.xml" Condition="Exists('WebAssembly\LinkerConfig.xml')" />
+        <LinkerDescriptor Include="Platforms\WebAssembly\LinkerConfig.xml" Condition="Exists('Platforms\WebAssembly\LinkerConfig.xml')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="WasmCSS\Fonts.css" Condition="Exists('WasmCSS\Fonts.css')" />
+        <EmbeddedResource Include="WebAssembly\WasmCSS\Fonts.css" Condition="Exists('WebAssembly\WasmCSS\Fonts.css')" />
+        <EmbeddedResource Include="Platforms\WebAssembly\WasmCSS\Fonts.css" Condition="Exists('Platforms\WebAssembly\WasmCSS\Fonts.css')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="WasmScripts\AppManifest.js" Condition="Exists('WasmScripts\AppManifest.js')" />
+        <EmbeddedResource Include="WebAssembly\WasmScripts\AppManifest.js" Condition="Exists('WebAssembly\WasmScripts\AppManifest.js')" />
+        <EmbeddedResource Include="Platforms\WebAssembly\WasmScripts\AppManifest.js" Condition="Exists('Platforms\WebAssembly\WasmScripts\AppManifest.js')" />
+    </ItemGroup>
+    
+</Project>

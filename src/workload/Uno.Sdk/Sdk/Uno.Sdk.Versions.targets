@@ -1,0 +1,30 @@
+<Project>
+
+  <PropertyGroup>
+    <_DefaultTargetPlatformVersion>1.0</_DefaultTargetPlatformVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetPlatformSupported>true</TargetPlatformSupported>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">$(_DefaultTargetPlatformVersion)</TargetPlatformVersion>
+    <_TargetFramework Condition="$(TargetFramework.EndsWith('uno'))">$(TargetFramework)$(_DefaultTargetPlatformVersion)</_TargetFramework>
+    <_TargetFramework Condition="!$(TargetFramework.EndsWith('uno'))">$(TargetFramework)</_TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="uno" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SupportedAPILevel Include="v1.0" MappedAPIVersion="1.0"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UnoSdkSupportedTargetPlatformVersion Include="1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SdkSupportedTargetPlatformVersion Include="@(UnoSdkSupportedTargetPlatformVersion)" />
+  </ItemGroup>
+
+</Project>

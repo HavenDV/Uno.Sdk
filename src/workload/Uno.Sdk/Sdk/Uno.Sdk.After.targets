@@ -1,0 +1,12 @@
+<Project>
+
+  <PropertyGroup>
+    <EnableDefaultUnoItems Condition="'$(EnableDefaultUnoItems)' == ''">$(EnableDefaultItems)</EnableDefaultUnoItems>
+  </PropertyGroup>
+
+  <Import Project="Uno.Sdk.Common.targets" />
+  <Import Project="Uno.Sdk.Applications.targets" Condition="'$(OutputType)'=='Exe'" />
+  <Import Project="Uno.Sdk.ProjectCapabilities.targets" />
+  <Import Project="Uno.Sdk.DefaultItems.targets" />
+
+</Project>

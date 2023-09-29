@@ -1,0 +1,22 @@
+{
+  "version": "@UNO_WORKLOAD_VERSION@",
+  "workloads": {
+    "uno": {
+      "description": ".NET SDK Workload for building Uno applications.",
+      "packs": [
+        "Uno.Sdk",
+        "Uno.Templates"
+      ]
+    }
+  },
+  "packs": {
+    "Uno.Sdk": {
+      "kind": "sdk",
+      "version": "@UNO_WORKLOAD_VERSION@"
+    },
+    "Uno.Templates": {
+      "kind": "template",
+      "version": "@UNO_WORKLOAD_VERSION@"
+    }
+  }
+}

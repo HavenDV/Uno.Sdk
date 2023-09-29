@@ -1,6 +1,6 @@
 <Project>
 	
-	<Import Project="$(MSBuildThisFileDirectory)..\..\..\libs\Uno.Sdk\Sdk\Sdk.props" />
+	<Import Project="$(MSBuildThisFileDirectory)..\..\..\workload\Uno.Sdk\Sdk\Sdk.props" />
 	
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
@@ -13,6 +13,6 @@
 
 	<Import Project="..\Uno.Sdk.Apps.Uno.Shared\Uno.Sdk.Apps.Uno.Shared.props" />
 
-	<Import Project="$(MSBuildThisFileDirectory)..\..\..\libs\Uno.Sdk\Sdk\Sdk.targets" />
+	<Import Project="$(MSBuildThisFileDirectory)..\..\..\workload\Uno.Sdk\Sdk\Sdk.targets" />
 	
 </Project>

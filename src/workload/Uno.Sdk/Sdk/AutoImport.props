@@ -1,0 +1,27 @@
+<!--
+***********************************************************************************************
+AutoImport.props
+
+Contains Uno default MSBuild item includes.
+
+WARNING:  This file is imported by all projects using
+          Microsoft.NET.Sdk. All Item includes in this file *MUST* be
+          hidden behind an Android property based condition.
+
+Spec for AutoImport.props:
+
+https://github.com/dotnet/designs/blob/main/accepted/2020/workloads/workload-resolvers.md#workload-props-files
+
+***********************************************************************************************
+-->
+
+<Project>
+
+    <!-- 
+      There are two approaches described for the default items:
+      - Via AutoImport.props, described here: https://github.com/dotnet/designs/blob/main/accepted/2020/workloads/workload-resolvers.md#workload-props-files
+      - Via this file according: https://github.com/dotnet/maui/blob/main/src/Workload/Microsoft.Maui.Sdk/Sdk/Microsoft.Maui.Sdk.DefaultItems.targets
+      At the moment we are trying to use the MAUI approach
+    -->
+    
+</Project>
