@@ -26,7 +26,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
-$ManifestBaseName = "Uno.Sdk.Manifest"
+$ManifestBaseName = "H.Uno.Sdk.Manifest"
 
 function New-TemporaryDirectory {
     $parent = [System.IO.Path]::GetTempPath()

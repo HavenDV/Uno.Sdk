@@ -5,7 +5,7 @@
 
 #!/bin/bash -e
 
-MANIFEST_BASE_NAME="uno.sdk.manifest"
+MANIFEST_BASE_NAME="h.uno.sdk.manifest"
 MANIFEST_VERSION="<latest>"
 MANIFEST_LATEST_VERSION="0.8.0"
 DOTNET_INSTALL_DIR="<auto>"
