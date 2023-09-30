@@ -10,11 +10,11 @@
     }
   },
   "packs": {
-    "Uno.Sdk": {
+    "H.Uno.Sdk": {
       "kind": "sdk",
       "version": "@UNO_WORKLOAD_VERSION@"
     },
-    "Uno.Templates": {
+    "H.Uno.Templates": {
       "kind": "template",
       "version": "@UNO_WORKLOAD_VERSION@"
     }
