@@ -1,27 +1,27 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "HavenDV",
-  "classifications": [ "WebAssembly" ],
-  "identity": "WebAssembly.WebAssemblyApp",
-  "name": "WebAssembly .NET Application",
-  "description": "A project for creating an WebAssembly .NET application",
-  "shortName": "webassembly",
+  "classifications": [ "Uno" ],
+  "identity": "Uno.UnoApp",
+  "name": "Uno .NET Application",
+  "description": "A project for creating an Uno .NET application",
+  "shortName": "uno",
   "tags": {
     "language": "C#",
     "type": "project"
   },
-  "sourceName": "WebAssemblyApp1",
+  "sourceName": "UnoApp1",
   "preferNameDirectory": true,
   "primaryOutputs": [
-    { "path": "WebAssemblyApp1.csproj" }
+    { "path": "UnoApp1.csproj" }
   ],
   "symbols": {
     "packageName": {
       "type": "parameter",
-      "description": "Overrides the package name in the webassembly-manifest.xml",
+      "description": "Overrides the package name in the uno-manifest.xml",
       "datatype": "string",
-      "replaces": "com.companyname.WebAssemblyApp1"
+      "replaces": "com.companyname.UnoApp1"
     }
   },
-  "defaultName": "WebAssemblyApp1"
+  "defaultName": "UnoApp1"
 }
