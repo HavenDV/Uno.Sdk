@@ -19,15 +19,16 @@
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.EndsWith('skia')) or $(TargetFramework.EndsWith('webassembly'))">
-    <SupportedAPILevel Include="v1.0" MappedAPIVersion="1.0"/>
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.EndsWith('skia')) or $(TargetFramework.EndsWith('webassembly'))">
     <UnoSdkSupportedTargetPlatformVersion Include="1.0" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.EndsWith('skia')) or $(TargetFramework.EndsWith('webassembly'))">
     <SdkSupportedTargetPlatformVersion Include="@(UnoSdkSupportedTargetPlatformVersion)" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETCoreApp' and $([MSBuild]::VersionGreaterThanOrEquals($(TargetFrameworkVersion), '6.0')) ">
+    <SdkSupportedTargetPlatformIdentifier Include="skia" DisplayName="Skia" />
+    <SdkSupportedTargetPlatformIdentifier Include="webassembly" DisplayName="WebAssembly" />
   </ItemGroup>
 
 </Project>
