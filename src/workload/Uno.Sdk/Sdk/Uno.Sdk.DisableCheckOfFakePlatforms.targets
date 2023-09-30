@@ -1,5 +1,9 @@
 <Project>
   
+  <!--
+    A hack we need to try.
+    But for me at the moment, explicitly installing Skia/WebAssembly workloads looks much better than this.
+  -->
   <Target Name="_CheckForMissingWorkload"
           BeforeTargets="_CheckForInvalidConfigurationAndPlatform;_CheckForUnsupportedTargetPlatformIdentifier"
           Condition="'@(MissingWorkloadPack)' != '' And '$(DesignTimeBuild)' != 'true'">
