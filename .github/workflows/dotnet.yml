@@ -36,7 +36,7 @@ jobs:
 
       - name: "Build local packages"
         if: matrix.source == 'local'
-        run: dotnet build
+        run: dotnet build src/workload/Uno.Sdk.Manifest
 
       - name: "Download workload-install on Windows"
         if: matrix.os == 'windows'

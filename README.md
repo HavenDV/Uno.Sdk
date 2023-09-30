@@ -13,7 +13,7 @@ Now is only there platforms are supported:
 
 ### Usage
 ```xml
-<Project Sdk="H.Uno.Sdk/0.8.3">
+<Project Sdk="H.Uno.Sdk/0.8.4">
 
     <PropertyGroup>
         <TargetFramework>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-skia;net7.0-webassembly</TargetFramework>
