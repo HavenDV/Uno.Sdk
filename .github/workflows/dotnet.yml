@@ -43,14 +43,14 @@ jobs:
         run: Invoke-WebRequest 'https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/workload-install.ps1' -OutFile 'workload-install.ps1'
       - name: "Install workload from local packages on Windows"
         if: matrix.source == 'local' && matrix.os == 'windows'
-        run: ./workload-install.ps1 -s out/nuget-unsigned
+        run: ./workload-install.ps1 -s artifacts/nuget
       - name: "Install workload from NuGet on Windows"
         if: matrix.source == 'nuget' && matrix.os == 'windows'
         run: ./workload-install.ps1
 
       - name: "Install workload from local packages on Linux/macOS"
         if: matrix.source == 'local' && matrix.os != 'windows'
-        run: curl -sSL https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/workload-install.sh | bash -s -- -s out/nuget-unsigned
+        run: curl -sSL https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/workload-install.sh | bash -s -- -s artifacts/nuget
       - name: "Install workload from NuGet on Linux/macOS"
         if: matrix.source == 'nuget' && matrix.os != 'windows'
         run: curl -sSL https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/workload-install.sh | sudo bash
