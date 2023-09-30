@@ -24,7 +24,7 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - if: matrix.source == 'local'
-        run: dotnet build
+        run: dotnet build src/workload/Uno.Sdk.Manifest
       - if: matrix.source == 'local'
         run: curl -sSL https://raw.githubusercontent.com/HavenDV/Uno.Sdk/main/scripts/workload-install.sh | bash -s -- -s out/nuget-unsigned
       - if: matrix.source == 'nuget'
@@ -50,7 +50,7 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - if: matrix.source == 'local'
-        run: dotnet build
+        run: dotnet build src/workload/Uno.Sdk.Manifest
       - run: Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/Uno.Sdk/main/scripts/workload-install.ps1' -OutFile 'workload-install.ps1'
       - if: matrix.source == 'local'
         run: ./workload-install.ps1 -s out/nuget-unsigned
@@ -76,7 +76,7 @@ jobs:
         with:
           vs-prerelease: ${{ matrix.vs-prerelease }}
       - if: matrix.source == 'local'
-        run: dotnet build
+        run: dotnet build src/workload/Uno.Sdk.Manifest
       - run: Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/Uno.Sdk/main/scripts/workload-install.ps1' -OutFile 'workload-install.ps1'
       - if: matrix.source == 'local'
         run: ./workload-install.ps1 -s out/nuget-unsigned
