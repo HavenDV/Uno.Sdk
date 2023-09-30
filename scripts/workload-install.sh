@@ -5,9 +5,9 @@
 
 #!/bin/bash -e
 
-MANIFEST_BASE_NAME="h.uno.sdk.manifest"
+MANIFEST_NAME="H.Uno.Sdk.Manifest"
 MANIFEST_VERSION="<latest>"
-MANIFEST_LATEST_VERSION="0.8.2"
+SOURCE="<auto>"
 DOTNET_INSTALL_DIR="<auto>"
 DOTNET_TARGET_VERSION_BAND="<auto>"
 DOTNET_DEFAULT_PATH_LINUX="/usr/share/dotnet"
@@ -20,6 +20,10 @@ while [ $# -ne 0 ]; do
         -v|--version)
             shift
             MANIFEST_VERSION=$1
+            ;;
+        -s|--source)
+            shift
+            SOURCE=$1
             ;;
         -d|--dotnet-install-dir)
             shift
@@ -105,10 +109,10 @@ fi
 
 function install_uno_workload() {
     DOTNET_VERSION=$1
+    SOURCE=$2
     IFS='.' read -r -a array <<< "$DOTNET_VERSION"
     CURRENT_DOTNET_VERSION=${array[0]}
     DOTNET_VERSION_BAND="${array[0]}.${array[1]}.${array[2]:0:1}00"
-    MANIFEST_NAME="$MANIFEST_BASE_NAME"
 
     # Reset local variables
     if [[ "$UPDATE_ALL_WORKLOADS" == "true" ]]; then
@@ -121,7 +125,6 @@ function install_uno_workload() {
         if [[ "$CURRENT_DOTNET_VERSION" -ge "7" ]]; then
             if [[ "$DOTNET_VERSION" == *"-preview"* || $DOTNET_VERSION == *"-rc"* || $DOTNET_VERSION == *"-alpha"* ]] && [[ ${#array[@]} -ge 4 ]]; then
                 DOTNET_TARGET_VERSION_BAND="$DOTNET_VERSION_BAND${array[2]:3}.${array[3]}"
-                MANIFEST_NAME="$MANIFEST_BASE_NAME"
             else
                 DOTNET_TARGET_VERSION_BAND=$DOTNET_VERSION_BAND
             fi
@@ -132,7 +135,7 @@ function install_uno_workload() {
 
     # Check latest version of manifest.
     if [[ "$MANIFEST_VERSION" == "<latest>" ]]; then
-        MANIFEST_VERSION=$MANIFEST_LATEST_VERSION
+        MANIFEST_VERSION="0.8.2"
         if [ ! "$MANIFEST_VERSION" ]; then
             MANIFEST_VERSION=$(curl -s https://api.nuget.org/v3-flatcontainer/$MANIFEST_NAME/index.json | grep \" | tail -n 1 | tr -d '\r' | xargs)
             if [[ -n $MANIFEST_VERSION ]]; then
@@ -153,7 +156,11 @@ function install_uno_workload() {
     echo "Installing $MANIFEST_NAME/$MANIFEST_VERSION to $SDK_MANIFESTS_DIR..."
 
     # Download and extract the manifest nuget package.
-    curl -s -o $TMPDIR/manifest.zip -L https://www.nuget.org/api/v2/package/$MANIFEST_NAME/$MANIFEST_VERSION
+    if [[ "$SOURCE" == "<auto>" ]]; then
+      curl -s -o $TMPDIR/manifest.zip -L https://www.nuget.org/api/v2/package/$MANIFEST_NAME/$MANIFEST_VERSION
+    else
+      cp -f $SOURCE/$MANIFEST_NAME.$MANIFEST_VERSION.nupkg $TMPDIR/manifest.zip
+    fi
 
     unzip -qq -d $TMPDIR/unzipped $TMPDIR/manifest.zip
     if [ ! -d $TMPDIR/unzipped/data ]; then
@@ -179,8 +186,13 @@ function install_uno_workload() {
         CACHE_GLOBAL_JSON="false"
     fi
     dotnet new globaljson --sdk-version $DOTNET_VERSION
-    $DOTNET_INSTALL_DIR/dotnet workload install uno --skip-manifest-update
-
+    
+    if [[ "$SOURCE" == "<auto>" ]]; then
+      $DOTNET_INSTALL_DIR/dotnet workload install uno --skip-manifest-update
+    else
+      $DOTNET_INSTALL_DIR/dotnet workload install uno --skip-manifest-update --source $SOURCE
+    fi
+    
     # Clean-up
     rm -fr $TMPDIR
     rm global.json
@@ -203,7 +215,7 @@ if [ -z "$INSTALLED_DOTNET_SDKS" ]; then
 else
     for DOTNET_SDK in $INSTALLED_DOTNET_SDKS; do
         echo "Check Uno Workload for sdk $DOTNET_SDK."
-        install_uno_workload $DOTNET_SDK
+        install_uno_workload $DOTNET_SDK $SOURCE
     done
 fi
 

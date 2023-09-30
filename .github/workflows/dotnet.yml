@@ -1,7 +1,90 @@
 name: Build, test and publish
-on: [ push ]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
+  build-test-non-windows:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+        dotnet-version: [
+          6.0.414,
+          7.0.401,
+          #8.0.100-rc.1
+        ]
+        source: [nuget, local]
+    name: ${{ matrix.os }}/${{ matrix.dotnet-version }}/${{ matrix.source }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - if: matrix.source == 'local'
+        uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - if: matrix.source == 'local'
+        run: dotnet build
+      - if: matrix.source == 'local'
+        run: curl -sSL https://raw.githubusercontent.com/HavenDV/Uno.Sdk/main/scripts/workload-install.sh | bash -s -- -s out/nuget-unsigned
+      - if: matrix.source == 'nuget'
+        run: curl -sSL https://raw.githubusercontent.com/HavenDV/Uno.Sdk/main/scripts/workload-install.sh | sudo bash
+      - run: dotnet new uno --output test
+      - run: dotnet build test
+  
+  build-test-windows:
+    strategy:
+      matrix:
+        dotnet-version: [
+          6.0.414,
+          7.0.401,
+          #8.0.100-rc.1
+        ]
+        source: [nuget, local]
+    name: windows-latest/${{ matrix.dotnet-version }}/${{ matrix.source }}
+    runs-on: windows-latest
+    steps:
+      - if: matrix.source == 'local'
+        uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - if: matrix.source == 'local'
+        run: dotnet build
+      - run: Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/Uno.Sdk/main/scripts/workload-install.ps1' -OutFile 'workload-install.ps1'
+      - if: matrix.source == 'local'
+        run: ./workload-install.ps1 -s out/nuget-unsigned
+      - if: matrix.source == 'nuget'
+        run: ./workload-install.ps1
+      - run: dotnet new uno --output test
+      - run: dotnet build test
+  
+  build-test-msbuild:
+    strategy:
+      matrix:
+        vs-prerelease: [true, false]
+        source: [nuget, local]
+    name: msbuild/preview-${{ matrix.vs-prerelease }}/${{ matrix.source }}
+    runs-on: windows-latest
+    steps:
+      - if: matrix.source == 'local'
+        uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-prerelease: ${{ matrix.vs-prerelease }}
+      - if: matrix.source == 'local'
+        run: dotnet build
+      - run: Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/Uno.Sdk/main/scripts/workload-install.ps1' -OutFile 'workload-install.ps1'
+      - if: matrix.source == 'local'
+        run: ./workload-install.ps1 -s out/nuget-unsigned
+      - if: matrix.source == 'nuget'
+        run: ./workload-install.ps1
+      - run: dotnet new uno --output test
+      - run: msbuild test /restore
+  
   build-test-publish:
     name: Build, test and publish
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
