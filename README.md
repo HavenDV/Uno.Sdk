@@ -22,7 +22,7 @@ to support all Skia project types.
 <Project Sdk="H.Uno.Sdk/0.9.0">
 
     <PropertyGroup>
-        <TargetFramework>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-skia;net7.0-webassembly</TargetFramework>
+        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-skia;net7.0-webassembly</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     </PropertyGroup>
 
