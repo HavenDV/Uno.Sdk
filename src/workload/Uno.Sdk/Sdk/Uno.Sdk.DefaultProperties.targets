@@ -204,7 +204,6 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
-    <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
     <NoWarn>$(NoWarn);CS8785</NoWarn>
     <!-- Uncomment for Unpackaged builds -->
     <!-- <WindowsPackageType>None</WindowsPackageType> -->

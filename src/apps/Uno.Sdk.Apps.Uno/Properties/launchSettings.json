@@ -8,6 +8,10 @@
     }
   },
   "profiles": {
+    "Package": {
+      "commandName": "MsixPackage",
+      "commandLineArgs": ""
+    },
     "Uno.Sdk.Apps.Uno.Wasm": {
       "commandName": "Project",
       "dotnetRunMessages": true,

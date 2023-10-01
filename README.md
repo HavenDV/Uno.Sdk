@@ -7,17 +7,23 @@
 
 Easy configuration for Uno projects in 2 lines of code.
 Now is only there platforms are supported:
-- Mobile
-- Skia
+- Mobile(macOS, MacCatalyst and Android)
+- Windows
 - WebAssembly
+- Skia.Gkt(Skia.Wpf, Skia.Linux.Framebuffer and Skia.Tizen still are unsupported)
+
+I think we need to replace `net7.0-skia` to 
+`net7.0-windows`(Skia.Wpf), `net7.0-gtk`(Skia.Gtk), 
+`net7.0-linux`(Skia.Linux.Framebuffer) and `net7.0-tizen`(Skia.Tizen) 
+to support all Skia project types.
 
 ### Usage
 ```xml
-<Project Sdk="H.Uno.Sdk/0.8.4">
+<Project Sdk="H.Uno.Sdk/0.9.0">
 
     <PropertyGroup>
         <TargetFramework>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-skia;net7.0-webassembly</TargetFramework>
-        <!-- Still unsupported: ;net7.0-windows10.0.19041.0 -->
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     </PropertyGroup>
 
 </Project>

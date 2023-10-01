@@ -139,6 +139,8 @@
     <PropertyGroup>
         <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\Skia\app.manifest')">Platforms\Skia\app.manifest</ApplicationManifest>
         <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Skia\app.manifest')">Skia\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\Windows\app.manifest')">Platforms\Windows\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Windows\app.manifest')">Windows\app.manifest</ApplicationManifest>
         <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('app.manifest')">app.manifest</ApplicationManifest>
     </PropertyGroup>
 

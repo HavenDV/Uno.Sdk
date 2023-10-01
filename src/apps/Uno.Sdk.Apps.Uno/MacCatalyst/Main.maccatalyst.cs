@@ -8,4 +8,4 @@ if (System.Diagnostics.Debugger.IsAttached)
 }
 #endif
 
-UIApplication.Main(args, null, typeof(AppHead));
+UIApplication.Main(args, null, typeof(App));
