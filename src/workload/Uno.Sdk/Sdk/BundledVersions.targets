@@ -6,11 +6,34 @@
       Moreover, MAUI refuses this too - https://github.com/dotnet/maui/blob/main/src/Workload/Microsoft.Maui.Sdk/Sdk/BundledVersions.in.targets#L73
       It's there for now, but we have to take it into account.
     -->
-    
-    <PropertyGroup>
+
+    <PropertyGroup Label="Versions">
+        <!-- Common -->
         <UnoVersion Condition=" '$(UnoVersion)' == '' ">4.10.26</UnoVersion>
         <UnoResizetizerVersion Condition=" '$(UnoResizetizerVersion)' == '' ">1.1.3</UnoResizetizerVersion>
+        <UnoExtensionsVersion Condition=" '$(UnoExtensionsVersion)' == '' ">1.6.0</UnoExtensionsVersion>
+        <MicrosoftExtensionsLoggingConsoleVersion Condition=" '$(MicrosoftExtensionsLoggingConsoleVersion)' == '' ">7.0.0</MicrosoftExtensionsLoggingConsoleVersion>
         
+        <!-- It still using? -->
+        <UnoCoreExtensionsLoggingSingletonVersion Condition=" '$(UnoCoreExtensionsLoggingSingletonVersion)' == '' ">4.0.1</UnoCoreExtensionsLoggingSingletonVersion>
+
+        <!-- Skia -->
+        <SkiaVersion Condition=" '$(SkiaVersion)' == '' ">2.88.6</SkiaVersion>
+
+        <!-- WebAssembly -->
+        <MicrosoftWindowsCompatibilityVersion Condition=" '$(MicrosoftWindowsCompatibilityVersion)' == '' ">7.0.5</MicrosoftWindowsCompatibilityVersion>
+        <UnoWasmBootstrapVersion Condition=" '$(UnoWasmBootstrapVersion)' == '' ">7.0.29</UnoWasmBootstrapVersion>
+
+        <!-- Windows -->
+        <MicrosoftWindowsAppSDKVersion Condition=" '$(MicrosoftWindowsAppSDKVersion)' == '' ">1.4.230913002</MicrosoftWindowsAppSDKVersion>
+        <MicrosoftWindowsSDKBuildToolsVersion Condition=" '$(MicrosoftWindowsSDKBuildToolsVersion)' == '' ">10.0.25936-preview</MicrosoftWindowsSDKBuildToolsVersion>
+
+        <!-- Mobile -->
+        <UnoUniversalImageLoaderVersion Condition=" '$(UnoUniversalImageLoaderVersion)' == '' ">1.9.36</UnoUniversalImageLoaderVersion>
+        <XamarinGoogleAndroidMaterialVersion Condition=" '$(XamarinGoogleAndroidMaterialVersion)' == '' ">1.9.0.3</XamarinGoogleAndroidMaterialVersion>
+    </PropertyGroup>
+    
+    <PropertyGroup>
         <!--
           If opted into NuGet Central Package Management, $(DisableUnoImplicitPackageReferences) defaults to true
           https://learn.microsoft.com/nuget/consume-packages/Central-Package-Management
@@ -50,41 +73,39 @@
     -->
 
     <ItemGroup>
-        <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Microsoft.Windows.Compatibility" Version="7.0.0" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.3.230602002" IsImplicitlyDefined="true" />
-        <PackageVersion Include="SkiaSharp.Skottie" Version="2.88.3" IsImplicitlyDefined="true" />
-        <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.3" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Uno.Resizetizer" Version="1.1.0" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Uno.UniversalImageLoader" Version="1.9.36" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Uno.Wasm.Bootstrap" Version="7.0.23" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="7.0.23" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Uno.Wasm.Bootstrap.Server" Version="7.0.23" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Microsoft.Windows.Compatibility" Version="$(MicrosoftWindowsCompatibilityVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="$(MicrosoftWindowsSDKBuildToolsVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Microsoft.WindowsAppSDK" Version="$(MicrosoftWindowsAppSDKVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="SkiaSharp.Skottie" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="$(UnoCoreExtensionsLoggingSingletonVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="$(UnoExtensionsVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="$(UnoExtensionsVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.UniversalImageLoader" Version="$(UnoUniversalImageLoaderVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.Wasm.Bootstrap" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.Wasm.Bootstrap.Server" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.8.0" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Xamarin.Google.Android.Material" Version="$(Xamarin.Google.Android.Material)" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoLibrary)' == 'true'">
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI" Version="4.10.26" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Resizetizer" Version="1.1.3" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoMobile)' == 'true'">
-        <PackageReference Include="Uno.Resizetizer" Version="1.1.3" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.6.0" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="$(UnoExtensionsVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(Configuration)'=='Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
     </ItemGroup>
@@ -92,8 +113,8 @@
     <Choose>
         <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
             <ItemGroup>
-                <PackageReference Include="Xamarin.Google.Android.Material" Version="1.9.0.3" IsImplicitlyDefined="true" />
-                <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" IsImplicitlyDefined="true" />
+                <PackageReference Include="Xamarin.Google.Android.Material" Version="$(Xamarin.Google.Android.Material)" IsImplicitlyDefined="true" />
+                <PackageReference Include="Uno.UniversalImageLoader" Version="$(UnoUniversalImageLoaderVersion)" IsImplicitlyDefined="true" />
             </ItemGroup>
         </When>
         <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
@@ -103,31 +124,31 @@
     </Choose>
 
     <ItemGroup Condition="'$(UseUnoSkia)' == 'true'">
-        <PackageReference Include="Uno.Resizetizer" Version="1.1.3" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
-        <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.6" IsImplicitlyDefined="true" />
-        <PackageReference Include="SkiaSharp.Skottie" Version="2.88.6" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="SkiaSharp.Skottie" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" IsImplicitlyDefined="true" Condition="'$(Configuration)'=='Debug'" />
         <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
-        <PackageReference Include="Uno.Resizetizer" Version="1.1.3" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.5" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Wasm.Bootstrap" Version="7.0.29" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="7.0.29" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.Windows.Compatibility" Version="$(MicrosoftWindowsCompatibilityVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Wasm.Bootstrap" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.6.0" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="$(UnoExtensionsVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoWindows)' == 'true'">
-        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.25936-preview" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="$(MicrosoftWindowsAppSDKVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$(MicrosoftWindowsSDKBuildToolsVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
     </ItemGroup>
     
 </Project>
