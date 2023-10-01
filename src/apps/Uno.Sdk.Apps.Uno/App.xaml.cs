@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
 using Uno.Resizetizer;
@@ -11,8 +10,6 @@ public sealed partial class App : Application
     #region Properties
 
     private Window? MainWindow { get; set; }
-    
-    private IHost AppHost { get; }
 
     #endregion
     
@@ -25,16 +22,6 @@ public sealed partial class App : Application
 	/// </summary>
 	public App()
 	{
-        AppHost = Host
-            .CreateDefaultBuilder()
-            .ConfigureLogging(static context =>
-            {
-#if WINDOWS_UWP
-                context.ClearProviders();
-#endif
-            })
-            .Build();
-
 		this.InitializeComponent();
 	}
 

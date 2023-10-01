@@ -65,7 +65,7 @@ function Get-LatestVersion([string]$Id) {
         if ($attempts -gt 0) { Start-Sleep $sleepInSeconds }
     } while ($attempts -gt 0)
     
-    return "0.9.0"
+    return "0.9.1"
 }
 
 function Get-Package([string]$Id, [string]$Version, [string]$Destination, [string]$Source = "", [string]$FileExt = "nupkg") {

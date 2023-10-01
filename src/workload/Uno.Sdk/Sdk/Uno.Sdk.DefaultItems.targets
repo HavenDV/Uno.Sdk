@@ -31,6 +31,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="$(ProjectDir)Assets\**" />
+        <Content Include="$(ProjectDir)Resources\Assets\**" />
+        <UpToDateCheckInput Include="$(ProjectDir)**\*.xaml" Exclude="$(ProjectDir)bin\**\*.xaml;$(ProjectDir)obj\**\*.xaml" />
+        <PRIResource Include ="$(ProjectDir)**\*.resw" />
+        <Page Include="$(ProjectDir)**\*.xaml" Exclude="$(ProjectDir)bin\**\*.xaml;$(ProjectDir)obj\**\*.xaml;$(ProjectDir)App.xaml" />
         <ApplicationDefinition Include="AppHead.xaml"
                                SubType="Designer"
                                XamlRuntime="WinUI"
@@ -53,18 +58,23 @@
                  DependentUpon="App.xaml"
                  Link="App.xaml.cs"
                  Condition="Exists('App.xaml.cs')" />
-        <UnoIcon Include="Resources\Icons\iconapp.svg"
+        <UnoIcon Include="$(ProjectDir)Resources\Icons\iconapp.svg"
                  ForegroundScale="0.65"
                  Color="#00000000"
-                 Condition="Exists('Resources\Icons\iconapp.svg')" />
-        <UnoIcon Update="Resources/Icons/iconapp.svg"
-                 ForegroundFile="Resources/Icons/appconfig.svg"
-                 Condition="Exists('Resources/Icons/iconapp.svg') AND Exists('Resources/Icons/appconfig.svg')" />
+                 Condition="Exists('$(ProjectDir)Resources\Icons\iconapp.svg')" />
+        <UnoIcon Update="$(ProjectDir)Resources/Icons/iconapp.svg"
+                 ForegroundFile="$(ProjectDir)Resources/Icons/appconfig.svg"
+                 Condition="Exists('$(ProjectDir)Resources/Icons/iconapp.svg') AND Exists('$(ProjectDir)Resources/Icons/appconfig.svg')" />
         <UnoSplashScreen
-                Include="Resources\Splash\splash_screen.svg"
+                Include="$(ProjectDir)Resources\Splash\splash_screen.svg"
                 BaseSize="128,128"
                 Color="#086AD1"
-                Condition="Exists('Resources\Splash\splash_screen.svg')" />
+                Condition="Exists('$(ProjectDir)Resources\Splash\splash_screen.svg')" />
+        <UnoImage Include="$(ProjectDir)Assets\**\*.svg" Exclude="@(UnoIcon);@(UnoSplashScreen)" />
+        <UnoImage Include="$(ProjectDir)Resources\**\*.svg" Exclude="@(UnoIcon);@(UnoSplashScreen)" />
+        <Compile Update="**/*.xaml.cs">
+            <DependentUpon>%(Filename)</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-ios')) != true">
