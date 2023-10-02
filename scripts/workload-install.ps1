@@ -20,7 +20,7 @@ param(
     [Alias('d')][string]$DotnetInstallDir="<auto>",
     [Alias('t')][string]$DotnetTargetVersionBand="<auto>",
     [Alias('s')][string]$Source="<auto>",
-    [Alias('s')][string]$Workload="uno",
+    [Alias('w')][string]$Workload="uno",
     [Alias('u')][switch]$UpdateAllWorkloads
 )
 
