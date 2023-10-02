@@ -2,10 +2,78 @@
   "version": "@UNO_WORKLOAD_VERSION@",
   "workloads": {
     "uno": {
-      "description": ".NET SDK Workload for building Uno applications.",
+      "description": ".NET Uno SDK for all platforms",
+      "extends": [
+        "uno-mobile",
+        "uno-desktop",
+        "uno-webassembly"
+      ]
+    },
+    "uno-mobile": {
+      "description": ".NET Uno SDK for Mobile",
+      "extends": [
+        "uno-android",
+        "uno-ios",
+        "uno-tizen"
+      ]
+    },
+    "uno-desktop": {
+      "description": ".NET Uno SDK for Desktop",
+      "extends": [
+        "uno-maccatalyst",
+        "uno-windows",
+        "uno-skia"
+      ]
+    },
+    "uno-core": {
+      "abstract": true,
+      "description": ".NET Uno SDK Core Packages",
       "packs": [
         "H.Uno.Sdk",
         "H.Uno.Templates"
+      ]
+    },
+    "uno-webassembly": {
+      "description": ".NET Uno SDK for WebAssembly",
+      "extends": [
+        "uno-core"
+      ]
+    },
+    "uno-skia": {
+      "description": ".NET Uno SDK for Skia",
+      "extends": [
+        "uno-core"
+      ]
+    },
+    "uno-android": {
+      "description": ".NET Uno SDK for Android",
+      "extends": [
+        "uno-core",
+        "android"
+      ]
+    },
+    "uno-maccatalyst": {
+      "description": ".NET Uno SDK for Mac Catalyst",
+      "extends": [
+        "uno-core",
+        "maccatalyst"
+      ]
+    },
+    "uno-ios": {
+      "description": ".NET Uno SDK for iOS",
+      "extends": [
+        "uno-core",
+        "ios"
+      ]
+    },
+    "uno-windows": {
+      "description": ".NET Uno SDK for Windows",
+      "extends": [ "uno-core" ]
+    },
+    "uno-tizen": {
+      "description": ".NET Uno SDK for Tizen",
+      "extends": [
+        "uno-core"
       ]
     }
   },
