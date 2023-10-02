@@ -140,7 +140,7 @@
         <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Microsoft.Windows.Compatibility" Version="$(MicrosoftWindowsCompatibilityVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.Wasm.Bootstrap" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" GeneratePathProperty="true" />
         <PackageReference Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />

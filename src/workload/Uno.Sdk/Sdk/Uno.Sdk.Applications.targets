@@ -1,8 +1,21 @@
 <Project>
 
-  <PropertyGroup>
-    <RunCommand>dotnet</RunCommand>
-    <RunArguments>build &quot;$(MSBuildProjectFullPath)&quot; -target:Run</RunArguments>
+  <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
+    <RunCommand Condition=" '$(RunCommand)' == '' ">$(PkgUno_Wasm_Bootstrap_DevServer)/tools/server/net7.0/dotnet-unowasm.dll</RunCommand>
+    <RunArguments Condition=" '$(RunArguments)' == '' ">serve
+      --pathbase
+      $(TargetDir)dist
+      --configuration
+      $(Configuration)
+      --targetframework
+      net7.0
+      --intermediateoutputpath
+      obj\$(Configuration)/net7.0//</RunArguments>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(UseUnoSkia)' == 'true'">
+    <RunCommand Condition=" '$(RunCommand)' == '' ">$(TargetDir)$(AssemblyName)$(_NativeExecutableExtension)</RunCommand>
+    <RunArguments Condition=" '$(RunArguments)' == '' ">$(StartArguments)</RunArguments>
   </PropertyGroup>
 
 <!--  <Target Name="Install" DependsOnTargets="_CheckSdbToolPath;Build;UnoPackage">-->
