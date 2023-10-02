@@ -35,7 +35,8 @@
         <Content Include="$(ProjectDir)Resources\Assets\**" />
         <UpToDateCheckInput Include="$(ProjectDir)**\*.xaml" Exclude="$(ProjectDir)bin\**\*.xaml;$(ProjectDir)obj\**\*.xaml" />
         <PRIResource Include ="$(ProjectDir)**\*.resw" />
-        <Page Include="$(ProjectDir)**\*.xaml" Exclude="$(ProjectDir)bin\**\*.xaml;$(ProjectDir)obj\**\*.xaml;$(ProjectDir)App.xaml" />
+        <Page Include="$(ProjectDir)**\*.xaml" Exclude="$(ProjectDir)bin\**\*.xaml;$(ProjectDir)obj\**\*.xaml;$(ProjectDir)App.xaml"
+              Condition="'$(UseUnoWindows)' != 'true'" />
         <ApplicationDefinition Include="AppHead.xaml"
                                SubType="Designer"
                                XamlRuntime="WinUI"
