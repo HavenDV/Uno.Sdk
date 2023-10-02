@@ -50,6 +50,20 @@ dotnet workload uninstall skia
 dotnet workload uninstall webassembly
 ```
 
+### Disclaimer
+Although this is a working solution, I have simplified some things regarding workload and manifest,
+which could theoretically cause problems (for example, when upgrading to a new sdk version).  
+
+### Docs
+Official documentation regarding the design of Workloads and Sdks:
+- https://github.com/dotnet/sdk/tree/main/documentation/general/workloads
+- https://github.com/dotnet/designs/blob/main/accepted/2020/workloads/workloads.md
+- https://github.com/dotnet/designs/blob/main/accepted/2020/workloads/workload-resolvers.md
+- https://github.com/dotnet/designs/blob/main/accepted/2020/workloads/workload-manifest.md
+- https://github.com/dotnet/designs/blob/main/accepted/2021/workloads/workload-installation.md
+- MAUI Workload - https://github.com/dotnet/maui/tree/main/src/Workload
+- Tizen Workload - https://github.com/Samsung/Tizen.NET/tree/main/workload
+
 ## Support
 
 Priority place for bugs: https://github.com/HavenDV/Uno.Sdk/issues  
