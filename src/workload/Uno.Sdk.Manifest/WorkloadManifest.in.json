@@ -22,7 +22,9 @@
       "extends": [
         "uno-maccatalyst",
         "uno-windows",
-        "uno-skia"
+        "uno-wpf",
+        "uno-gtk",
+        "uno-linux"
       ]
     },
     "uno-core": {
@@ -39,8 +41,32 @@
         "uno-core"
       ]
     },
+    "uno-skia-wpf": {
+      "description": ".NET Uno SDK for Skia using WPF",
+      "extends": [
+        "uno-core"
+      ]
+    },
+    "uno-skia-gtk": {
+      "description": ".NET Uno SDK for Skia using GTK",
+      "extends": [
+        "uno-core"
+      ]
+    },
+    "uno-skia-linux-framebuffer": {
+      "description": ".NET Uno SDK for Skia using Linux Framebuffer",
+      "extends": [
+        "uno-core"
+      ]
+    },
+    "uno-skia-tizen": {
+      "description": ".NET Uno SDK for Skia using Tizen",
+      "extends": [
+        "uno-core"
+      ]
+    },
     "uno-skia": {
-      "description": ".NET Uno SDK for Skia",
+      "description": ".NET Uno SDK for Skia using GTK",
       "extends": [
         "uno-core"
       ]
@@ -63,16 +89,35 @@
         "uno-core"
       ]
     },
+    "uno-linux": {
+      "description": ".NET Uno SDK for Linux",
+      "extends": [
+        "uno-skia-linux-framebuffer"
+      ]
+    },
     "uno-windows": {
       "description": ".NET Uno SDK for Windows",
       "extends": [
         "uno-core"
       ]
     },
+    "uno-wpf": {
+      "description": ".NET Uno SDK for Windows 7 using WPF",
+      "extends": [
+        "uno-skia-wpf"
+      ]
+    },
+    "uno-gtk": {
+      "description": ".NET Uno SDK for GTK",
+      "extends": [
+        "uno-skia",
+        "uno-skia-gtk"
+      ]
+    },
     "uno-tizen": {
       "description": ".NET Uno SDK for Tizen",
       "extends": [
-        "uno-core"
+        "uno-skia-tizen"
       ]
     }
   },
