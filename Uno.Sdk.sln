@@ -54,6 +54,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.IntegrationTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Apps.Uno", "src\apps\Uno.Sdk.Apps.Uno\Uno.Sdk.Apps.Uno.csproj", "{988E8895-199F-4E49-99AE-3864DEC37E6E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tasks", "tasks", "{DC1E1984-10C8-44D8-B849-5C0BEC0AF2AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasks", "src\tasks\Tasks\Tasks.csproj", "{086D6BA9-7140-4945-AC80-6B8F1A25CFC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +108,10 @@ Global
 		{988E8895-199F-4E49-99AE-3864DEC37E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{988E8895-199F-4E49-99AE-3864DEC37E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{988E8895-199F-4E49-99AE-3864DEC37E6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{086D6BA9-7140-4945-AC80-6B8F1A25CFC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{086D6BA9-7140-4945-AC80-6B8F1A25CFC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{086D6BA9-7140-4945-AC80-6B8F1A25CFC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{086D6BA9-7140-4945-AC80-6B8F1A25CFC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,6 +129,7 @@ Global
 		{D4B71540-3082-4C6A-ABEA-3351E5C94EF4} = {7CC47D4D-B930-4B3F-8164-16E743B7C64C}
 		{CC5E45ED-A87B-43E2-9E5F-D7333E496C6D} = {3865F61E-2E45-4D03-AB41-0008CDFE934D}
 		{988E8895-199F-4E49-99AE-3864DEC37E6E} = {4CA75328-5D8C-46F5-9B4C-E84A50145139}
+		{086D6BA9-7140-4945-AC80-6B8F1A25CFC8} = {DC1E1984-10C8-44D8-B849-5C0BEC0AF2AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CED9A020-DBA5-4BE6-8096-75E528648EC1}

@@ -12,12 +12,12 @@
 
   <PropertyGroup Label="Paths">
     <SolutionDir>$(MSBuildThisFileDirectory)../../../</SolutionDir>
-    <OutDir>$(SolutionDir)out/</OutDir>
+    <ArtifactsDir>$(SolutionDir)artifacts/</ArtifactsDir>
     <TmpDir>$(SolutionDir).tmp/</TmpDir>
     <TestDir>$(TmpDir)test/</TestDir>
     <WorkloadDir>$(SolutionDir)src/workload/</WorkloadDir>
-    <WorkloadPacksOutDir>$(OutDir)nuget-unsigned/</WorkloadPacksOutDir>
-    <DotnetDestDir>$(OutDir)dotnet/</DotnetDestDir>
+    <PackagesDir>$(ArtifactsDir)nuget/</PackagesDir>
+    <DotnetDestDir>$(ArtifactsDir)dotnet/</DotnetDestDir>
     <DotnetDestDir Condition="'$(UseCurrentDotnet)' == 'true'">/usr/local/share/dotnet/</DotnetDestDir>
     <DotnetExe>$(DotnetDestDir)dotnet</DotnetExe>
     <DotnetManifestsDestDir>$(DotnetDestDir)sdk-manifests/$(DotnetVersion)/uno.sdk.manifest/</DotnetManifestsDestDir>
@@ -49,11 +49,11 @@
   <Target Name="WorkloadInstall" DependsOnTargets="DotnetInstall;BuildPackages">
     <ItemGroup>
       <_SourceFiles Include="$(WorkloadDir)Uno.Sdk.Manifest/WorkloadManifest.targets"/>
-      <_SourceFiles Include="$(WorkloadPacksOutDir)workload-manifest/WorkloadManifest.json"/>
+      <_SourceFiles Include="$(PackagesDir)workload-manifest/WorkloadManifest.json"/>
     </ItemGroup>
     
     <Copy SourceFiles="@(_SourceFiles)" DestinationFolder="$(DotnetManifestsDestDir)"/>
-    <Exec Command="$(DotnetExe) workload install uno --skip-manifest-update --source $(WorkloadPacksOutDir) --temp-dir=$(TmpDir)" ConsoleToMSBuild="true"/>
+    <Exec Command="$(DotnetExe) workload install uno --skip-manifest-update --source $(PackagesDir) --temp-dir=$(TmpDir)" ConsoleToMSBuild="true"/>
   </Target>
 
   <Target Name="WorkloadUninstall">
@@ -68,7 +68,7 @@
   </Target>
 
   <Target Name="CleanArtifactsAndTemporaryFiles">
-    <RemoveDir Directories="$(OutDir)" />
+    <RemoveDir Directories="$(ArtifactsDir)" />
     <RemoveDir Directories="$(TmpDir)" />
   </Target>
 
