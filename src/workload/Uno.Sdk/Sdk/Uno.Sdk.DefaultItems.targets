@@ -159,7 +159,7 @@
         <Manifest Include="$(ApplicationManifest)" Condition="Exists('$(ApplicationManifest)')" />
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="'$(UseUnoWindows)' != 'true'">
         <EmbeddedResource Include="Package.appxmanifest" Condition="Exists('Package.appxmanifest')" />
         <EmbeddedResource Include="Skia\Package.appxmanifest" Condition="Exists('Skia\Package.appxmanifest')" />
         <EmbeddedResource Include="Platforms\Skia\Package.appxmanifest" Condition="Exists('Platforms\Skia\Package.appxmanifest')" />

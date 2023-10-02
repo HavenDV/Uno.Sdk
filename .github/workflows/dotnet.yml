@@ -17,8 +17,8 @@ jobs:
       nuget-key: ${{ secrets.NUGET_KEY }}
       
   wait-nuget:
-    needs: build-test-publish
     name: Wait NuGet packages
+    needs: build-test-publish
     runs-on: ubuntu-latest
     steps:
       - name: Sleep for 5 minutes
