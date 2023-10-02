@@ -48,27 +48,26 @@
     "uno-android": {
       "description": ".NET Uno SDK for Android",
       "extends": [
-        "uno-core",
-        "android"
+        "uno-core"
       ]
     },
     "uno-maccatalyst": {
       "description": ".NET Uno SDK for Mac Catalyst",
       "extends": [
-        "uno-core",
-        "maccatalyst"
+        "uno-core"
       ]
     },
     "uno-ios": {
       "description": ".NET Uno SDK for iOS",
       "extends": [
-        "uno-core",
-        "ios"
+        "uno-core"
       ]
     },
     "uno-windows": {
       "description": ".NET Uno SDK for Windows",
-      "extends": [ "uno-core" ]
+      "extends": [
+        "uno-core"
+      ]
     },
     "uno-tizen": {
       "description": ".NET Uno SDK for Tizen",
