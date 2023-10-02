@@ -19,7 +19,7 @@ to support all Skia project types.
 
 ### Usage
 ```xml
-<Project Sdk="H.Uno.Sdk/0.9.2">
+<Project Sdk="H.Uno.Sdk/0.9.3">
 
     <PropertyGroup>
         <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-skia;net7.0-webassembly</TargetFrameworks>

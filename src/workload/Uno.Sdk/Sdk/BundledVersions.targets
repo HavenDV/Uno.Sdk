@@ -92,7 +92,7 @@
         <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Xamarin.Google.Android.Material" Version="$(Xamarin.Google.Android.Material)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Xamarin.Google.Android.Material" Version="$(XamarinGoogleAndroidMaterialVersion)" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoLibrary)' == 'true'">
@@ -113,7 +113,7 @@
     <Choose>
         <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
             <ItemGroup>
-                <PackageReference Include="Xamarin.Google.Android.Material" Version="$(Xamarin.Google.Android.Material)" IsImplicitlyDefined="true" />
+                <PackageReference Include="Xamarin.Google.Android.Material" Version="$(XamarinGoogleAndroidMaterialVersion)" IsImplicitlyDefined="true" />
                 <PackageReference Include="Uno.UniversalImageLoader" Version="$(UnoUniversalImageLoaderVersion)" IsImplicitlyDefined="true" />
             </ItemGroup>
         </When>
