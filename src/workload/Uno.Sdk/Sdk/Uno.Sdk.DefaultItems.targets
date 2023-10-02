@@ -41,13 +41,13 @@
                                XamlRuntime="WinUI"
                                Generator="MSBuild:Compile"
                                Link="AppHead.xaml"
-                               Condition="Exists('AppHead.xaml')" />
+                               Condition="Exists('AppHead.xaml') and '$(UseUnoWindows)' != 'true'" />
         <ApplicationDefinition Include="App.xaml"
                                SubType="Designer"
                                XamlRuntime="WinUI"
                                Generator="MSBuild:Compile"
                                Link="App.xaml"
-                               Condition="Exists('App.xaml')" />
+                               Condition="Exists('App.xaml') and '$(UseUnoWindows)' != 'true'" />
         <Compile Update="AppHead.xaml.cs"
                  XamlRuntime="WinUI"
                  DependentUpon="AppHead.xaml"
