@@ -5,7 +5,28 @@ on:
       - main
 
 jobs:
+  build-test-publish:
+    name: Build, test and publish
+    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+    with:
+      generate-build-number: false
+      conventional-commits-publish-conditions: false
+      enable-caching: false
+      project-path: src/workload/Uno.Sdk.Manifest
+    secrets:
+      nuget-key: ${{ secrets.NUGET_KEY }}
+      
+  wait-nuget:
+    needs: build-test-publish
+    name: Wait NuGet packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sleep for 5 minutes
+        run: sleep 300s
+        shell: bash
+        
   build-test:
+    needs: wait-nuget
     strategy:
       matrix:
         os: [macos, ubuntu, windows]
@@ -68,14 +89,3 @@ jobs:
       - name: "Build new project using MSBuild"
         if: matrix.os == 'windows' && matrix.dotnet.quality != 'preview'
         run: msbuild /restore test-msbuild
-  
-  build-test-publish:
-    name: Build, test and publish
-    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
-    with:
-      generate-build-number: false
-      conventional-commits-publish-conditions: false
-      enable-caching: false
-      project-path: src/workload/Uno.Sdk.Manifest
-    secrets:
-      nuget-key: ${{ secrets.NUGET_KEY }}
