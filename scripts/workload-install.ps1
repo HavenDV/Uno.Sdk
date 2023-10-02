@@ -20,6 +20,7 @@ param(
     [Alias('d')][string]$DotnetInstallDir="<auto>",
     [Alias('t')][string]$DotnetTargetVersionBand="<auto>",
     [Alias('s')][string]$Source="<auto>",
+    [Alias('s')][string]$Workload="uno",
     [Alias('u')][switch]$UpdateAllWorkloads
 )
 
@@ -28,6 +29,7 @@ $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
 $ManifestBaseName = "H.Uno.Sdk.Manifest"
+$ManifestDirName = "uno.sdk.manifest"
 
 function New-TemporaryDirectory {
     $parent = [System.IO.Path]::GetTempPath()
@@ -123,7 +125,7 @@ function Remove-Pack([string]$Id, [string]$Version, [string]$Kind) {
     }
 }
 
-function Install-UnoWorkload([string]$DotnetVersion, [string]$Source)
+function Install-UnoWorkload([string]$DotnetVersion)
 {
     $VersionSplitSymbol = '.'
     $SplitVersion = $DotnetVersion.Split($VersionSplitSymbol)
@@ -156,7 +158,7 @@ function Install-UnoWorkload([string]$DotnetVersion, [string]$Source)
 
     # Check workload manifest directory.
     $ManifestDir = Join-Path -Path $DotnetInstallDir -ChildPath "sdk-manifests" | Join-Path -ChildPath $DotnetTargetVersionBand
-    $UnoManifestDir = Join-Path -Path $ManifestDir -ChildPath "uno.sdk.manifest"
+    $UnoManifestDir = Join-Path -Path $ManifestDir -ChildPath "$ManifestDirName"
     $UnoManifestFile = Join-Path -Path $UnoManifestDir -ChildPath "WorkloadManifest.json"
 
     # Check and remove already installed old version.
@@ -249,7 +251,7 @@ else
     {
         try {
             Write-Host "`nCheck Uno Workload for sdk $DotnetSdk"
-            Install-UnoWorkload -DotnetVersion $DotnetSdk -Source $Source
+            Install-UnoWorkload -DotnetVersion $DotnetSdk
         }
         catch {
             Write-Host "Failed to install Uno Workload for sdk $DotnetSdk"

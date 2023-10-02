@@ -1,13 +1,15 @@
+#!/bin/bash -e
+
 #
 # Copyright (c) Uno Platform Inc. All rights reserved.
 # Licensed under the Apache-2.0 license. See LICENSE file in the project root for full license information.
 #
 
-#!/bin/bash -e
-
 MANIFEST_NAME="H.Uno.Sdk.Manifest"
+MANIFEST_DIR_NAME="uno.sdk.manifest"
 MANIFEST_VERSION="<latest>"
 SOURCE="<auto>"
+WORKLOAD="uno"
 DOTNET_INSTALL_DIR="<auto>"
 DOTNET_TARGET_VERSION_BAND="<auto>"
 DOTNET_DEFAULT_PATH_LINUX="/usr/share/dotnet"
@@ -24,6 +26,10 @@ while [ $# -ne 0 ]; do
         -s|--source)
             shift
             SOURCE=$1
+            ;;
+        -w|--workload)
+            shift
+            WORKLOAD=$1
             ;;
         -d|--dotnet-install-dir)
             shift
@@ -109,7 +115,6 @@ fi
 
 function install_uno_workload() {
     DOTNET_VERSION=$1
-    SOURCE=$2
     IFS='.' read -r -a array <<< "$DOTNET_VERSION"
     CURRENT_DOTNET_VERSION=${array[0]}
     DOTNET_VERSION_BAND="${array[0]}.${array[1]}.${array[2]:0:1}00"
@@ -170,10 +175,10 @@ function install_uno_workload() {
     chmod 744 $TMPDIR/unzipped/data/*
 
     # Copy manifest files to dotnet sdk.
-    mkdir -p $SDK_MANIFESTS_DIR/uno.sdk.manifest
-    cp -f $TMPDIR/unzipped/data/* $SDK_MANIFESTS_DIR/uno.sdk.manifest/
+    mkdir -p $SDK_MANIFESTS_DIR/$MANIFEST_DIR_NAME
+    cp -f $TMPDIR/unzipped/data/* $SDK_MANIFESTS_DIR/$MANIFEST_DIR_NAME/
 
-    if [ ! -f $SDK_MANIFESTS_DIR/uno.sdk.manifest/WorkloadManifest.json ]; then
+    if [ ! -f $SDK_MANIFESTS_DIR/$MANIFEST_DIR_NAME/WorkloadManifest.json ]; then
         echo "Installation is failed."
         return
     fi
@@ -188,9 +193,9 @@ function install_uno_workload() {
     dotnet new globaljson --sdk-version $DOTNET_VERSION
     
     if [[ "$SOURCE" == "<auto>" ]]; then
-      $DOTNET_INSTALL_DIR/dotnet workload install uno --skip-manifest-update
+      $DOTNET_INSTALL_DIR/dotnet workload install $WORKLOAD --skip-manifest-update
     else
-      $DOTNET_INSTALL_DIR/dotnet workload install uno --skip-manifest-update --source $SOURCE
+      $DOTNET_INSTALL_DIR/dotnet workload install $WORKLOAD --skip-manifest-update --source $SOURCE
     fi
     
     # Clean-up
@@ -215,7 +220,7 @@ if [ -z "$INSTALLED_DOTNET_SDKS" ]; then
 else
     for DOTNET_SDK in $INSTALLED_DOTNET_SDKS; do
         echo "Check Uno Workload for sdk $DOTNET_SDK."
-        install_uno_workload $DOTNET_SDK $SOURCE
+        install_uno_workload $DOTNET_SDK
     done
 fi
 
