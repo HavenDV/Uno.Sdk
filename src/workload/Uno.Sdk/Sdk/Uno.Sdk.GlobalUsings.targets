@@ -1,0 +1,32 @@
+<Project>
+
+    <ItemGroup Condition="'$(EnableUnoGlobalUsings)' == 'true'">
+        <Using Include="System" />
+        <Using Include="Windows.ApplicationModel.Activation.ApplicationExecutionState" Alias="ApplicationExecutionState" />
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(EnableUnoGlobalUsings)' == 'true' and '$(UseUnoUwp)' == 'true'">
+        <Using Include="Windows.UI" />
+        <Using Include="Windows.UI.Xaml" />
+        <Using Include="Windows.UI.Xaml.Data" />
+        <Using Include="Windows.UI.Xaml.Media" />
+        <Using Include="Windows.UI.Xaml.Navigation" />
+        <Using Include="Windows.UI.Xaml.Controls" />
+        <Using Include="Windows.UI.Xaml.Window" Alias="Window" />
+        <Using Include="Windows.UI.Xaml.Application" Alias="Application" />
+        <Using Include="Windows.ApplicationModel.Activation.LaunchActivatedEventArgs" Alias="LaunchActivatedEventArgs" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(EnableUnoGlobalUsings)' == 'true' and '$(UseUnoUwp)' != 'true'">
+        <Using Include="Microsoft.UI" />
+        <Using Include="Microsoft.UI.Xaml" />
+        <Using Include="Microsoft.UI.Xaml.Data" />
+        <Using Include="Microsoft.UI.Xaml.Media" />
+        <Using Include="Microsoft.UI.Xaml.Navigation" />
+        <Using Include="Microsoft.UI.Xaml.Controls" />
+        <Using Include="Microsoft.UI.Xaml.Window" Alias="Window" />
+        <Using Include="Microsoft.UI.Xaml.Application" Alias="Application" />
+        <Using Include="Microsoft.UI.Xaml.LaunchActivatedEventArgs" Alias="LaunchActivatedEventArgs" />
+    </ItemGroup>
+    
+</Project>

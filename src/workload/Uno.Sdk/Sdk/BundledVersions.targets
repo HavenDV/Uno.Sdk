@@ -81,6 +81,7 @@
         <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="$(MicrosoftWindowsSDKBuildToolsVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Microsoft.WindowsAppSDK" Version="$(MicrosoftWindowsAppSDKVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="SkiaSharp.Skottie" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="SkiaSharp.Views.Uno" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="$(UnoCoreExtensionsLoggingSingletonVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="$(UnoExtensionsVersion)" IsImplicitlyDefined="true" />
@@ -90,27 +91,40 @@
         <PackageVersion Include="Uno.Wasm.Bootstrap" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.Wasm.Bootstrap.Server" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Xamarin.Google.Android.Material" Version="$(XamarinGoogleAndroidMaterialVersion)" IsImplicitlyDefined="true" />
+        
+        <PackageVersion Include="Uno.UI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.UI.Skia.Gtk" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <PackageVersion Include="Uno.UI.WebAssembly" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        
         <PackageVersion Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageVersion Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageVersion Include="Xamarin.Google.Android.Material" Version="$(XamarinGoogleAndroidMaterialVersion)" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoLibrary)' == 'true'">
-        <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
+        
+        <PackageReference Include="Uno.UI" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
+        
+        <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoMobile)' == 'true'">
-        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="$(UnoExtensionsVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(Configuration)'=='Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+
+        <PackageReference Include="Uno.UI" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)'=='Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        
+        <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)'=='Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <Choose>
@@ -127,35 +141,45 @@
     </Choose>
 
     <ItemGroup Condition="'$(UseUnoSkia)' == 'true'">
-        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="SkiaSharp.Skottie" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" IsImplicitlyDefined="true" Condition="'$(Configuration)'=='Debug'" />
+        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="SkiaSharp.Skottie" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
+
+        <PackageReference Include="Uno.UI.Skia.Gtk" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        <PackageReference Include="SkiaSharp.Views.Uno" Version="$(SkiaVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
+        
+        <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="$(SkiaVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
-        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="$(UnoExtensionsVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Microsoft.Windows.Compatibility" Version="$(MicrosoftWindowsCompatibilityVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.Wasm.Bootstrap" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" GeneratePathProperty="true" />
-        <PackageReference Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="$(UnoExtensionsVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
+
+        <PackageReference Include="Uno.UI.WebAssembly" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        
+        <PackageReference Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoWindows)' == 'true'">
-        <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="$(MicrosoftWindowsAppSDKVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$(MicrosoftWindowsSDKBuildToolsVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="$(UnoCoreExtensionsLoggingSingletonVersion)" IsImplicitlyDefined="true" />
         <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+
+        <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
     </ItemGroup>
     
 </Project>

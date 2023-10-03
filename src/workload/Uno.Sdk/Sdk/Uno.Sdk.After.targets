@@ -8,6 +8,7 @@
   <Import Project="Uno.Sdk.Applications.targets" Condition="'$(OutputType)'=='Exe'" />
   <Import Project="Uno.Sdk.ProjectCapabilities.targets" />
   <Import Project="Uno.Sdk.DefaultItems.targets" />
+  <Import Project="Uno.Sdk.GlobalUsings.targets" />
   
   <Import Project="Uno.Sdk.DisableCheckOfFakePlatforms.targets"/>
   

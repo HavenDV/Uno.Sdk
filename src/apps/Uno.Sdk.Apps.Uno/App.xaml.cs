@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Logging;
-using Microsoft.UI.Xaml;
-using Uno.Resizetizer;
+//using Uno.Resizetizer;
 using Uno.Sdk.Apps.Views;
 
 namespace Uno.Sdk.Apps.Uno;
@@ -35,7 +34,7 @@ public sealed partial class App : Application
 #if NET6_0_OR_GREATER && WINDOWS && !HAS_UNO
 		MainWindow = new Window();
 #else
-		MainWindow = Microsoft.UI.Xaml.Window.Current;
+		MainWindow = Window.Current;
 #endif
 
 		// Do not repeat app initialization when the Window already has content,
@@ -64,7 +63,7 @@ public sealed partial class App : Application
 		// Ensure the current window is active
 		MainWindow.Activate();
 
-		MainWindow.SetWindowIcon();
+		//MainWindow.SetWindowIcon();
 	}
 
 	/// <summary>

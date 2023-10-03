@@ -1,7 +1,14 @@
 <Project>
 
   <PropertyGroup>
+    <UseUnoUwp Condition=" '$(UseUnoUwp)' == '' ">false</UseUnoUwp>
+    <UseUno Condition=" '$(UseUno)' == '' ">$(UseUnoUwp)</UseUno>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <ImplicitUsings Condition=" '$(ImplicitUsings)' == '' ">enable</ImplicitUsings>
+    <EnableUnoGlobalUsings Condition=" '$(EnableUnoGlobalUsings)' == '' and '$(ImplicitUsings)' == 'enable'">true</EnableUnoGlobalUsings>
+    
     <Nullable Condition=" '$(Nullable)' == '' ">enable</Nullable>
 
     <DebugType Condition=" '$(DebugType)' == '' ">portable</DebugType>
