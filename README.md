@@ -54,6 +54,17 @@ which will not work with some target frameworks)
 </Project>
 ```
 
+### Fast start
+You can use https://github.com/HavenDV/Uno.Sdk.Example/ as a start point or just use templates:
+```shell
+dotnet new install H.Uno.Templates # If you don't have installed workload
+mkdir SingleProjectSolution
+cd SingleProjectSolution
+dotnet new uno
+dotnet build
+dotnet run --framework net7.0-gtk
+```
+
 ### Install workload
 Although you don't have to do this, full support for the custom target framework requires installing the appropriate workload:
 - On Linux / macOS:
