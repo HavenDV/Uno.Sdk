@@ -49,6 +49,8 @@ function Ensure-Directory([string]$TestDir) {
 }
 
 function Get-LatestVersion([string]$Id) {
+    return "0.11.0"
+    
     $attempts=3
     $sleepInSeconds=3
     do
@@ -66,8 +68,6 @@ function Get-LatestVersion([string]$Id) {
         $attempts--
         if ($attempts -gt 0) { Start-Sleep $sleepInSeconds }
     } while ($attempts -gt 0)
-    
-    return "0.11.0"
 }
 
 function Get-Package([string]$Id, [string]$Version, [string]$Destination, [string]$Source = "", [string]$FileExt = "nupkg") {
