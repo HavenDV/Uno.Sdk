@@ -21,8 +21,10 @@
     <DotnetDestDir>$(ArtifactsDir)dotnet/</DotnetDestDir>
     <DotnetDefaultPathLinux>/usr/share/dotnet/</DotnetDefaultPathLinux>
     <DotnetDefaultPathMacOS>/usr/local/share/dotnet/</DotnetDefaultPathMacOS>
+    <DotnetDefaultPathWindows>/usr/local/share/dotnet/</DotnetDefaultPathWindows>
     <DotnetDestDir Condition="'$(UseCurrentDotnet)' == 'true' and $([MSBuild]::IsOSPlatform('Linux'))">$(DotnetDefaultPathLinux)</DotnetDestDir>
     <DotnetDestDir Condition="'$(UseCurrentDotnet)' == 'true' and $([MSBuild]::IsOSPlatform('macOS'))">$(DotnetDefaultPathMacOS)</DotnetDestDir>
+    <DotnetDestDir Condition="'$(UseCurrentDotnet)' == 'true' and $([MSBuild]::IsOSPlatform('Windows'))">$(DotnetDefaultPathWindows)</DotnetDestDir>
     <DotnetExe>$(DotnetDestDir)dotnet</DotnetExe>
     <DotnetExe Condition="$([MSBuild]::IsOSPlatform('Windows'))">dotnet</DotnetExe>
     <DotnetManifestsDestDir>$(DotnetDestDir)sdk-manifests/$(DotnetVersion)/uno.sdk.manifest/</DotnetManifestsDestDir>
