@@ -12,19 +12,26 @@ jobs:
       template: uno
       path: src/workload/Uno.Sdk.Manifest
       source: artifacts/nuget
-      
+
   publish:
     needs: test-scripts-with-local-packages
-    name: Build, test and publish
-    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
-    with:
-      os: windows-latest
-      generate-build-number: false
-      conventional-commits-publish-conditions: false
-      enable-caching: false
-      project-path: src/workload/Uno.Sdk.Manifest
-    secrets:
-      nuget-key: ${{ secrets.NUGET_KEY }}
+    name: Publish NuGet packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Build packages"
+        run: dotnet build
+          src/workload/Uno.Sdk.Manifest
+          --configuration Release
+
+      - name: "Publish"
+        run: dotnet nuget push
+          **.nupkg
+          --skip-duplicate
+          --source https://api.nuget.org/v3/index.json
+          --api-key ${{ secrets.NUGET_KEY }}
       
   wait-nuget:
     name: Wait NuGet packages

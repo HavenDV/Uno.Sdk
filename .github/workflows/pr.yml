@@ -1,0 +1,14 @@
+name: Build and test
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-scripts-with-local-packages:
+    name: Test scripts with local packages
+    uses: ./.github/workflows/test-workload.yml
+    with:
+      template: uno
+      path: src/workload/Uno.Sdk.Manifest
+      source: artifacts/nuget
