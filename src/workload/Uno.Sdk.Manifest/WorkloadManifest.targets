@@ -1,5 +1,9 @@
 <Project>
 
+  <PropertyGroup>
+    <IsUnoWorkloadInstalled>true</IsUnoWorkloadInstalled>
+  </PropertyGroup>
+  
   <!--
       .NET Uno telemetry and failure tracking. These are used to detect when the user specified one of the
       various <UseUno*> properties, but for some reason the workload was not installed correctly.
@@ -16,9 +20,8 @@
       We can't use this approach yet because WebAssembly uses Microsoft.NET.Sdk.Web, 
       and we can separate the use of regular Sdk and Web Sdk only through the Project Sdk property
   -->
-<!--  <Import-->
-<!--          Condition=" ('$(UseUno)' == 'true' or '$(UseUnoAssets)' == 'true') and ('$(SkipUnoWorkloadManifest)' != 'true') "-->
-<!--          Project="Sdk.targets" Sdk="Uno.Sdk"-->
-<!--  />-->
+  <Import
+          Condition=" ('$(UseUno)' == 'true' or '$(UseUnoAssets)' == 'true') and ('$(SkipUnoWorkloadManifest)' != 'true') and '$(UseUnoSdkWay)' != 'true' "
+          Project="Sdk.targets" Sdk="H.Uno.Sdk" />
   
 </Project>

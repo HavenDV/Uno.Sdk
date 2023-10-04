@@ -10,6 +10,6 @@
   <Import Project="Uno.Sdk.DefaultItems.targets" />
   <Import Project="Uno.Sdk.GlobalUsings.targets" />
   
-  <Import Project="Uno.Sdk.DisableCheckOfFakePlatforms.targets" />
+  <Import Project="Uno.Sdk.DisableCheckOfFakePlatforms.targets" Condition="'$(IsUnoWorkloadInstalled)' != 'true'" />
   
 </Project>
