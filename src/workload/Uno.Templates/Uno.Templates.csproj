@@ -10,20 +10,4 @@
     <None Include="uno/**" Pack="true" PackagePath="content/uno" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="uno\Platforms\.DS_Store" />
-    <Content Include="uno\Platforms\WebAssembly\.DS_Store" />
-    <Content Include="uno\Resources\.DS_Store" />
-    <Content Include="uno\Views\.DS_Store" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="uno\App.xaml.cs" />
-    <Compile Include="uno\Platforms\Gtk\Program.cs" />
-    <Compile Include="uno\Platforms\Linux\Program.cs" />
-    <Compile Include="uno\Platforms\WebAssembly\Program.cs" />
-    <Compile Include="uno\Platforms\Wpf\App.xaml.cs" />
-    <Compile Include="uno\Views\MainView.xaml.cs" />
-  </ItemGroup>
-
 </Project>
