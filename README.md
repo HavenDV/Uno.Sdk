@@ -10,19 +10,17 @@ Now is only there platforms are supported:
 - Mobile(macOS, MacCatalyst and Android)
 - Windows
 - WebAssembly
-- Skia.Gkt(Skia.Wpf, Skia.Linux.Framebuffer and Skia.Tizen still are unsupported)
-
-I think we need to replace `net7.0-skia` to 
-`net7.0-windows`(Skia.Wpf), `net7.0-gtk`(Skia.Gtk), 
-`net7.0-linux`(Skia.Linux.Framebuffer) and `net7.0-tizen`(Skia.Tizen) 
-to support all Skia project types.
+- Skia.Gkt(`net7.0-gtk`)
+- Skia.Wpf(`net7.0-windows`)(still unsupported)
+- Skia.Linux.Framebuffer(`net7.0-linux`)
+- Skia.Tizen(`net7.0-tizen`)(still unsupported)
 
 ### Usage
 ```xml
 <Project Sdk="H.Uno.Sdk/0.10.0">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-skia;net7.0-webassembly</TargetFrameworks>
+        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-gtk;net7.0-webassembly</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     </PropertyGroup>
 
@@ -30,15 +28,18 @@ to support all Skia project types.
 ```
 
 ### Install
-To support custom target frameworks, you need to install the appropriate workloads:
+Although you don't have to do this, full support for the custom target framework requires installing the appropriate workloads:
 - On Linux / macOS:
 ```
-curl -sSL https://raw.githubusercontent.com/HavenDV/Skia/main/scripts/workload-install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/HavenDV/Gtk/main/scripts/workload-install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/HavenDV/Linux/main/scripts/workload-install.sh | sudo bash
 curl -sSL https://raw.githubusercontent.com/HavenDV/WebAssembly/main/scripts/workload-install.sh | sudo bash
 ```
 - On Windows:
 ```
-Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/Skia/main/workload/scripts/workload-install.ps1' -OutFile 'workload-install.ps1';
+Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/Gtk/main/workload/scripts/workload-install.ps1' -OutFile 'workload-install.ps1';
+./workload-install.ps1
+Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/Linux/main/workload/scripts/workload-install.ps1' -OutFile 'workload-install.ps1';
 ./workload-install.ps1
 Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/WebAssembly/main/workload/scripts/workload-install.ps1' -OutFile 'workload-install.ps1';
 ./workload-install.ps1
@@ -46,7 +47,8 @@ Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/WebAssembly/main/wo
 
 ### Uninstall
 ```
-dotnet workload uninstall skia
+dotnet workload uninstall gtk
+dotnet workload uninstall linux
 dotnet workload uninstall webassembly
 ```
 

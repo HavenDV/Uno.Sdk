@@ -3,7 +3,7 @@
 	<Import Project="$(MSBuildThisFileDirectory)..\..\..\workload\Uno.Sdk\Sdk\Sdk.props" />
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-ios;net7.0-android;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net7.0-android</TargetFrameworks> <!-- ;net7.0-ios;net7.0-maccatalyst -->
 	</PropertyGroup>
 
 	<ItemGroup>

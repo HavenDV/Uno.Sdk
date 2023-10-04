@@ -65,12 +65,6 @@
         "uno-core"
       ]
     },
-    "uno-skia": {
-      "description": ".NET Uno SDK for Skia using GTK",
-      "extends": [
-        "uno-core"
-      ]
-    },
     "uno-android": {
       "description": ".NET Uno SDK for Android",
       "extends": [
@@ -110,7 +104,6 @@
     "uno-gtk": {
       "description": ".NET Uno SDK for GTK",
       "extends": [
-        "uno-skia",
         "uno-skia-gtk"
       ]
     },

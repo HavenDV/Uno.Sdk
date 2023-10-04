@@ -4,7 +4,7 @@
 	
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
-		<UseUnoSkia>true</UseUnoSkia>
+		<UseUnoGtk>true</UseUnoGtk>
 	</PropertyGroup>
 
 	<ItemGroup>

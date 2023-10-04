@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Uno.Sdk.Apps.Uno.All.Skia.Gtk" type="DotNetProject" factoryName=".NET Project">
-    <option name="EXE_PATH" value="$PROJECT_DIR$/src/apps/Uno/Uno.Sdk.Apps.Uno.All/bin/Debug/net7.0-skia/Uno.Sdk.Apps.Uno.All.dll" />
+    <option name="EXE_PATH" value="$PROJECT_DIR$/src/apps/Uno/Uno.Sdk.Apps.Uno.All/bin/Debug/net7.0-gtk/Uno.Sdk.Apps.Uno.All" />
     <option name="PROGRAM_PARAMETERS" value="" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/apps/Uno/Uno.Sdk.Apps.Uno.All/bin/Debug/net7.0-skia" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/apps/Uno/Uno.Sdk.Apps.Uno.All/bin/Debug/net7.0-gtk" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
     <option name="USE_MONO" value="0" />
@@ -12,7 +12,7 @@
     <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
     <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
     <option name="PROJECT_KIND" value="DotNetCore" />
-    <option name="PROJECT_TFM" value="net7.0-skia" />
+    <option name="PROJECT_TFM" value="net7.0-gtk" />
     <method v="2">
       <option name="Build" />
     </method>
