@@ -13,7 +13,7 @@
       obj\$(Configuration)/net7.0//</RunArguments>
   </PropertyGroup>
   
-  <PropertyGroup Condition="'$(UseUnoSkia)' == 'true'">
+  <PropertyGroup Condition="'$(UseUnoTizen)' == 'true' or '$(UseUnoGtk)' == 'true' or '$(UseUnoLinux)' == 'true' or '$(UseUnoWpf)' == 'true'">
     <RunCommand Condition=" '$(RunCommand)' == '' ">$(TargetDir)$(AssemblyName)$(_NativeExecutableExtension)</RunCommand>
     <RunArguments Condition=" '$(RunArguments)' == '' ">$(StartArguments)</RunArguments>
   </PropertyGroup>

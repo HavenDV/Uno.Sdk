@@ -36,7 +36,10 @@
 
   <PropertyGroup>
     <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">false</UseUnoMobile>
-    <UseUnoSkia Condition=" '$(UseUnoSkia)' == '' ">false</UseUnoSkia>
+    <UseUnoGtk Condition=" '$(UseUnoGtk)' == '' ">false</UseUnoGtk>
+    <UseUnoLinux Condition=" '$(UseUnoLinux)' == '' ">false</UseUnoLinux>
+    <UseUnoWpf Condition=" '$(UseUnoWpf)' == '' ">false</UseUnoWpf>
+    <UseUnoTizen Condition=" '$(UseUnoTizen)' == '' ">false</UseUnoTizen>
     <UseUnoWebAssembly Condition=" '$(UseUnoWebAssembly)' == '' ">false</UseUnoWebAssembly>
     <UseUnoWindows Condition=" '$(UseUnoWindows)' == '' ">false</UseUnoWindows>
     <UseUnoLibrary Condition=" '$(UseUnoLibrary)' == '' ">false</UseUnoLibrary>
@@ -71,10 +74,22 @@
         <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
       </PropertyGroup>
     </When>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'skia'">
+    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">
       <PropertyGroup>
-        <IsSkia>true</IsSkia>
-        <UseUnoSkia>true</UseUnoSkia>
+        <IsTizen>true</IsTizen>
+        <UseUnoTizen>true</UseUnoTizen>
+      </PropertyGroup>
+    </When>
+    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'gtk'">
+      <PropertyGroup>
+        <IsGtk>true</IsGtk>
+        <UseUnoGtk>true</UseUnoGtk>
+      </PropertyGroup>
+    </When>
+    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'linux'">
+      <PropertyGroup>
+        <IsLinux>true</IsLinux>
+        <UseUnoLinux>true</UseUnoLinux>
       </PropertyGroup>
     </When>
     <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'webassembly'">
@@ -89,6 +104,12 @@
         <UseUnoWindows>true</UseUnoWindows>
         <SupportedOSPlatformVersion>10.0.18362.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="$(TargetFramework.Contains('windows7')) or $(TargetFramework.EndsWith('-windows'))">
+      <PropertyGroup>
+        <IsWpf>true</IsWpf>
+        <UseUnoWpf>true</UseUnoWpf>
       </PropertyGroup>
     </When>
   </Choose>
@@ -162,11 +183,23 @@
     </ItemGroup>
   </Target>
 
-  <PropertyGroup Condition="'$(UseUnoSkia)' == 'true'">
-    <OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
-    <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
+  <PropertyGroup Condition="'$(UseUnoGtk)' == 'true' or '$(UseUnoLinux)' == 'true'">
+    <OutputType Condition="'$(OutputType)' == '' and '$(Configuration)'=='Release'">WinExe</OutputType>
+    <OutputType Condition="'$(OutputType)' == '' and '$(Configuration)'=='Debug'">Exe</OutputType>
   </PropertyGroup>
 
+  <ItemGroup Label="AssemblyInfo" Condition="'$(UseUnoWpf)' == 'true'">
+    <AssemblyAttribute Include="System.Runtime.InteropServices.ComVisibleAttribute">
+      <_Parameter1>false</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Windows.ThemeInfo">
+      <_Parameter1>System.Windows.ResourceDictionaryLocation.None</_Parameter1>
+      <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
+      <_Parameter2>System.Windows.ResourceDictionaryLocation.SourceAssembly</_Parameter2>
+      <_Parameter2_IsLiteral>true</_Parameter2_IsLiteral>
+    </AssemblyAttribute>
+  </ItemGroup>
+  
   <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
     <OutputType>Exe</OutputType>
     <NoWarn>$(NoWarn);NU1504;NU1505;NU1701</NoWarn>
@@ -218,6 +251,13 @@
     <!-- Bundles the WinAppSDK binaries (Uncomment for unpackaged builds) -->
     <!-- <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained> -->
     <!-- <SelfContained>true</SelfContained> -->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(UseUnoWpf)' == 'true'">
+    <EnableWindowsTargeting Condition="'$(EnableWindowsTargeting)' == ''">true</EnableWindowsTargeting>
+    <OutputType Condition="'$(OutputType)' == '' and '$(Configuration)' == 'Release'">WinExe</OutputType>
+    <OutputType Condition="'$(OutputType)' == '' and '$(Configuration)' == 'Debug'">Exe</OutputType>
+    <UseWPF Condition="'$(UseWPF)' == ''">true</UseWPF>
   </PropertyGroup>
 
   <!-- 

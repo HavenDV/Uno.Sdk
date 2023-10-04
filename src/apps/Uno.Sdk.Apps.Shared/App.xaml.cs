@@ -69,13 +69,6 @@ public sealed partial class App : Application
             window.Content = frame;
         }
 
-#if !HAS_WINUI
-        if (args.PrelaunchActivated)
-        {
-            return;
-        }
-#endif
-
         if (frame.Content is null)
         {
             frame.Content = new MainView();

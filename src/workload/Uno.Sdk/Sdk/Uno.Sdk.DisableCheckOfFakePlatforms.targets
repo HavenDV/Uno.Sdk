@@ -2,7 +2,7 @@
   
   <!--
     A hack we need to try.
-    But for me at the moment, explicitly installing Skia/WebAssembly workloads looks much better than this.
+    But for me at the moment, explicitly installing workloads looks much better than this.
   -->
   <Target Name="_CheckForMissingWorkload"
           BeforeTargets="_CheckForInvalidConfigurationAndPlatform;_CheckForUnsupportedTargetPlatformIdentifier"
@@ -12,7 +12,7 @@
                           NetCoreRoot="$(NetCoreRoot)"
                           NETCoreSdkVersion="$(NETCoreSdkVersion)"
                           GenerateErrorsForMissingWorkloads="true"
-                          Condition="'@(MissingWorkloadPack)' != 'Skia.Sdk' and '@(MissingWorkloadPack)' != 'WebAssembly.Sdk'"/>
+                          Condition="'@(MissingWorkloadPack)' != 'Gtk.Sdk' and '@(MissingWorkloadPack)' != 'WebAssembly.Sdk' and '@(MissingWorkloadPack)' != 'Linux.Sdk'"/>
   </Target>
 
 </Project>

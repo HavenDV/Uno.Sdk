@@ -6,28 +6,34 @@
 
   <PropertyGroup>
     <TargetPlatformSupported>true</TargetPlatformSupported>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' and ($(TargetFramework.EndsWith('skia')) or $(TargetFramework.EndsWith('webassembly')))">$(_DefaultTargetPlatformVersion)</TargetPlatformVersion>
-    <_TargetFramework Condition="$(TargetFramework.EndsWith('skia'))">$(TargetFramework)$(_DefaultTargetPlatformVersion)</_TargetFramework>
-    <_TargetFramework Condition="!$(TargetFramework.EndsWith('skia'))">$(TargetFramework)</_TargetFramework>
-    <_TargetFramework Condition="$(TargetFramework.EndsWith('webassembly'))">$(TargetFramework)$(_DefaultTargetPlatformVersion)</_TargetFramework>
-    <_TargetFramework Condition="!$(TargetFramework.EndsWith('webassembly'))">$(TargetFramework)</_TargetFramework>
+    
+    <IsUnoPlatform>false</IsUnoPlatform>
+    <IsUnoPlatform Condition="$(TargetFramework.EndsWith('gtk')) or $(TargetFramework.EndsWith('linux')) or $(TargetFramework.EndsWith('webassembly'))">true</IsUnoPlatform>
+    
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' and '$(IsUnoPlatform)' == 'true'">$(_DefaultTargetPlatformVersion)</TargetPlatformVersion>
+    <_TargetFramework Condition="'$(IsUnoPlatform)' == 'true'">$(TargetFramework)$(_DefaultTargetPlatformVersion)</_TargetFramework>
+    <_TargetFramework Condition="'$(IsUnoPlatform)' != 'true'">$(TargetFramework)</_TargetFramework>
+    
+    <NoWarn Condition="$(TargetFramework.EndsWith('linux'))">$(NoWarn);CA1418</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <SupportedPlatform Include="skia" />
+    <SupportedPlatform Include="gtk" />
+    <SupportedPlatform Include="linux" />
     <SupportedPlatform Include="webassembly" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework.EndsWith('skia')) or $(TargetFramework.EndsWith('webassembly'))">
+  <ItemGroup Condition="'$(IsUnoPlatform)' == 'true'">
     <UnoSdkSupportedTargetPlatformVersion Include="1.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework.EndsWith('skia')) or $(TargetFramework.EndsWith('webassembly'))">
+  <ItemGroup Condition="'$(IsUnoPlatform)' == 'true'">
     <SdkSupportedTargetPlatformVersion Include="@(UnoSdkSupportedTargetPlatformVersion)" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETCoreApp' and $([MSBuild]::VersionGreaterThanOrEquals($(TargetFrameworkVersion), '6.0')) ">
-    <SdkSupportedTargetPlatformIdentifier Include="skia" DisplayName="Skia" />
+    <SdkSupportedTargetPlatformIdentifier Include="gtk" DisplayName="GTK" />
+    <SdkSupportedTargetPlatformIdentifier Include="linux" DisplayName="Linux" />
     <SdkSupportedTargetPlatformIdentifier Include="webassembly" DisplayName="WebAssembly" />
   </ItemGroup>
 

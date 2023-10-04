@@ -3,14 +3,16 @@
 	<Import Project="$(MSBuildThisFileDirectory)../../workload/Uno.Sdk/Sdk/Sdk.props" />
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-skia;net7.0-webassembly</TargetFrameworks> <!-- net7.0-ios;net7.0-android;net7.0-maccatalyst; -->
+		<TargetFrameworks>net7.0-gtk;net7.0-webassembly;net7.0-linux</TargetFrameworks> <!-- net7.0-ios;net7.0-android;net7.0-maccatalyst; -->
 		<TargetFrameworks Condition="'$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- <UseUnoUwp>true</UseUnoUwp> -->
 	</PropertyGroup>
 
 	<Import Project="$(MSBuildThisFileDirectory)../../workload/Uno.Sdk/Sdk/Sdk.targets" />
 
-	<!-- Disable some target to see real WinUI compile issues -->
+	<!-- Disable some target to see real WinUI compile issues on macOS -->
 	<Target Name="MarkupCompilePass1"/>
 	<Target Name="_OnXamlPreCompileError"/>
+	<Target Name="DesignTimeMarkupCompilationCT"/>
+	
 </Project>

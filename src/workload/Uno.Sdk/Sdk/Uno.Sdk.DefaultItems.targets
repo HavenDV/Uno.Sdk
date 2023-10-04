@@ -35,8 +35,9 @@
         <Content Include="$(ProjectDir)Resources\Assets\**" />
         <UpToDateCheckInput Include="$(ProjectDir)**\*.xaml" Exclude="$(ProjectDir)bin\**\*.xaml;$(ProjectDir)obj\**\*.xaml" />
         <PRIResource Include ="$(ProjectDir)**\*.resw" />
-        <Page Include="$(ProjectDir)**\*.xaml" Exclude="$(ProjectDir)bin\**\*.xaml;$(ProjectDir)obj\**\*.xaml;$(ProjectDir)App.xaml"
-              Condition="'$(UseUnoWindows)' != 'true'" />
+        <Page Include="$(ProjectDir)**\*.xaml" Exclude="$(ProjectDir)bin\**\*.xaml;$(ProjectDir)obj\**\*.xaml;$(ProjectDir)App.xaml;$(ProjectDir)Platforms\**\*.xaml"
+              Condition="'$(UseUnoWindows)' != 'true'"
+              XamlRuntime="WinUI" />
         <ApplicationDefinition Include="AppHead.xaml"
                                SubType="Designer"
                                XamlRuntime="WinUI"
@@ -114,11 +115,23 @@
         <Compile Remove="**\tizen\**\*.cs" />
         <None Include="**\tizen\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
-    <ItemGroup Condition="$(TargetFramework.Contains('-skia')) != true ">
-        <Compile Remove="**\*.skia.cs" />
-        <None Include="**\*.skia.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
-        <Compile Remove="**\skia\**\*.cs" />
-        <None Include="**\skia\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    <ItemGroup Condition="$(TargetFramework.Contains('-linux')) != true ">
+        <Compile Remove="**\*.linux.cs" />
+        <None Include="**\*.linux.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\linux\**\*.cs" />
+        <None Include="**\linux\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.Contains('-gtk')) != true ">
+        <Compile Remove="**\*.gtk.cs" />
+        <None Include="**\*.gtk.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\gtk\**\*.cs" />
+        <None Include="**\gtk\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.Contains('-windows7')) != true and !$(TargetFramework.EndsWith('-windows'))">
+        <Compile Remove="**\*.wpf.cs" />
+        <None Include="**\*.wpf.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\wpf\**\*.cs" />
+        <None Include="**\wpf\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
     <ItemGroup Condition="$(TargetFramework.Contains('-webassembly')) != true ">
         <Compile Remove="**\*.webassembly.cs" />
@@ -146,12 +159,13 @@
         </When>
     </Choose>
 
-
     <PropertyGroup>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\Skia\app.manifest')">Platforms\Skia\app.manifest</ApplicationManifest>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Skia\app.manifest')">Skia\app.manifest</ApplicationManifest>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\Windows\app.manifest')">Platforms\Windows\app.manifest</ApplicationManifest>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Windows\app.manifest')">Windows\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoWpf)' == 'true' and Exists('Platforms\Wpf\app.manifest')">Platforms\Wpf\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoWpf)' == 'true' and Exists('Wpf\app.manifest')">Wpf\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoGtk)' == 'true' and Exists('Platforms\Gtk\app.manifest')">Platforms\Gtk\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoGtk)' == 'true' and Exists('Gtk\app.manifest')">Gtk\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoWindows)' == 'true' and Exists('Platforms\Windows\app.manifest')">Platforms\Windows\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoWindows)' == 'true' and Exists('Windows\app.manifest')">Windows\app.manifest</ApplicationManifest>
         <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('app.manifest')">app.manifest</ApplicationManifest>
     </PropertyGroup>
 
@@ -160,37 +174,46 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoWindows)' != 'true'">
+        <EmbeddedResource Include="Platforms\Wpf\Package.appxmanifest" Condition="'$(UseUnoWpf)' == 'true' and Exists('Platforms\Wpf\Package.appxmanifest')" />
+        <EmbeddedResource Include="Wpf\Package.appxmanifest" Condition="'$(UseUnoWpf)' == 'true' and Exists('Wpf\Package.appxmanifest')" />
+        <EmbeddedResource Include="Platforms\Gtk\Package.appxmanifest" Condition="'$(UseUnoGtk)' == 'true' and Exists('Platforms\Gtk\Package.appxmanifest')" />
+        <EmbeddedResource Include="Gtk\Package.appxmanifest" Condition="'$(UseUnoGtk)' == 'true' and Exists('Gtk\Package.appxmanifest')" />
         <EmbeddedResource Include="Package.appxmanifest" Condition="Exists('Package.appxmanifest')" />
-        <EmbeddedResource Include="Skia\Package.appxmanifest" Condition="Exists('Skia\Package.appxmanifest')" />
-        <EmbeddedResource Include="Platforms\Skia\Package.appxmanifest" Condition="Exists('Platforms\Skia\Package.appxmanifest')" />
     </ItemGroup>
 
+    <ItemGroup Condition="'$(UseUnoWpf)' == 'true'">
+        <ApplicationDefinition Include="Platforms/Wpf/App.xaml"
+                               SubType="Designer"
+                               Generator="MSBuild:Compile"
+                               XamlRuntime="Wpf"
+                               Condition="Exists('Platforms/Wpf/App.xaml')" />
+    </ItemGroup>
 
-    <PropertyGroup>
-        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('Platforms\WebAssembly\manifest.webmanifest')">Platforms\Skia\manifest.webmanifest</WasmPWAManifestFile>
-        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('WebAssembly\manifest.webmanifest')">Skia\manifest.webmanifest</WasmPWAManifestFile>
+    <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
+        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('Platforms\WebAssembly\manifest.webmanifest')">Platforms\Gtk\manifest.webmanifest</WasmPWAManifestFile>
+        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('WebAssembly\manifest.webmanifest')">Gtk\manifest.webmanifest</WasmPWAManifestFile>
         <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('manifest.webmanifest')">manifest.webmanifest</WasmPWAManifestFile>
     </PropertyGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
         <Content Include="manifest.webmanifest" Condition="Exists('manifest.webmanifest')" />
         <Content Include="WebAssembly\manifest.webmanifest" Condition="Exists('WebAssembly\manifest.webmanifest')" />
         <Content Include="Platforms\WebAssembly\manifest.webmanifest" Condition="Exists('Platforms\WebAssembly\manifest.webmanifest')" />
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
         <LinkerDescriptor Include="LinkerConfig.xml" Condition="Exists('LinkerConfig.xml')" />
         <LinkerDescriptor Include="WebAssembly\LinkerConfig.xml" Condition="Exists('WebAssembly\LinkerConfig.xml')" />
         <LinkerDescriptor Include="Platforms\WebAssembly\LinkerConfig.xml" Condition="Exists('Platforms\WebAssembly\LinkerConfig.xml')" />
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
         <EmbeddedResource Include="WasmCSS\Fonts.css" Condition="Exists('WasmCSS\Fonts.css')" />
         <EmbeddedResource Include="WebAssembly\WasmCSS\Fonts.css" Condition="Exists('WebAssembly\WasmCSS\Fonts.css')" />
         <EmbeddedResource Include="Platforms\WebAssembly\WasmCSS\Fonts.css" Condition="Exists('Platforms\WebAssembly\WasmCSS\Fonts.css')" />
     </ItemGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
         <EmbeddedResource Include="WasmScripts\AppManifest.js" Condition="Exists('WasmScripts\AppManifest.js')" />
         <EmbeddedResource Include="WebAssembly\WasmScripts\AppManifest.js" Condition="Exists('WebAssembly\WasmScripts\AppManifest.js')" />
         <EmbeddedResource Include="Platforms\WebAssembly\WasmScripts\AppManifest.js" Condition="Exists('Platforms\WebAssembly\WasmScripts\AppManifest.js')" />
