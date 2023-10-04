@@ -9,6 +9,7 @@
 
     <PropertyGroup>
         <UseUno>true</UseUno>
+        <UseUnoSdkWay>true</UseUnoSdkWay>
     </PropertyGroup>
     
 </Project>

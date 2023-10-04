@@ -35,9 +35,19 @@
         "H.Uno.Templates"
       ]
     },
+    "linux": {
+      "description": ".NET SDK for Linux to use in Uno Skia projects"
+    },
+    "gtk": {
+      "description": ".NET SDK for GTK to use in Uno Skia projects"
+    },
+    "webassembly": {
+      "description": ".NET SDK for WebAssembly to use in Uno projects"
+    },
     "uno-webassembly": {
       "description": ".NET Uno SDK for WebAssembly",
       "extends": [
+        "webassembly",
         "uno-core"
       ]
     },
@@ -50,12 +60,14 @@
     "uno-skia-gtk": {
       "description": ".NET Uno SDK for Skia using GTK",
       "extends": [
+        "gtk",
         "uno-core"
       ]
     },
     "uno-skia-linux-framebuffer": {
       "description": ".NET Uno SDK for Skia using Linux Framebuffer",
       "extends": [
+        "linux",
         "uno-core"
       ]
     },
