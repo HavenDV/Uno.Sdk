@@ -119,7 +119,6 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(UseUnoMobile)' == 'true'">
-    <SingleProject>true</SingleProject>
     <OutputType>Exe</OutputType>
     <!-- Display name -->
     <ApplicationTitle>Uno</ApplicationTitle>
