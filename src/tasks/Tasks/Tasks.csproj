@@ -6,7 +6,8 @@
 
   <PropertyGroup Label="Parameters">
     <DotnetVersion>7.0.400</DotnetVersion>
-    <DotnetInstallUrl>https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh</DotnetInstallUrl>
+    <DotnetInstallUrl Condition="$([MSBuild]::IsOSPlatform('Windows'))">https://dot.net/v1/dotnet-install.ps1</DotnetInstallUrl>
+    <DotnetInstallUrl Condition="$([MSBuild]::IsOSPlatform('Linux')) or $([MSBuild]::IsOSPlatform('macOS'))">https://dot.net/v1/dotnet-install.sh</DotnetInstallUrl>
     <UseCurrentDotnet>true</UseCurrentDotnet>
   </PropertyGroup>
 
@@ -18,8 +19,12 @@
     <WorkloadDir>$(SolutionDir)src/workload/</WorkloadDir>
     <PackagesDir>$(ArtifactsDir)nuget/</PackagesDir>
     <DotnetDestDir>$(ArtifactsDir)dotnet/</DotnetDestDir>
-    <DotnetDestDir Condition="'$(UseCurrentDotnet)' == 'true'">/usr/local/share/dotnet/</DotnetDestDir>
+    <DotnetDefaultPathLinux>/usr/share/dotnet/</DotnetDefaultPathLinux>
+    <DotnetDefaultPathMacOS>/usr/local/share/dotnet/</DotnetDefaultPathMacOS>
+    <DotnetDestDir Condition="'$(UseCurrentDotnet)' == 'true' and $([MSBuild]::IsOSPlatform('Linux'))">$(DotnetDefaultPathLinux)</DotnetDestDir>
+    <DotnetDestDir Condition="'$(UseCurrentDotnet)' == 'true' and $([MSBuild]::IsOSPlatform('macOS'))">$(DotnetDefaultPathMacOS)</DotnetDestDir>
     <DotnetExe>$(DotnetDestDir)dotnet</DotnetExe>
+    <DotnetExe Condition="$([MSBuild]::IsOSPlatform('Windows'))">dotnet</DotnetExe>
     <DotnetManifestsDestDir>$(DotnetDestDir)sdk-manifests/$(DotnetVersion)/uno.sdk.manifest/</DotnetManifestsDestDir>
   </PropertyGroup>
 
@@ -43,7 +48,13 @@
   </Target>
 
   <Target Name="DotnetInstall" DependsOnTargets="DownloadDotnetInstall;BuildPackages" Condition="'$(UseCurrentDotnet)' != 'true'">
-    <Exec Command="sh $(TmpDir)dotnet-install.sh --version $(DotnetVersion) --install-dir $(DotnetDestDir)" ConsoleToMSBuild="true"/>
+    <PropertyGroup>
+      <DotnetInstallCommand Condition="$([MSBuild]::IsOSPlatform('Windows'))">$(TmpDir)dotnet-install.ps1 -Version $(DotnetVersion) -InstallDir $(DotnetDestDir)</DotnetInstallCommand>
+      <DotnetInstallCommand Condition="$([MSBuild]::IsOSPlatform('Linux'))">sudo $(TmpDir)dotnet-install.sh --version $(DotnetVersion) --install-dir $(DotnetDestDir)</DotnetInstallCommand>
+      <DotnetInstallCommand Condition="$([MSBuild]::IsOSPlatform('macOS'))">sh $(TmpDir)dotnet-install.sh --version $(DotnetVersion) --install-dir $(DotnetDestDir)</DotnetInstallCommand>
+    </PropertyGroup>
+
+    <Exec Command="$(DotnetInstallCommand)" ConsoleToMSBuild="true"/>
   </Target>
 
   <Target Name="WorkloadInstall" DependsOnTargets="DotnetInstall;BuildPackages">
