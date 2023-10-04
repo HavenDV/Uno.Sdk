@@ -11,8 +11,8 @@
 	<Import Project="$(MSBuildThisFileDirectory)../../workload/Uno.Sdk/Sdk/Sdk.targets" />
 
 	<!-- Disable some target to see real WinUI compile issues on macOS -->
-	<Target Name="MarkupCompilePass1"/>
-	<Target Name="_OnXamlPreCompileError"/>
-	<Target Name="DesignTimeMarkupCompilationCT"/>
+<!--	<Target Name="MarkupCompilePass1"/>-->
+<!--	<Target Name="_OnXamlPreCompileError"/>-->
+<!--	<Target Name="DesignTimeMarkupCompilationCT"/>-->
 	
 </Project>
