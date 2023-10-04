@@ -14,7 +14,7 @@
     <DebugType Condition=" '$(DebugType)' == '' ">portable</DebugType>
     <DebugSymbols Condition=" '$(DebugSymbols)' == '' ">True</DebugSymbols>
 
-    <ManagePackageVersionsCentrally Condition=" '$(ManagePackageVersionsCentrally)' == '' ">true</ManagePackageVersionsCentrally>
+<!--    <ManagePackageVersionsCentrally Condition=" '$(ManagePackageVersionsCentrally)' == '' ">true</ManagePackageVersionsCentrally>-->
 
     <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
 
