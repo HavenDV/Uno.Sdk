@@ -5,7 +5,16 @@ on:
       - main
 
 jobs:
-  build-test-publish:
+  test-scripts-with-local-packages:
+    name: Test scripts with local packages
+    uses: ./.github/workflows/test-workload.yml@main
+    with:
+      template: uno
+      path: src/workload/Uno.Sdk.Manifest
+      source: artifacts/nuget
+      
+  publish:
+    needs: test-scripts-with-local-packages
     name: Build, test and publish
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
@@ -14,83 +23,21 @@ jobs:
       conventional-commits-publish-conditions: false
       enable-caching: false
       project-path: src/workload/Uno.Sdk.Manifest
-      additional-command: dotnet build
-        src/tasks/Tasks
-        /t:TestWorkload
-        --configuration Release
     secrets:
       nuget-key: ${{ secrets.NUGET_KEY }}
       
   wait-nuget:
     name: Wait NuGet packages
-    needs: build-test-publish
+    needs: publish
     runs-on: ubuntu-latest
     steps:
       - name: Sleep for 5 minutes
         run: sleep 300s
         shell: bash
         
-  build-test:
+  test-scripts-with-nuget-packages:
+    name: Test scripts with NuGet packages
     needs: wait-nuget
-    strategy:
-      matrix:
-        os: [macos, ubuntu, windows]
-        dotnet: [
-          { version: 6.0.x, quality: ga },
-          { version: 7.0.x, quality: ga },
-          { version: 8.0.x, quality: preview }
-        ]
-        source: [nuget, local]
-        template: [uno]
-    
-    name: ${{ matrix.os }}/${{ matrix.dotnet.version }}/${{ matrix.dotnet.quality }}/${{ matrix.source }}
-    runs-on: ${{ matrix.os }}-latest
-    steps:
-      - name: "Checkout"
-        if: matrix.source == 'local'
-        uses: actions/checkout@v4
-
-      - name: "Setup dotnet"
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: ${{ matrix.dotnet.version }}
-          dotnet-quality: ${{ matrix.dotnet.quality }}
-
-      - name: "Setup MSBuild"
-        if: matrix.os == 'windows'
-        uses: microsoft/setup-msbuild@v1.1
-
-      - name: "Build local packages"
-        if: matrix.source == 'local'
-        run: dotnet build src/workload/Uno.Sdk.Manifest
-
-      - name: "Download workload-install on Windows"
-        if: matrix.os == 'windows'
-        run: Invoke-WebRequest 'https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/workload-install.ps1' -OutFile 'workload-install.ps1'
-      - name: "Install workload from local packages on Windows"
-        if: matrix.source == 'local' && matrix.os == 'windows'
-        run: ./workload-install.ps1 -s artifacts/nuget
-      - name: "Install workload from NuGet on Windows"
-        if: matrix.source == 'nuget' && matrix.os == 'windows'
-        run: ./workload-install.ps1
-
-      - name: "Install workload from local packages on Linux/macOS"
-        if: matrix.source == 'local' && matrix.os != 'windows'
-        run: curl -sSL https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/workload-install.sh | bash -s -- -s artifacts/nuget
-      - name: "Install workload from NuGet on Linux/macOS"
-        if: matrix.source == 'nuget' && matrix.os != 'windows'
-        run: curl -sSL https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/workload-install.sh | sudo bash
-
-      - name: "Create new project from template"
-        run: dotnet new ${{ matrix.template }} --output test
-
-      - name: "Build new project using dotnet"
-        run: dotnet build test
-
-      - name: "Create new project from template to test MSBuild"
-        if: matrix.os == 'windows'
-        run: dotnet new ${{ matrix.template }} --output test-msbuild
-
-      - name: "Build new project using MSBuild"
-        if: matrix.os == 'windows' && matrix.dotnet.quality != 'preview'
-        run: msbuild /restore test-msbuild
+    uses: ./.github/workflows/test-workload.yml@main
+    with:
+      template: uno
