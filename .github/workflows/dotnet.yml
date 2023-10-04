@@ -7,7 +7,7 @@ on:
 jobs:
   test-scripts-with-local-packages:
     name: Test scripts with local packages
-    uses: ./.github/workflows/test-workload.yml@main
+    uses: ./.github/workflows/test-workload.yml
     with:
       template: uno
       path: src/workload/Uno.Sdk.Manifest
@@ -38,6 +38,6 @@ jobs:
   test-scripts-with-nuget-packages:
     name: Test scripts with NuGet packages
     needs: wait-nuget
-    uses: ./.github/workflows/test-workload.yml@main
+    uses: ./.github/workflows/test-workload.yml
     with:
       template: uno
