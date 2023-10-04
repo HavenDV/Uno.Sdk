@@ -1,10 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="H.Uno.Sdk">
   
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace Condition="'$(name)' != '$(name{-VALUE-FORMS-}safe_namespace)'">UnoApp1</RootNamespace>
+    <TargetFrameworks>net7.0-gtk;net7.0-webassembly;net7.0-linux</TargetFrameworks>
+    <TargetFrameworks Condition="'$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
-    <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
   
 </Project>

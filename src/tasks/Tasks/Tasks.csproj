@@ -49,7 +49,7 @@
   <Target Name="WorkloadInstall" DependsOnTargets="DotnetInstall;BuildPackages">
     <ItemGroup>
       <_SourceFiles Include="$(WorkloadDir)Uno.Sdk.Manifest/WorkloadManifest.targets"/>
-      <_SourceFiles Include="$(PackagesDir)workload-manifest/WorkloadManifest.json"/>
+      <_SourceFiles Include="$(PackagesDir)../workload-manifest/WorkloadManifest.json"/>
     </ItemGroup>
     
     <Copy SourceFiles="@(_SourceFiles)" DestinationFolder="$(DotnetManifestsDestDir)"/>

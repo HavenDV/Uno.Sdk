@@ -9,10 +9,14 @@ jobs:
     name: Build, test and publish
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
+      os: windows-latest
       generate-build-number: false
       conventional-commits-publish-conditions: false
       enable-caching: false
-      project-path: src/workload/Uno.Sdk.Manifest
+      additional-command: sudo dotnet build
+        src/tasks/Tasks
+        /t:TestWorkload
+        --configuration Release
     secrets:
       nuget-key: ${{ secrets.NUGET_KEY }}
       

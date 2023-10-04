@@ -37,7 +37,7 @@
   
   <Target Name="_GenerateWorkloadContent">
     <PropertyGroup>
-      <WorkloadManifestJsonPath>$(PackageOutputPath)../WorkloadManifest.json</WorkloadManifestJsonPath>
+      <WorkloadManifestJsonPath>$(PackageOutputPath)../workload-manifest/WorkloadManifest.json</WorkloadManifestJsonPath>
     </PropertyGroup>
 
     <MakeDir Directories="$([System.IO.Path]::GetDirectoryName ($(WorkloadManifestJsonPath)))" />
