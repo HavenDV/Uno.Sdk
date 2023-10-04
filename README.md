@@ -71,6 +71,13 @@ Invoke-WebRequest 'https://raw.githubusercontent.com/HavenDV/Uno.Sdk/main/script
 dotnet workload uninstall uno
 ```
 
+### Settings
+The SDK is designed to assign default values only to properties that have not been explicitly set by the user. 
+This way the user has full control over what the SDK does. 
+Settings:
+- `<UseUnoUwp>true</UseUnoUwp>` - will use Uno.UI packages instead of Uno.WinUI.
+- `<UnoVersion>5.0.0</UnoVersion` (and other versions, see [here](https://github.com/HavenDV/Uno.Sdk/blob/main/src/workload/Uno.Sdk/Sdk/BundledVersions.targets#L10)) - will change the versions of all implicit PackageReferences
+
 ### Disclaimer
 Although this is a working solution, I have simplified some things regarding workload and manifest,
 which could theoretically cause problems (for example, when upgrading to a new sdk version).  
