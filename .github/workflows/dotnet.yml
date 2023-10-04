@@ -13,6 +13,7 @@ jobs:
       generate-build-number: false
       conventional-commits-publish-conditions: false
       enable-caching: false
+      project-path: src/workload/Uno.Sdk.Manifest
       additional-command: sudo dotnet build
         src/tasks/Tasks
         /t:TestWorkload
