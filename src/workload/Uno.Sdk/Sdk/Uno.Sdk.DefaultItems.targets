@@ -31,7 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="$(ProjectDir)Assets\**" />
+        <Content Include="$(ProjectDir)Assets\**" Condition="'$(UseUnoLibrary)' != 'true'" />
         <Content Include="$(ProjectDir)Resources\Assets\**" />
         <UpToDateCheckInput Include="$(ProjectDir)**\*.xaml" Exclude="$(ProjectDir)bin\**\*.xaml;$(ProjectDir)obj\**\*.xaml" />
         <PRIResource Include ="$(ProjectDir)**\*.resw" />
@@ -72,7 +72,7 @@
                 BaseSize="128,128"
                 Color="#086AD1"
                 Condition="Exists('$(ProjectDir)Resources\Splash\splash_screen.svg')" />
-        <UnoImage Include="$(ProjectDir)Assets\**\*.svg" Exclude="@(UnoIcon);@(UnoSplashScreen)" />
+        <UnoImage Include="$(ProjectDir)Assets\**\*.svg" Condition="'$(UseUnoLibrary)' != 'true'" Exclude="@(UnoIcon);@(UnoSplashScreen)" />
         <UnoImage Include="$(ProjectDir)Resources\**\*.svg" Exclude="@(UnoIcon);@(UnoSplashScreen)" />
         <Compile Update="**/*.xaml.cs">
             <DependentUpon>%(Filename)</DependentUpon>
