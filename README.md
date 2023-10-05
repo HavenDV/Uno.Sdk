@@ -102,6 +102,7 @@ Official documentation regarding the design of Workloads and Sdks:
 - https://github.com/dotnet/designs/blob/main/accepted/2021/workloads/workload-installation.md
 - MAUI Workload - https://github.com/dotnet/maui/tree/main/src/Workload
 - Tizen Workload - https://github.com/Samsung/Tizen.NET/tree/main/workload
+- Uno Single Project Targets - https://github.com/unoplatform/uno/blob/master/build/nuget/uno.winui.single-project.targets
 
 ## Support
 
