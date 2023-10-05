@@ -11,7 +11,7 @@ Now is only there platforms are supported:
 - Windows
 - WebAssembly
 - Skia.Gkt(`net7.0-gtk`)
-- Skia.Wpf(`net7.0-windows`)(still unsupported)
+- Skia.Wpf(`net7.0-windows`)
 - Skia.Linux.Framebuffer(`net7.0-linux`)
 - Skia.Tizen(`net7.0-tizen`)(still unsupported)
 
@@ -19,10 +19,10 @@ Now is only there platforms are supported:
 Here are three possible uses:
 - Use SDK via NuGet. A small hack will be used here to disable the error message about missing workloads for webassembly/linux/gtk.
 ```xml
-<Project Sdk="H.Uno.Sdk/0.11.1">
+<Project Sdk="H.Uno.Sdk/0.12.0">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-gtk;net7.0-webassembly</TargetFrameworks>
+        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-webassembly;net7.0-gtk;net7.0-linux;net7.0-windows</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     </PropertyGroup>
 
@@ -33,7 +33,7 @@ Here are three possible uses:
 <Project Sdk="H.Uno.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-gtk;net7.0-webassembly</TargetFrameworks>
+        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-webassembly;net7.0-gtk;net7.0-linux;net7.0-windows</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     </PropertyGroup>
 
@@ -46,7 +46,7 @@ which will not work with some target frameworks)
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-gtk;net7.0-webassembly</TargetFrameworks>
+        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-webassembly;net7.0-gtk;net7.0-linux;net7.0-windows</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
         <UseUno>true</UseUno> <!-- or UseUnoUwp -->
     </PropertyGroup>

@@ -18,12 +18,4 @@
         <EmbeddedResource Include="Package.appxmanifest" Condition="Exists('Package.appxmanifest')" />
     </ItemGroup>
     
-    <ItemGroup>
-        <ApplicationDefinition Include="Platforms/Wpf/App.xaml"
-                               SubType="Designer"
-                               Generator="MSBuild:Compile"
-                               XamlRuntime="Wpf"
-                               Condition="Exists('Platforms/Wpf/App.xaml')" />
-    </ItemGroup>
-    
 </Project>
