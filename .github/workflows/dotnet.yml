@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'src/**'
+      - '.github/workflows/**'
+      - 'scripts/**'
 
 jobs:
   test-scripts-with-local-packages:

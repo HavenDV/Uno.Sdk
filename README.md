@@ -28,6 +28,7 @@ Here are three possible uses:
 
 </Project>
 ```
+Note: Sometimes there may be problems with restoring the SDK from NuGet, so the second method is preferable
 - Use local SDK after installing workload
 ```xml
 <Project Sdk="H.Uno.Sdk">
