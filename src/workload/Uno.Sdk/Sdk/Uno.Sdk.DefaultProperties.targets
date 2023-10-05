@@ -1,20 +1,16 @@
 <Project>
 
-  <PropertyGroup>
-    <UnoApplication Condition=" '$(UnoApplication)' == '' and '$(OutputType)' == 'Exe' ">true</UnoApplication>
-    <UnoApplication Condition=" '$(UnoApplication)' == '' ">false</UnoApplication>
-  </PropertyGroup>
+  <Import Project="Uno.Sdk.DetectPlatform.targets" />
 
+  <PropertyGroup Condition="'$(TargetFrameworks)' != '' AND '$(TargetFramework)' == ''">
+    <IsMultiTargetingBuild>true</IsMultiTargetingBuild>
+  </PropertyGroup>
+  
   <PropertyGroup>
     <_IsUnoDefined>$([System.Text.RegularExpressions.Regex]::IsMatch('$(DefineConstants.Trim())', '(^|;)__UNO__($|;)'))</_IsUnoDefined>
     <DefineConstants Condition="!$(_IsUnoDefined)">__UNO__;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <UseUnoUwp Condition=" '$(UseUnoUwp)' == '' ">false</UseUnoUwp>
-    <UseUno Condition=" '$(UseUno)' == '' ">$(UseUnoUwp)</UseUno>
-  </PropertyGroup>
-  
   <PropertyGroup>
     <ImplicitUsings Condition=" '$(ImplicitUsings)' == '' ">enable</ImplicitUsings>
     <EnableUnoGlobalUsings Condition=" '$(EnableUnoGlobalUsings)' == '' and '$(ImplicitUsings)' == 'enable'">true</EnableUnoGlobalUsings>
@@ -31,238 +27,12 @@
     <DefaultLanguage Condition=" '$(DefaultLanguage)' == '' ">en</DefaultLanguage>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <UseUnoLibrary Condition=" '$(UseUnoLibrary)' == '' and '$(UnoApplication)' != 'true' ">true</UseUnoLibrary>
-    <UseUnoLibrary Condition=" '$(UseUnoLibrary)' == '' ">false</UseUnoLibrary>
-  </PropertyGroup>
-
-  <Choose>
-    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-      <PropertyGroup>
-        <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">true</UseUnoMobile>
-        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">21.0</SupportedOSPlatformVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
-      <PropertyGroup>
-        <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">true</UseUnoMobile>
-        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">14.2</SupportedOSPlatformVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'macos'">
-      <PropertyGroup>
-        <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">true</UseUnoMobile>
-        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">10.14</SupportedOSPlatformVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
-      <PropertyGroup>
-        <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">true</UseUnoMobile>
-        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">14.0</SupportedOSPlatformVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">
-      <PropertyGroup>
-        <UseUnoTizen Condition=" '$(UseUnoTizen)' == '' ">true</UseUnoTizen>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'gtk'">
-      <PropertyGroup>
-        <UseUnoGtk Condition=" '$(UseUnoGtk)' == '' ">true</UseUnoGtk>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'linux'">
-      <PropertyGroup>
-        <UseUnoLinux Condition=" '$(UseUnoLinux)' == '' ">true</UseUnoLinux>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'webassembly'">
-      <PropertyGroup>
-        <UseUnoWebAssembly Condition=" '$(UseUnoWebAssembly)' == '' ">true</UseUnoWebAssembly>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoLibrary)' != 'true' and $(TargetFramework.Contains('windows10'))">
-      <PropertyGroup>
-        <UseUnoWindows Condition=" '$(UseUnoWindows)' == '' ">true</UseUnoWindows>
-        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">10.0.18362.0</SupportedOSPlatformVersion>
-        <TargetPlatformMinVersion Condition=" '$(TargetPlatformMinVersion)' == '' ">10.0.18362.0</TargetPlatformMinVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoLibrary)' != 'true' and ($(TargetFramework.Contains('windows7')) or $(TargetFramework.EndsWith('-windows')))">
-      <PropertyGroup>
-        <UseUnoWpf Condition=" '$(UseUnoWpf)' == '' ">true</UseUnoWpf>
-      </PropertyGroup>
-    </When>
-  </Choose>
-
-  <PropertyGroup>
-    <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">false</UseUnoMobile>
-    <UseUnoGtk Condition=" '$(UseUnoGtk)' == '' ">false</UseUnoGtk>
-    <UseUnoLinux Condition=" '$(UseUnoLinux)' == '' ">false</UseUnoLinux>
-    <UseUnoWpf Condition=" '$(UseUnoWpf)' == '' ">false</UseUnoWpf>
-    <UseUnoTizen Condition=" '$(UseUnoTizen)' == '' ">false</UseUnoTizen>
-    <UseUnoWebAssembly Condition=" '$(UseUnoWebAssembly)' == '' ">false</UseUnoWebAssembly>
-    <UseUnoWindows Condition=" '$(UseUnoWindows)' == '' ">false</UseUnoWindows>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFrameworks)' != '' AND '$(TargetFramework)' == ''">
-    <IsMultiTargetingBuild>true</IsMultiTargetingBuild>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(UseUnoMobile)' == 'true'">
-    <!-- Display name -->
-    <ApplicationTitle Condition=" '$(ApplicationTitle)' == '' ">Uno</ApplicationTitle>
-    <!-- App Identifier -->
-    <ApplicationId Condition=" '$(ApplicationId)' == '' ">com.companyname.uno</ApplicationId>
-    <ApplicationIdGuid Condition=" '$(ApplicationIdGuid)' == '' ">85713610-D897-46B8-A4B8-465E6A43702E</ApplicationIdGuid>
-    <!-- Versions -->
-    <ApplicationDisplayVersion Condition=" '$(ApplicationDisplayVersion)' == '' ">1.0</ApplicationDisplayVersion>
-    <ApplicationVersion Condition=" '$(ApplicationVersion)' == '' ">1</ApplicationVersion>
-
-    <!-- Debugger workaround https://github.com/dotnet/maui-samples/blob/8aa6b8780b12e97b157514c3bdc54bb4a13001cd/HelloMacCatalyst/HelloMacCatalyst.csproj#L7 -->
-    <!-- <MtouchExtraArgs Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">$(MtouchExtraArgs) -setenv:MONO_THREADS_SUSPEND=preemptive</MtouchExtraArgs> -->
-    <!-- Required for C# Hot Reload -->
-    <UseInterpreter Condition="'$(UseInterpreter)' == '' and '$(Configuration)' == 'Debug' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'maccatalyst'">True</UseInterpreter>
-    <IsUnoHead Condition=" '$(IsUnoHead)' == '' ">true</IsUnoHead>
-    <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
-  </PropertyGroup>
-
-  <Choose>
-    <When Condition="'$(UseUnoMobile)' == 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-      <PropertyGroup>
-        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">21.0</SupportedOSPlatformVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoMobile)' == 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
-      <PropertyGroup>
-        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">14.2</SupportedOSPlatformVersion>
-        <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
-        <!-- See https://github.com/unoplatform/uno/issues/9430 for more details. -->
-        <MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
-        <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">iossimulator-x64</RuntimeIdentifier>
-      </PropertyGroup>
-      <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
-        <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(UseUnoMobile)' == 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
-      <PropertyGroup>
-        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">14.0</SupportedOSPlatformVersion>
-        <!-- Configure the GC -->
-        <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
-        <!-- Required for unknown crash as of .NET 6 Mobile Preview 13 -->
-        <MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
-        <!-- Full globalization is required for Uno -->
-        <InvariantGlobalization Condition=" '$(InvariantGlobalization)' == '' ">false</InvariantGlobalization>
-        <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">maccatalyst-x64</RuntimeIdentifier>
-      </PropertyGroup>
-      <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-        <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
-        <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
-      </PropertyGroup>
-    </When>
-  </Choose>
-
-  <!-- https://github.com/xamarin/xamarin-macios/issues/15897 -->
-  <Target Name="_SetPublishFolderTypeNoneOnDocFileItems" BeforeTargets="_ComputePublishLocation" Condition="$(UseUnoMobile)">
-    <ItemGroup>
-      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.xml' and '%(ResolvedFileToPublish.PublishFolderType)' == ''" PublishFolderType="None" />
-      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.uprimarker' and '%(ResolvedFileToPublish.PublishFolderType)' == ''" PublishFolderType="None" />
-    </ItemGroup>
-  </Target>
-
-  <PropertyGroup Condition="'$(UseUnoGtk)' == 'true' or '$(UseUnoLinux)' == 'true'">
-    <OutputType Condition="'$(OutputType)' == 'Exe' and '$(Configuration)' == 'Release'">WinExe</OutputType>
-  </PropertyGroup>
-
-  <ItemGroup Label="AssemblyInfo" Condition="'$(DisableUnoWpfAssemblyInfo)' != 'true' and '$(UseUnoWpf)' == 'true'">
-    <AssemblyAttribute Include="System.Runtime.InteropServices.ComVisibleAttribute">
-      <_Parameter1>false</_Parameter1>
-    </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Windows.ThemeInfo">
-      <_Parameter1>System.Windows.ResourceDictionaryLocation.None</_Parameter1>
-      <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
-      <_Parameter2>System.Windows.ResourceDictionaryLocation.SourceAssembly</_Parameter2>
-      <_Parameter2_IsLiteral>true</_Parameter2_IsLiteral>
-    </AssemblyAttribute>
-  </ItemGroup>
-  
-  <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
-    <NoWarn>$(NoWarn);NU1504;NU1505;NU1701</NoWarn>
-    <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
-    <!-- Disabled due to issue with Central Package Management with implicit using -->
-    <ImplicitUsings>disable</ImplicitUsings>
-    <AppDesignerFolder Condition=" '$(AppDesignerFolder)' == '' ">Properties</AppDesignerFolder>
-    <!--
-        Supports Deep Linking Routes
-        https://aka.platform.uno/wasm-deeplink
-    -->
-    <WasmShellWebAppBasePath Condition=" '$(WasmShellWebAppBasePath)' == '' ">/</WasmShellWebAppBasePath>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true' and '$(Configuration)' == 'Debug'">
-    <MonoRuntimeDebuggerEnabled Condition=" '$(MonoRuntimeDebuggerEnabled)' == '' ">true</MonoRuntimeDebuggerEnabled>
-    <!--
-        IL Linking is disabled in Debug configuration.
-        When building in Release, see https://platform.uno/docs/articles/features/using-il-linker-WebAssembly.html
-    -->
-    <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true' and '$(Configuration)' == 'Release'">
-    <!-- XAML Resource trimming https://aka.platform.uno/xaml-trimming -->
-    <!--<UnoXamlResourcesTrimming>true</UnoXamlResourcesTrimming>-->
-    <!-- Improve performance with AOT builds https://aka.platform.uno/wasm-aot -->
-    <!-- <WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode> -->
-    <!-- Temporarily uncomment to generate an AOT profile https://aka.platform.uno/wasm-aot-profile -->
-    <!-- <WasmShellGenerateAOTProfile>true</WasmShellGenerateAOTProfile> -->
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(UseUnoWindows)' == 'true'">
-    <TargetPlatformMinVersion Condition=" '$(TargetPlatformMinVersion)' == '' ">10.0.18362.0</TargetPlatformMinVersion>
-    <Platforms Condition=" '$(Platforms)' == '' ">x86;x64;arm64</Platforms>
-    <RuntimeIdentifiers Condition=" '$(RuntimeIdentifiers)' == '' ">win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
-    <PublishProfile Condition=" '$(PublishProfile)' == '' ">win10-$(Platform).pubxml</PublishProfile>
-    <UseWinUI Condition=" '$(UseWinUI)' == '' ">true</UseWinUI>
-    <EnableMsixTooling Condition=" '$(EnableMsixTooling)' == '' ">true</EnableMsixTooling>
-    <EnableWindowsTargeting Condition=" '$(EnableWindowsTargeting)' == '' ">true</EnableWindowsTargeting>
-    <NoWarn>$(NoWarn);CS8785</NoWarn>
-    <!-- Uncomment for Unpackaged builds -->
-    <!-- <WindowsPackageType>None</WindowsPackageType> -->
-    <!-- For Unpackaged builds, change version of SDK to previous stable release https://github.com/microsoft/WindowsAppSDK/issues/3591 -->
-    <!-- Bundles the WinAppSDK binaries (Uncomment for unpackaged builds) -->
-    <!-- <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained> -->
-    <!-- <SelfContained>true</SelfContained> -->
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(UseUnoWpf)' == 'true'">
-    <EnableWindowsTargeting Condition="'$(EnableWindowsTargeting)' == ''">true</EnableWindowsTargeting>
-    <OutputType Condition="'$(OutputType)' == 'Exe' and '$(Configuration)' == 'Release'">WinExe</OutputType>
-    <UseWpf Condition="'$(UseWpf)' == ''">true</UseWpf>
-  </PropertyGroup>
-
-  <!-- 
-        Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
-        Tools extension to be activated for this project even if the Windows App SDK Nuget
-        package has not yet been restored.
-    -->
-  <ItemGroup Condition="'$(UseUnoWindows)' == 'true' and '$(DisableMsixProjectCapabilityAddedByProject)' != 'true' and '$(EnableMsixTooling)' == 'true'">
-    <ProjectCapability Include="Msix"/>
-  </ItemGroup>
-
-  <!-- 
-        Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution 
-        Explorer "Package and Publish" context menu entry to be enabled for this project even if 
-        the Windows App SDK Nuget package has not yet been restored.
-    -->
-  <PropertyGroup Condition="'$(UseUnoWindows)' == 'true' and '$(DisableHasPackageAndPublishMenuAddedByProject)' != 'true' and '$(EnableMsixTooling)' == 'true'">
-    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(UseUnoLibrary)' == 'true'">
-    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
-    <GenerateLibraryLayout Condition=" '$(GenerateLibraryLayout)' == '' ">true</GenerateLibraryLayout>
-  </PropertyGroup>
+  <Import Project="Uno.Sdk.DefaultProperties.Mobile.targets" Condition=" '$(UseUnoMobile)' == 'true' " />
+  <Import Project="Uno.Sdk.DefaultProperties.Windows.targets" Condition=" '$(UseUnoWindows)' == 'true' " />
+  <Import Project="Uno.Sdk.DefaultProperties.WebAssembly.targets" Condition=" '$(UseUnoWebAssembly)' == 'true' " />
+  <Import Project="Uno.Sdk.DefaultProperties.Gtk.targets" Condition=" '$(UseUnoGtk)' == 'true' " />
+  <Import Project="Uno.Sdk.DefaultProperties.Wpf.targets" Condition=" '$(UseUnoWpf)' == 'true' " />
+  <Import Project="Uno.Sdk.DefaultProperties.Linux.targets" Condition=" '$(UseUnoLinux)' == 'true' " />
+  <Import Project="Uno.Sdk.DefaultProperties.Library.targets" Condition=" '$(UseUnoLibrary)' == 'true' " />
 
 </Project>

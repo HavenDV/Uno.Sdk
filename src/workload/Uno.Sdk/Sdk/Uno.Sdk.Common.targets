@@ -1,9 +1,5 @@
 <Project>
 
-  <PropertyGroup Condition="'$(HostOS)' == ''">
-    <HostOS Condition="$([MSBuild]::IsOSPlatform('windows'))">Windows</HostOS>
-    <HostOS Condition="$([MSBuild]::IsOSPlatform('linux'))">Linux</HostOS>
-    <HostOS Condition="$([MSBuild]::IsOSPlatform('osx'))">Darwin</HostOS>
-  </PropertyGroup>
+    
 
 </Project>

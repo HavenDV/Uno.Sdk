@@ -1,0 +1,66 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Display name -->
+    <ApplicationTitle Condition=" '$(ApplicationTitle)' == '' ">Uno</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId Condition=" '$(ApplicationId)' == '' ">com.companyname.uno</ApplicationId>
+    <ApplicationIdGuid Condition=" '$(ApplicationIdGuid)' == '' ">85713610-D897-46B8-A4B8-465E6A43702E</ApplicationIdGuid>
+    <!-- Versions -->
+    <ApplicationDisplayVersion Condition=" '$(ApplicationDisplayVersion)' == '' ">1.0</ApplicationDisplayVersion>
+    <ApplicationVersion Condition=" '$(ApplicationVersion)' == '' ">1</ApplicationVersion>
+
+    <!-- Debugger workaround https://github.com/dotnet/maui-samples/blob/8aa6b8780b12e97b157514c3bdc54bb4a13001cd/HelloMacCatalyst/HelloMacCatalyst.csproj#L7 -->
+    <!-- <MtouchExtraArgs Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">$(MtouchExtraArgs) -setenv:MONO_THREADS_SUSPEND=preemptive</MtouchExtraArgs> -->
+    <!-- Required for C# Hot Reload -->
+    <UseInterpreter Condition="'$(UseInterpreter)' == '' and '$(Configuration)' == 'Debug' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'maccatalyst'">True</UseInterpreter>
+    <IsUnoHead Condition=" '$(IsUnoHead)' == '' ">true</IsUnoHead>
+    <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+      <PropertyGroup>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">21.0</SupportedOSPlatformVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+      <PropertyGroup>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">14.2</SupportedOSPlatformVersion>
+        <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+        <!-- See https://github.com/unoplatform/uno/issues/9430 for more details. -->
+        <MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
+        <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">iossimulator-x64</RuntimeIdentifier>
+      </PropertyGroup>
+      <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
+        <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
+      </PropertyGroup>
+    </When>
+    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+      <PropertyGroup>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">14.0</SupportedOSPlatformVersion>
+        <!-- Configure the GC -->
+        <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+        <!-- Required for unknown crash as of .NET 6 Mobile Preview 13 -->
+        <MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
+        <!-- Full globalization is required for Uno -->
+        <InvariantGlobalization Condition=" '$(InvariantGlobalization)' == '' ">false</InvariantGlobalization>
+        <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">maccatalyst-x64</RuntimeIdentifier>
+      </PropertyGroup>
+      <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
+        <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
+      </PropertyGroup>
+    </When>
+  </Choose>
+  
+  <!-- https://github.com/xamarin/xamarin-macios/issues/15897 -->
+  <Target Name="_SetPublishFolderTypeNoneOnDocFileItems" BeforeTargets="_ComputePublishLocation" Condition="$(UseUnoMobile)">
+    <ItemGroup>
+      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.xml' and '%(ResolvedFileToPublish.PublishFolderType)' == ''" PublishFolderType="None" />
+      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.uprimarker' and '%(ResolvedFileToPublish.PublishFolderType)' == ''" PublishFolderType="None" />
+    </ItemGroup>
+  </Target>
+
+</Project>

@@ -1,0 +1,7 @@
+<Project>
+
+  <PropertyGroup>
+    <OutputType Condition="'$(OutputType)' == 'Exe' and '$(Configuration)' == 'Release'">WinExe</OutputType>
+  </PropertyGroup>
+
+</Project>

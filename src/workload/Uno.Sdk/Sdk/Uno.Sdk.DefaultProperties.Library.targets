@@ -1,0 +1,8 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout Condition=" '$(GenerateLibraryLayout)' == '' ">true</GenerateLibraryLayout>
+  </PropertyGroup>
+
+</Project>
