@@ -1,7 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <UnoApplication Condition=" '$(UnoApplication)' == '' And '$(OutputType)' == 'Exe' ">true</UnoApplication>
+    <UnoApplication Condition=" '$(UnoApplication)' == '' and '$(OutputType)' == 'Exe' ">true</UnoApplication>
     <UnoApplication Condition=" '$(UnoApplication)' == '' ">false</UnoApplication>
   </PropertyGroup>
 
@@ -167,8 +167,8 @@
   <!-- https://github.com/xamarin/xamarin-macios/issues/15897 -->
   <Target Name="_SetPublishFolderTypeNoneOnDocFileItems" BeforeTargets="_ComputePublishLocation" Condition="$(UseUnoMobile)">
     <ItemGroup>
-      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.xml' And '%(ResolvedFileToPublish.PublishFolderType)' == ''" PublishFolderType="None" />
-      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.uprimarker' And '%(ResolvedFileToPublish.PublishFolderType)' == ''" PublishFolderType="None" />
+      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.xml' and '%(ResolvedFileToPublish.PublishFolderType)' == ''" PublishFolderType="None" />
+      <ResolvedFileToPublish Update="@(ResolvedFileToPublish)" Condition="'%(ResolvedFileToPublish.Extension)' == '.uprimarker' and '%(ResolvedFileToPublish.PublishFolderType)' == ''" PublishFolderType="None" />
     </ItemGroup>
   </Target>
 
@@ -247,7 +247,7 @@
         Tools extension to be activated for this project even if the Windows App SDK Nuget
         package has not yet been restored.
     -->
-  <ItemGroup Condition="'$(UseUnoWindows)' == 'true' and '$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+  <ItemGroup Condition="'$(UseUnoWindows)' == 'true' and '$(DisableMsixProjectCapabilityAddedByProject)' != 'true' and '$(EnableMsixTooling)' == 'true'">
     <ProjectCapability Include="Msix"/>
   </ItemGroup>
 
@@ -256,7 +256,7 @@
         Explorer "Package and Publish" context menu entry to be enabled for this project even if 
         the Windows App SDK Nuget package has not yet been restored.
     -->
-  <PropertyGroup Condition="'$(UseUnoWindows)' == 'true' and '$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+  <PropertyGroup Condition="'$(UseUnoWindows)' == 'true' and '$(DisableHasPackageAndPublishMenuAddedByProject)' != 'true' and '$(EnableMsixTooling)' == 'true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
 

@@ -6,7 +6,7 @@
   -->
   <Target Name="_CheckForMissingWorkload"
           BeforeTargets="_CheckForInvalidConfigurationAndPlatform;_CheckForUnsupportedTargetPlatformIdentifier"
-          Condition="'@(MissingWorkloadPack)' != '' And '$(DesignTimeBuild)' != 'true'">
+          Condition="'@(MissingWorkloadPack)' != '' and '$(DesignTimeBuild)' != 'true'">
 
     <ShowMissingWorkloads MissingWorkloadPacks="@(MissingWorkloadPack)"
                           NetCoreRoot="$(NetCoreRoot)"

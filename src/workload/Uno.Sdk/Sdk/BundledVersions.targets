@@ -121,10 +121,10 @@
         <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
 
         <PackageReference Include="Uno.UI" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)'=='Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)' == 'Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
         
         <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)'=='Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)' == 'Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <Choose>
@@ -147,11 +147,11 @@
         <PackageReference Include="SkiaSharp.Skottie" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
 
         <PackageReference Include="Uno.UI.Skia.Gtk" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)' == 'Debug'" IsImplicitlyDefined="true" />
         <PackageReference Include="SkiaSharp.Views.Uno" Version="$(SkiaVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
         
         <PackageReference Include="Uno.WinUI.Skia.Gtk" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)' == 'Debug'" IsImplicitlyDefined="true" />
         <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="$(SkiaVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
     </ItemGroup>
 
@@ -162,11 +162,11 @@
         <PackageReference Include="SkiaSharp.Skottie" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
 
         <PackageReference Include="Uno.UI.Skia.Linux.Framebuffer" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)' == 'Debug'" IsImplicitlyDefined="true" />
         <PackageReference Include="SkiaSharp.Views.Uno" Version="$(SkiaVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
 
         <PackageReference Include="Uno.WinUI.Skia.Linux.Framebuffer" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)' == 'Debug'" IsImplicitlyDefined="true" />
         <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="$(SkiaVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
     </ItemGroup>
 
@@ -177,11 +177,11 @@
         <PackageReference Include="SkiaSharp.Skottie" Version="$(SkiaVersion)" IsImplicitlyDefined="true" />
 
         <PackageReference Include="Uno.UI.Skia.Wpf" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)' == 'Debug'" IsImplicitlyDefined="true" />
         <PackageReference Include="SkiaSharp.Views.Uno" Version="$(SkiaVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
 
         <PackageReference Include="Uno.WinUI.Skia.Wpf" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)' == 'Debug'" IsImplicitlyDefined="true" />
         <PackageReference Include="SkiaSharp.Views.Uno.WinUI" Version="$(SkiaVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
     </ItemGroup>
 
@@ -195,10 +195,10 @@
         <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" GeneratePathProperty="true" />
 
         <PackageReference Include="Uno.UI.WebAssembly" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)' == 'Debug'" IsImplicitlyDefined="true" />
         
         <PackageReference Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)'=='Debug'" IsImplicitlyDefined="true" />
+        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)' == 'Debug'" IsImplicitlyDefined="true" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(UseUnoWindows)' == 'true'">

@@ -40,7 +40,7 @@ Docs about @(ProjectCapability):
 
 
     <!-- Additional capabilities to enable XAML Intellisense for non UWP/WinUI native projects -->
-    <ItemGroup Condition="'$(BuildingInsideVisualStudio)'=='true'">
+    <ItemGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">
         <AvailableItemName Include="PRIResource" />
         <AvailableItemName Include="AppxManifest" />
         <AvailableItemName Include="ApplicationDefinition" />
