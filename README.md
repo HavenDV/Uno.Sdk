@@ -28,7 +28,7 @@ Here are three possible uses:
 
 </Project>
 ```
-Note: Sometimes there may be problems with restoring the SDK from NuGet, so the second method is preferable
+Note: To restore correctly from NuGet you need to run this in a project where `net7.0-webassembly;net7.0-gtk;net7.0-linux` is missing
 - Use local SDK after installing workload
 ```xml
 <Project Sdk="H.Uno.Sdk">
