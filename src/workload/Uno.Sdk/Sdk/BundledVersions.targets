@@ -4,6 +4,8 @@
       https://github.com/dotnet/designs/blob/main/accepted/2020/workloads/workload-manifest.md#library-packs
       The design document does not recommend implicit PackageReferences.
       Moreover, MAUI refuses this too - https://github.com/dotnet/maui/blob/main/src/Workload/Microsoft.Maui.Sdk/Sdk/BundledVersions.in.targets#L73
+      PR: https://github.com/dotnet/maui/pull/14770
+      
       It's there for now, but we have to take it into account.
     -->
 
@@ -14,9 +16,6 @@
         <UnoExtensionsVersion Condition=" '$(UnoExtensionsVersion)' == '' ">1.6.0</UnoExtensionsVersion>
         <MicrosoftExtensionsLoggingConsoleVersion Condition=" '$(MicrosoftExtensionsLoggingConsoleVersion)' == '' ">7.0.0</MicrosoftExtensionsLoggingConsoleVersion>
         
-        <!-- It still using? -->
-        <UnoCoreExtensionsLoggingSingletonVersion Condition=" '$(UnoCoreExtensionsLoggingSingletonVersion)' == '' ">4.0.1</UnoCoreExtensionsLoggingSingletonVersion>
-
         <!-- Skia -->
         <SkiaVersion Condition=" '$(SkiaVersion)' == '' ">2.88.6</SkiaVersion>
 
@@ -27,6 +26,7 @@
         <!-- Windows -->
         <MicrosoftWindowsAppSDKVersion Condition=" '$(MicrosoftWindowsAppSDKVersion)' == '' ">1.4.230913002</MicrosoftWindowsAppSDKVersion>
         <MicrosoftWindowsSDKBuildToolsVersion Condition=" '$(MicrosoftWindowsSDKBuildToolsVersion)' == '' ">10.0.25936-preview</MicrosoftWindowsSDKBuildToolsVersion>
+        <UnoCoreExtensionsLoggingSingletonVersion Condition=" '$(UnoCoreExtensionsLoggingSingletonVersion)' == '' ">4.0.1</UnoCoreExtensionsLoggingSingletonVersion>
 
         <!-- Mobile -->
         <UnoUniversalImageLoaderVersion Condition=" '$(UnoUniversalImageLoaderVersion)' == '' ">1.9.36</UnoUniversalImageLoaderVersion>
@@ -58,7 +58,7 @@
     <ItemGroup Condition=" '$(DisableUnoImplicitPackageReferences)' != 'true' ">
 <!--        <_UnoImplicitPackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" PrivateAssets="all" Condition=" '$(UseUnoAssets)' == 'true' " />-->
 <!--        <_UnoImplicitPackageReference Include="Uno.WinUI" Version="$(UnoVersion)" Condition=" '$(UseUno)' == 'true' ">-->
-<!--            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(AndroidApplication)' != 'true' ">all</PrivateAssets>-->
+<!--            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>-->
 <!--        </_UnoImplicitPackageReference>-->
     </ItemGroup>
     
