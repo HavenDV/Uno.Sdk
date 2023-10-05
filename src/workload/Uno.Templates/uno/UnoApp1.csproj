@@ -1,9 +1,8 @@
 <Project Sdk="H.Uno.Sdk">
   
   <PropertyGroup>
-    <TargetFrameworks>net7.0-gtk;net7.0-webassembly;net7.0-linux</TargetFrameworks>
-    <!-- Error: D:\a\Uno.Sdk\Uno.Sdk\test-msbuild\Uno.UI.SourceGenerators\Uno.UI.SourceGenerators.XamlGenerator.XamlCodeGenerator\MainView_aabaadfc0f1dee992664b93ca97e20a4.cs(26,11): error CS8802: Only one compilation unit can have top-level statements. [D:\a\Uno.Sdk\Uno.Sdk\test-msbuild\test-msbuild.csproj::TargetFramework=net7.0-linux] -->
-<!--    <TargetFrameworks Condition="'$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>-->
+    <TargetFrameworks>net7.0-webassembly;net7.0-gtk;net7.0-linux;net7.0-windows</TargetFrameworks>
+    <TargetFrameworks Condition="'$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   
