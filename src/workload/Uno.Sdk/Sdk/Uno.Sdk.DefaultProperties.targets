@@ -1,6 +1,16 @@
 <Project>
 
   <PropertyGroup>
+    <UnoApplication Condition=" '$(UnoApplication)' == '' And '$(OutputType)' == 'Exe' ">true</UnoApplication>
+    <UnoApplication Condition=" '$(UnoApplication)' == '' ">false</UnoApplication>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <_IsUnoDefined>$([System.Text.RegularExpressions.Regex]::IsMatch('$(DefineConstants.Trim())', '(^|;)__UNO__($|;)'))</_IsUnoDefined>
+    <DefineConstants Condition="!$(_IsUnoDefined)">__UNO__;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <UseUnoUwp Condition=" '$(UseUnoUwp)' == '' ">false</UseUnoUwp>
     <UseUno Condition=" '$(UseUno)' == '' ">$(UseUnoUwp)</UseUno>
   </PropertyGroup>
@@ -21,18 +31,69 @@
     <DefaultLanguage Condition=" '$(DefaultLanguage)' == '' ">en</DefaultLanguage>
   </PropertyGroup>
 
-  <ItemGroup>
-    <!-- Removes native usings to avoid Ambiguous reference -->
-    <Using Remove="@(Using->HasMetadata('Platform'))" />
-  </ItemGroup>
-
   <PropertyGroup>
-    <IsAndroid Condition=" '$(IsAndroid)' == '' ">false</IsAndroid>
-    <IsIOS Condition=" '$(IsIOS)' == '' ">false</IsIOS>
-    <IsMac Condition=" '$(IsMac)' == '' ">false</IsMac>
-    <IsMacCatalyst Condition=" '$(IsMacCatalyst)' == '' ">false</IsMacCatalyst>
-    <IsWinAppSdk Condition=" '$(IsWinAppSdk)' == '' ">false</IsWinAppSdk>
+    <UseUnoLibrary Condition=" '$(UseUnoLibrary)' == '' and '$(UnoApplication)' != 'true' ">true</UseUnoLibrary>
+    <UseUnoLibrary Condition=" '$(UseUnoLibrary)' == '' ">false</UseUnoLibrary>
   </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+      <PropertyGroup>
+        <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">true</UseUnoMobile>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">21.0</SupportedOSPlatformVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+      <PropertyGroup>
+        <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">true</UseUnoMobile>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">14.2</SupportedOSPlatformVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'macos'">
+      <PropertyGroup>
+        <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">true</UseUnoMobile>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">10.14</SupportedOSPlatformVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+      <PropertyGroup>
+        <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">true</UseUnoMobile>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">14.0</SupportedOSPlatformVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">
+      <PropertyGroup>
+        <UseUnoTizen Condition=" '$(UseUnoTizen)' == '' ">true</UseUnoTizen>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'gtk'">
+      <PropertyGroup>
+        <UseUnoGtk Condition=" '$(UseUnoGtk)' == '' ">true</UseUnoGtk>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'linux'">
+      <PropertyGroup>
+        <UseUnoLinux Condition=" '$(UseUnoLinux)' == '' ">true</UseUnoLinux>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UseUnoLibrary)' != 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'webassembly'">
+      <PropertyGroup>
+        <UseUnoWebAssembly Condition=" '$(UseUnoWebAssembly)' == '' ">true</UseUnoWebAssembly>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UseUnoLibrary)' != 'true' and $(TargetFramework.Contains('windows10'))">
+      <PropertyGroup>
+        <UseUnoWindows Condition=" '$(UseUnoWindows)' == '' ">true</UseUnoWindows>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">10.0.18362.0</SupportedOSPlatformVersion>
+        <TargetPlatformMinVersion Condition=" '$(TargetPlatformMinVersion)' == '' ">10.0.18362.0</TargetPlatformMinVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(UseUnoLibrary)' != 'true' and ($(TargetFramework.Contains('windows7')) or $(TargetFramework.EndsWith('-windows')))">
+      <PropertyGroup>
+        <UseUnoWpf Condition=" '$(UseUnoWpf)' == '' ">true</UseUnoWpf>
+      </PropertyGroup>
+    </When>
+  </Choose>
 
   <PropertyGroup>
     <UseUnoMobile Condition=" '$(UseUnoMobile)' == '' ">false</UseUnoMobile>
@@ -42,77 +103,7 @@
     <UseUnoTizen Condition=" '$(UseUnoTizen)' == '' ">false</UseUnoTizen>
     <UseUnoWebAssembly Condition=" '$(UseUnoWebAssembly)' == '' ">false</UseUnoWebAssembly>
     <UseUnoWindows Condition=" '$(UseUnoWindows)' == '' ">false</UseUnoWindows>
-    <UseUnoLibrary Condition=" '$(UseUnoLibrary)' == '' ">false</UseUnoLibrary>
   </PropertyGroup>
-
-  <Choose>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-      <PropertyGroup>
-        <IsAndroid>true</IsAndroid>
-        <UseUnoMobile>true</UseUnoMobile>
-        <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
-      <PropertyGroup>
-        <IsIOS>true</IsIOS>
-        <UseUnoMobile>true</UseUnoMobile>
-        <SupportedOSPlatformVersion>14.2</SupportedOSPlatformVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'macos'">
-      <PropertyGroup>
-        <IsMac>true</IsMac>
-        <UseUnoMobile>true</UseUnoMobile>
-        <SupportedOSPlatformVersion>10.14</SupportedOSPlatformVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
-      <PropertyGroup>
-        <IsMacCatalyst>true</IsMacCatalyst>
-        <UseUnoMobile>true</UseUnoMobile>
-        <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">
-      <PropertyGroup>
-        <IsTizen>true</IsTizen>
-        <UseUnoTizen>true</UseUnoTizen>
-      </PropertyGroup>
-    </When>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'gtk'">
-      <PropertyGroup>
-        <IsGtk>true</IsGtk>
-        <UseUnoGtk>true</UseUnoGtk>
-      </PropertyGroup>
-    </When>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'linux'">
-      <PropertyGroup>
-        <IsLinux>true</IsLinux>
-        <UseUnoLinux>true</UseUnoLinux>
-      </PropertyGroup>
-    </When>
-    <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'webassembly'">
-      <PropertyGroup>
-        <IsWebAssembly>true</IsWebAssembly>
-        <UseUnoWebAssembly>true</UseUnoWebAssembly>
-      </PropertyGroup>
-    </When>
-    <When Condition="$(TargetFramework.Contains('windows10'))">
-      <PropertyGroup>
-        <IsWinAppSdk>true</IsWinAppSdk>
-        <UseUnoWindows>true</UseUnoWindows>
-        <SupportedOSPlatformVersion>10.0.18362.0</SupportedOSPlatformVersion>
-        <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
-      </PropertyGroup>
-    </When>
-    <When Condition="$(TargetFramework.Contains('windows7')) or $(TargetFramework.EndsWith('-windows'))">
-      <PropertyGroup>
-        <IsWpf>true</IsWpf>
-        <UseUnoWpf>true</UseUnoWpf>
-      </PropertyGroup>
-    </When>
-  </Choose>
 
   <PropertyGroup Condition="'$(TargetFrameworks)' != '' AND '$(TargetFramework)' == ''">
     <IsMultiTargetingBuild>true</IsMultiTargetingBuild>
@@ -251,7 +242,7 @@
   <PropertyGroup Condition="'$(UseUnoWpf)' == 'true'">
     <EnableWindowsTargeting Condition="'$(EnableWindowsTargeting)' == ''">true</EnableWindowsTargeting>
     <OutputType Condition="'$(OutputType)' == 'Exe' and '$(Configuration)' == 'Release'">WinExe</OutputType>
-    <UseWPF Condition="'$(UseWPF)' == ''">true</UseWPF>
+    <UseWpf Condition="'$(UseWpf)' == ''">true</UseWpf>
   </PropertyGroup>
 
   <!-- 
@@ -273,20 +264,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(UseUnoLibrary)' == 'true'">
-    <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
-
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <UnoApplication Condition=" '$(UnoApplication)' == '' And '$(OutputType)' == 'Exe' ">true</UnoApplication>
-    <UnoApplication Condition=" '$(UnoApplication)' == '' ">false</UnoApplication>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <_IsUnoDefined>$([System.Text.RegularExpressions.Regex]::IsMatch('$(DefineConstants.Trim())', '(^|;)__UNO__($|;)'))</_IsUnoDefined>
-    <DefineConstants Condition="!$(_IsUnoDefined)">__UNO__;$(DefineConstants)</DefineConstants>
+    <GenerateLibraryLayout Condition=" '$(GenerateLibraryLayout)' == '' ">true</GenerateLibraryLayout>
   </PropertyGroup>
 
 </Project>
