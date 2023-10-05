@@ -20,7 +20,7 @@ Docs about @(ProjectCapability):
     </ItemGroup>
 
     <!-- SingleProject-specific features -->
-    <ItemGroup Condition=" '$(SingleProject)' == 'true' ">
+    <ItemGroup Condition=" '$(UnoSingleProject)' == 'true' ">
         <ProjectCapability Include="Msix" />
         <ProjectCapability Include="UnoSingleProject" />
         <ProjectCapability Include="LaunchProfiles" />
@@ -29,6 +29,33 @@ Docs about @(ProjectCapability):
         <!-- Otherwise define LaunchProfilesGroupByPlatformFilters by default -->
         <ProjectCapability Include="LaunchProfilesGroupByPlatformFilters" Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &gt;= '17.0' " />
         <ProjectCapability Include="SingleTargetBuildForStartupProjects" Condition=" '$(EnableSingleTargetBuildForStartupProjects)' != 'false' " />
+
+        <ProjectCapability Include="MauiSingleProject" />
+        <ProjectCapability Include="UseMauiCore" />
+
+        <!-- Required since VS 2022 17.4 Preview 1 -->
+        <ProjectCapability Include="MauiCore" />
+        <ProjectCapability Include="Maui" />
+    </ItemGroup>
+
+
+    <!-- Additional capabilities to enable XAML Intellisense for non UWP/WinUI native projects -->
+    <ItemGroup Condition="'$(BuildingInsideVisualStudio)'=='true'">
+        <AvailableItemName Include="PRIResource" />
+        <AvailableItemName Include="AppxManifest" />
+        <AvailableItemName Include="ApplicationDefinition" />
+        <AvailableItemName Include="Page" />
+        <AvailableItemName Include="DesignData" />
+        <AvailableItemName Include="DesignDataWithDesignTimeCreatableTypes" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectCapability Include="WindowsXaml"/>
+        <ProjectCapability Include="WindowsXamlPage"/>
+        <ProjectCapability Include="WindowsXamlCodeBehind"/>
+        <ProjectCapability Include="WindowsXamlResourceDictionary"/>
+        <ProjectCapability Include="WindowsXamlUserControl"/>
+        <ProjectCapability Include="WindowsUniversalMultiViews"/>
     </ItemGroup>
 
 </Project>
