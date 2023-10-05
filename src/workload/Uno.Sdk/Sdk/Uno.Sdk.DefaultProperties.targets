@@ -119,7 +119,6 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(UseUnoMobile)' == 'true'">
-    <OutputType>Exe</OutputType>
     <!-- Display name -->
     <ApplicationTitle>Uno</ApplicationTitle>
     <!-- App Identifier -->
@@ -183,8 +182,7 @@
   </Target>
 
   <PropertyGroup Condition="'$(UseUnoGtk)' == 'true' or '$(UseUnoLinux)' == 'true'">
-    <OutputType Condition="'$(OutputType)' == '' and '$(Configuration)'=='Release'">WinExe</OutputType>
-    <OutputType Condition="'$(OutputType)' == '' and '$(Configuration)'=='Debug'">Exe</OutputType>
+    <OutputType Condition="'$(OutputType)' == 'Exe' and '$(Configuration)'=='Release'">WinExe</OutputType>
   </PropertyGroup>
 
   <ItemGroup Label="AssemblyInfo" Condition="'$(UseUnoWpf)' == 'true'">
@@ -200,7 +198,6 @@
   </ItemGroup>
   
   <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
-    <OutputType>Exe</OutputType>
     <NoWarn>$(NoWarn);NU1504;NU1505;NU1701</NoWarn>
     <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
     <!-- Disabled due to issue with Central Package Management with implicit using -->
@@ -235,7 +232,6 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(UseUnoWindows)' == 'true'">
-    <OutputType>WinExe</OutputType>
     <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
     <Platforms>x86;x64;arm64</Platforms>
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
@@ -254,8 +250,7 @@
 
   <PropertyGroup Condition="'$(UseUnoWpf)' == 'true'">
     <EnableWindowsTargeting Condition="'$(EnableWindowsTargeting)' == ''">true</EnableWindowsTargeting>
-    <OutputType Condition="'$(OutputType)' == '' and '$(Configuration)' == 'Release'">WinExe</OutputType>
-    <OutputType Condition="'$(OutputType)' == '' and '$(Configuration)' == 'Debug'">Exe</OutputType>
+    <OutputType Condition="'$(OutputType)' == 'Exe' and '$(Configuration)' == 'Release'">WinExe</OutputType>
     <UseWPF Condition="'$(UseWPF)' == ''">true</UseWPF>
   </PropertyGroup>
 
@@ -278,7 +273,6 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(UseUnoLibrary)' == 'true'">
-    <OutputType>Library</OutputType>
     <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
 
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->

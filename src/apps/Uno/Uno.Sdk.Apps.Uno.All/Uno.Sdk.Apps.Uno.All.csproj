@@ -4,6 +4,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-gtk;net7.0-webassembly</TargetFrameworks> <!-- net7.0-ios;net7.0-android;net7.0-maccatalyst; -->
+		<OutputType>Exe</OutputType>
 	</PropertyGroup>
 
 	<ItemGroup>
