@@ -5,15 +5,15 @@
 [![License: MIT](https://img.shields.io/github/license/HavenDV/Uno.Sdk)](https://github.com/HavenDV/Uno.Sdk/blob/main/LICENSE.txt)
 [![Discord](https://img.shields.io/discord/1115206893015662663?label=Discord&logo=discord&logoColor=white&color=d82679)](https://discord.gg/Ca2xhfBf3v)
 
-Easy configuration for Uno projects in 2 lines of code.
-Now is only there platforms are supported:
-- Mobile(macOS, MacCatalyst and Android)
-- Windows
-- WebAssembly
+Easy configuration for Uno projects in 2 lines of code.  
+Supported platforms:
+- Mobile(macOS, MacCatalyst and Android)(`net7.0-maccatalyst;net7.0-android;net7.0-ios`)
+- Windows(`net7.0-windows10.0.19041.0` or any other `net7.0-windows10`)
+- WebAssembly(`net7.0-webassembly`)
 - Skia.Gkt(`net7.0-gtk`)
 - Skia.Wpf(`net7.0-windows`)
 - Skia.Linux.Framebuffer(`net7.0-linux`)
-- Skia.Tizen(`net7.0-tizen`)(still unsupported)
+- Skia.Tizen(`net7.0-tizen`)(Untested)
 
 ### Usage
 Here are three possible uses:
