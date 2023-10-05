@@ -8,6 +8,9 @@
     }
   },
   "profiles": {
+    "Project": {
+      "commandName": "Project"
+    },
     "Uno.Sdk.Apps.Uno.Wasm": {
       "commandName": "Project",
       "dotnetRunMessages": true,

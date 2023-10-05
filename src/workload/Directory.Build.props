@@ -10,7 +10,7 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <Version>0.12.0</Version>
+    <Version>0.13.0</Version>
     <PackageType>DotnetPlatform</PackageType>
     <!-- Remove the `<group targetFramework=".NETStandard2.0" />` entry from the .nuspec. -->
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>

@@ -8,6 +8,9 @@
     }
   },
   "profiles": {
+    "Project": {
+      "commandName": "Project"
+    },
     "Package": {
       "commandName": "MsixPackage",
       "commandLineArgs": ""
