@@ -111,53 +111,53 @@
 
   <PropertyGroup Condition="'$(UseUnoMobile)' == 'true'">
     <!-- Display name -->
-    <ApplicationTitle>Uno</ApplicationTitle>
+    <ApplicationTitle Condition=" '$(ApplicationTitle)' == '' ">Uno</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.uno</ApplicationId>
-    <ApplicationIdGuid>85713610-D897-46B8-A4B8-465E6A43702E</ApplicationIdGuid>
+    <ApplicationId Condition=" '$(ApplicationId)' == '' ">com.companyname.uno</ApplicationId>
+    <ApplicationIdGuid Condition=" '$(ApplicationIdGuid)' == '' ">85713610-D897-46B8-A4B8-465E6A43702E</ApplicationIdGuid>
     <!-- Versions -->
-    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion Condition=" '$(ApplicationDisplayVersion)' == '' ">1.0</ApplicationDisplayVersion>
+    <ApplicationVersion Condition=" '$(ApplicationVersion)' == '' ">1</ApplicationVersion>
 
     <!-- Debugger workaround https://github.com/dotnet/maui-samples/blob/8aa6b8780b12e97b157514c3bdc54bb4a13001cd/HelloMacCatalyst/HelloMacCatalyst.csproj#L7 -->
     <!-- <MtouchExtraArgs Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">$(MtouchExtraArgs) -setenv:MONO_THREADS_SUSPEND=preemptive</MtouchExtraArgs> -->
     <!-- Required for C# Hot Reload -->
-    <UseInterpreter Condition="'$(Configuration)' == 'Debug' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'maccatalyst'">True</UseInterpreter>
-    <IsUnoHead>true</IsUnoHead>
+    <UseInterpreter Condition="'$(UseInterpreter)' == '' and '$(Configuration)' == 'Debug' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'maccatalyst'">True</UseInterpreter>
+    <IsUnoHead Condition=" '$(IsUnoHead)' == '' ">true</IsUnoHead>
     <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
   </PropertyGroup>
 
   <Choose>
     <When Condition="'$(UseUnoMobile)' == 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
       <PropertyGroup>
-        <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">21.0</SupportedOSPlatformVersion>
       </PropertyGroup>
     </When>
     <When Condition="'$(UseUnoMobile)' == 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
       <PropertyGroup>
-        <SupportedOSPlatformVersion>14.2</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">14.2</SupportedOSPlatformVersion>
         <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
         <!-- See https://github.com/unoplatform/uno/issues/9430 for more details. -->
         <MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
-        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'==''">iossimulator-x64</RuntimeIdentifier>
+        <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">iossimulator-x64</RuntimeIdentifier>
       </PropertyGroup>
-      <PropertyGroup Condition="'$(Configuration)'=='Release'">
+      <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
         <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
         <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
       </PropertyGroup>
     </When>
     <When Condition="'$(UseUnoMobile)' == 'true' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
       <PropertyGroup>
-        <SupportedOSPlatformVersion>14.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">14.0</SupportedOSPlatformVersion>
         <!-- Configure the GC -->
         <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
         <!-- Required for unknown crash as of .NET 6 Mobile Preview 13 -->
         <MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
         <!-- Full globalization is required for Uno -->
-        <InvariantGlobalization>false</InvariantGlobalization>
-        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)'==''">maccatalyst-x64</RuntimeIdentifier>
+        <InvariantGlobalization Condition=" '$(InvariantGlobalization)' == '' ">false</InvariantGlobalization>
+        <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">maccatalyst-x64</RuntimeIdentifier>
       </PropertyGroup>
-      <PropertyGroup Condition="'$(Configuration)'=='Release'">
+      <PropertyGroup Condition=" '$(Configuration) == 'Release' ">
         <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
         <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
       </PropertyGroup>
@@ -173,10 +173,10 @@
   </Target>
 
   <PropertyGroup Condition="'$(UseUnoGtk)' == 'true' or '$(UseUnoLinux)' == 'true'">
-    <OutputType Condition="'$(OutputType)' == 'Exe' and '$(Configuration)'=='Release'">WinExe</OutputType>
+    <OutputType Condition="'$(OutputType)' == 'Exe' and '$(Configuration)' == 'Release'">WinExe</OutputType>
   </PropertyGroup>
 
-  <ItemGroup Label="AssemblyInfo" Condition="'$(UseUnoWpf)' == 'true'">
+  <ItemGroup Label="AssemblyInfo" Condition="'$(DisableUnoWpfAssemblyInfo)' != 'true' and '$(UseUnoWpf)' == 'true'">
     <AssemblyAttribute Include="System.Runtime.InteropServices.ComVisibleAttribute">
       <_Parameter1>false</_Parameter1>
     </AssemblyAttribute>
@@ -193,19 +193,16 @@
     <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
     <!-- Disabled due to issue with Central Package Management with implicit using -->
     <ImplicitUsings>disable</ImplicitUsings>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AppDesignerFolder Condition=" '$(AppDesignerFolder)' == '' ">Properties</AppDesignerFolder>
     <!--
         Supports Deep Linking Routes
         https://aka.platform.uno/wasm-deeplink
     -->
-    <WasmShellWebAppBasePath>/</WasmShellWebAppBasePath>
+    <WasmShellWebAppBasePath Condition=" '$(WasmShellWebAppBasePath)' == '' ">/</WasmShellWebAppBasePath>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true' and '$(Configuration)'=='Debug'">
-    <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
-    <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+  <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true' and '$(Configuration)' == 'Debug'">
+    <MonoRuntimeDebuggerEnabled Condition=" '$(MonoRuntimeDebuggerEnabled)' == '' ">true</MonoRuntimeDebuggerEnabled>
     <!--
         IL Linking is disabled in Debug configuration.
         When building in Release, see https://platform.uno/docs/articles/features/using-il-linker-WebAssembly.html
@@ -213,7 +210,7 @@
     <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true' and '$(Configuration)'=='Release'">
+  <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true' and '$(Configuration)' == 'Release'">
     <!-- XAML Resource trimming https://aka.platform.uno/xaml-trimming -->
     <!--<UnoXamlResourcesTrimming>true</UnoXamlResourcesTrimming>-->
     <!-- Improve performance with AOT builds https://aka.platform.uno/wasm-aot -->
@@ -223,13 +220,13 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(UseUnoWindows)' == 'true'">
-    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
-    <Platforms>x86;x64;arm64</Platforms>
-    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
-    <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
-    <UseWinUI>true</UseWinUI>
-    <EnableMsixTooling>true</EnableMsixTooling>
-    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <TargetPlatformMinVersion Condition=" '$(TargetPlatformMinVersion)' == '' ">10.0.18362.0</TargetPlatformMinVersion>
+    <Platforms Condition=" '$(Platforms)' == '' ">x86;x64;arm64</Platforms>
+    <RuntimeIdentifiers Condition=" '$(RuntimeIdentifiers)' == '' ">win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <PublishProfile Condition=" '$(PublishProfile)' == '' ">win10-$(Platform).pubxml</PublishProfile>
+    <UseWinUI Condition=" '$(UseWinUI)' == '' ">true</UseWinUI>
+    <EnableMsixTooling Condition=" '$(EnableMsixTooling)' == '' ">true</EnableMsixTooling>
+    <EnableWindowsTargeting Condition=" '$(EnableWindowsTargeting)' == '' ">true</EnableWindowsTargeting>
     <NoWarn>$(NoWarn);CS8785</NoWarn>
     <!-- Uncomment for Unpackaged builds -->
     <!-- <WindowsPackageType>None</WindowsPackageType> -->

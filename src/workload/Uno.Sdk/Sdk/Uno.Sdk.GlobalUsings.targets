@@ -28,5 +28,10 @@
         <Using Include="Microsoft.UI.Xaml.Application" Alias="Application" />
         <Using Include="Microsoft.UI.Xaml.LaunchActivatedEventArgs" Alias="LaunchActivatedEventArgs" />
     </ItemGroup>
+
+    <ItemGroup>
+        <!-- Removes native usings to avoid Ambiguous reference -->
+        <Using Remove="@(Using->HasMetadata('Platform'))" />
+    </ItemGroup>
     
 </Project>
