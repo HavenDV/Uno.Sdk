@@ -1,0 +1,21 @@
+<Project>
+
+    <PropertyGroup>
+        <AndroidManifest Condition="'$(AndroidManifest)' == '' and Exists('Platforms\Android\AndroidManifest.xml')">Platforms\Android\AndroidManifest.xml</AndroidManifest>
+        <AndroidManifest Condition="'$(AndroidManifest)' == '' and Exists('Android\AndroidManifest.xml')">Android\AndroidManifest.xml</AndroidManifest>
+    </PropertyGroup>
+
+    <Choose>
+        <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+            <ItemGroup>
+                <AndroidEnvironment Include="Android/environment.conf" Condition="Exists('Android/environment.conf')" />
+                <AndroidEnvironment Include="Platforms/Android/environment.conf" Condition="Exists('Platforms/Android/environment.conf')" />
+            </ItemGroup>
+        </When>
+        <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+        </When>
+        <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+        </When>
+    </Choose>
+    
+</Project>

@@ -25,9 +25,9 @@
     
     These are in the workload so they can run when the NuGet packages are not yet restored.
     -->
-    <ItemGroup Condition="'$(EnableDefaultItems)'=='True' And '$(EnableDefaultXamlItems)'=='True' And '$(EnableDefaultEmbeddedResourceItems)'=='True'">
+    <ItemGroup Condition="'$(EnableDefaultItems)' == 'true' and '$(EnableDefaultXamlItems)' == 'true' and '$(EnableDefaultEmbeddedResourceItems)' == 'true'">
         <Compile Update="**\*.xaml$(DefaultLanguageSourceExtension)" DependentUpon="%(Filename)" SubType="Code" />
-        <None Remove="**\*.xaml" Condition="'$(EnableDefaultNoneItems)' == 'True'" />
+        <None Remove="**\*.xaml" Condition="'$(EnableDefaultNoneItems)' == 'true'" />
     </ItemGroup>
 
     <ItemGroup>
@@ -80,8 +80,8 @@
     </ItemGroup>
 
     <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-ios')) != true">
-        <Compile Remove="**\**\*.ios.cs" />
-        <None Include="**\**\*.ios.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\*.ios.cs" />
+        <None Include="**\*.ios.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
         <Compile Remove="**\ios\**\*.cs" />
         <None Include="**\ios\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
@@ -98,8 +98,8 @@
         <None Include="**\macios\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
     <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-android')) != true ">
-        <Compile Remove="**\**\*.android.cs" />
-        <None Include="**\**\*.android.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\*.android.cs" />
+        <None Include="**\*.android.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
         <Compile Remove="**\android\**\*.cs" />
         <None Include="**\android\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
@@ -140,83 +140,11 @@
         <None Include="**\webassembly\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
 
-
-    <PropertyGroup>
-        <AndroidManifest Condition="'$(AndroidManifest)' == '' and Exists('Platforms\Android\AndroidManifest.xml')">Platforms\Android\AndroidManifest.xml</AndroidManifest>
-        <AndroidManifest Condition="'$(AndroidManifest)' == '' and Exists('Android\AndroidManifest.xml')">Android\AndroidManifest.xml</AndroidManifest>
-    </PropertyGroup>
-
-    <Choose>
-        <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-            <ItemGroup>
-                <AndroidEnvironment Include="Android/environment.conf" Condition="Exists('Android/environment.conf')" />
-                <AndroidEnvironment Include="Platforms/Android/environment.conf" Condition="Exists('Platforms/Android/environment.conf')" />
-            </ItemGroup>
-        </When>
-        <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
-        </When>
-        <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
-        </When>
-    </Choose>
-
-    <PropertyGroup>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoWpf)' == 'true' and Exists('Platforms\Wpf\app.manifest')">Platforms\Wpf\app.manifest</ApplicationManifest>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoWpf)' == 'true' and Exists('Wpf\app.manifest')">Wpf\app.manifest</ApplicationManifest>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoGtk)' == 'true' and Exists('Platforms\Gtk\app.manifest')">Platforms\Gtk\app.manifest</ApplicationManifest>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoGtk)' == 'true' and Exists('Gtk\app.manifest')">Gtk\app.manifest</ApplicationManifest>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoWindows)' == 'true' and Exists('Platforms\Windows\app.manifest')">Platforms\Windows\app.manifest</ApplicationManifest>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and '$(UseUnoWindows)' == 'true' and Exists('Windows\app.manifest')">Windows\app.manifest</ApplicationManifest>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('app.manifest')">app.manifest</ApplicationManifest>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <Manifest Include="$(ApplicationManifest)" Condition="Exists('$(ApplicationManifest)')" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(UseUnoWindows)' != 'true'">
-        <EmbeddedResource Include="Platforms\Wpf\Package.appxmanifest" Condition="'$(UseUnoWpf)' == 'true' and Exists('Platforms\Wpf\Package.appxmanifest')" />
-        <EmbeddedResource Include="Wpf\Package.appxmanifest" Condition="'$(UseUnoWpf)' == 'true' and Exists('Wpf\Package.appxmanifest')" />
-        <EmbeddedResource Include="Platforms\Gtk\Package.appxmanifest" Condition="'$(UseUnoGtk)' == 'true' and Exists('Platforms\Gtk\Package.appxmanifest')" />
-        <EmbeddedResource Include="Gtk\Package.appxmanifest" Condition="'$(UseUnoGtk)' == 'true' and Exists('Gtk\Package.appxmanifest')" />
-        <EmbeddedResource Include="Package.appxmanifest" Condition="Exists('Package.appxmanifest')" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(UseUnoWpf)' == 'true'">
-        <ApplicationDefinition Include="Platforms/Wpf/App.xaml"
-                               SubType="Designer"
-                               Generator="MSBuild:Compile"
-                               XamlRuntime="Wpf"
-                               Condition="Exists('Platforms/Wpf/App.xaml')" />
-    </ItemGroup>
-
-    <PropertyGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
-        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('Platforms\WebAssembly\manifest.webmanifest')">Platforms\Gtk\manifest.webmanifest</WasmPWAManifestFile>
-        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('WebAssembly\manifest.webmanifest')">Gtk\manifest.webmanifest</WasmPWAManifestFile>
-        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('manifest.webmanifest')">manifest.webmanifest</WasmPWAManifestFile>
-    </PropertyGroup>
-
-    <ItemGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
-        <Content Include="manifest.webmanifest" Condition="Exists('manifest.webmanifest')" />
-        <Content Include="WebAssembly\manifest.webmanifest" Condition="Exists('WebAssembly\manifest.webmanifest')" />
-        <Content Include="Platforms\WebAssembly\manifest.webmanifest" Condition="Exists('Platforms\WebAssembly\manifest.webmanifest')" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
-        <LinkerDescriptor Include="LinkerConfig.xml" Condition="Exists('LinkerConfig.xml')" />
-        <LinkerDescriptor Include="WebAssembly\LinkerConfig.xml" Condition="Exists('WebAssembly\LinkerConfig.xml')" />
-        <LinkerDescriptor Include="Platforms\WebAssembly\LinkerConfig.xml" Condition="Exists('Platforms\WebAssembly\LinkerConfig.xml')" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
-        <EmbeddedResource Include="WasmCSS\Fonts.css" Condition="Exists('WasmCSS\Fonts.css')" />
-        <EmbeddedResource Include="WebAssembly\WasmCSS\Fonts.css" Condition="Exists('WebAssembly\WasmCSS\Fonts.css')" />
-        <EmbeddedResource Include="Platforms\WebAssembly\WasmCSS\Fonts.css" Condition="Exists('Platforms\WebAssembly\WasmCSS\Fonts.css')" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(UseUnoWebAssembly)' == 'true'">
-        <EmbeddedResource Include="WasmScripts\AppManifest.js" Condition="Exists('WasmScripts\AppManifest.js')" />
-        <EmbeddedResource Include="WebAssembly\WasmScripts\AppManifest.js" Condition="Exists('WebAssembly\WasmScripts\AppManifest.js')" />
-        <EmbeddedResource Include="Platforms\WebAssembly\WasmScripts\AppManifest.js" Condition="Exists('Platforms\WebAssembly\WasmScripts\AppManifest.js')" />
-    </ItemGroup>
+    <Import Project="Uno.Sdk.DefaultItems.Mobile.targets" Condition=" '$(UseUnoMobile)' == 'true' " />
+    <Import Project="Uno.Sdk.DefaultItems.Windows.targets" Condition=" '$(UseUnoWindows)' == 'true' " />
+    <Import Project="Uno.Sdk.DefaultItems.WebAssembly.targets" Condition=" '$(UseUnoWebAssembly)' == 'true' " />
+    <Import Project="Uno.Sdk.DefaultItems.Gtk.targets" Condition=" '$(UseUnoGtk)' == 'true' " />
+    <Import Project="Uno.Sdk.DefaultItems.Wpf.targets" Condition=" '$(UseUnoWpf)' == 'true' " />
+    <Import Project="Uno.Sdk.DefaultItems.Linux.targets" Condition=" '$(UseUnoLinux)' == 'true' " />
     
 </Project>

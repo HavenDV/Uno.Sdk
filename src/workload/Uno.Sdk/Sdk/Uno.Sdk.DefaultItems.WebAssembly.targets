@@ -1,0 +1,33 @@
+<Project>
+
+    <PropertyGroup>
+        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('Platforms\WebAssembly\manifest.webmanifest')">Platforms\Gtk\manifest.webmanifest</WasmPWAManifestFile>
+        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('WebAssembly\manifest.webmanifest')">Gtk\manifest.webmanifest</WasmPWAManifestFile>
+        <WasmPWAManifestFile Condition="'$(WasmPWAManifestFile)' == '' and Exists('manifest.webmanifest')">manifest.webmanifest</WasmPWAManifestFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="manifest.webmanifest" Condition="Exists('manifest.webmanifest')" />
+        <Content Include="WebAssembly\manifest.webmanifest" Condition="Exists('WebAssembly\manifest.webmanifest')" />
+        <Content Include="Platforms\WebAssembly\manifest.webmanifest" Condition="Exists('Platforms\WebAssembly\manifest.webmanifest')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <LinkerDescriptor Include="LinkerConfig.xml" Condition="Exists('LinkerConfig.xml')" />
+        <LinkerDescriptor Include="WebAssembly\LinkerConfig.xml" Condition="Exists('WebAssembly\LinkerConfig.xml')" />
+        <LinkerDescriptor Include="Platforms\WebAssembly\LinkerConfig.xml" Condition="Exists('Platforms\WebAssembly\LinkerConfig.xml')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="WasmCSS\Fonts.css" Condition="Exists('WasmCSS\Fonts.css')" />
+        <EmbeddedResource Include="WebAssembly\WasmCSS\Fonts.css" Condition="Exists('WebAssembly\WasmCSS\Fonts.css')" />
+        <EmbeddedResource Include="Platforms\WebAssembly\WasmCSS\Fonts.css" Condition="Exists('Platforms\WebAssembly\WasmCSS\Fonts.css')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="WasmScripts\AppManifest.js" Condition="Exists('WasmScripts\AppManifest.js')" />
+        <EmbeddedResource Include="WebAssembly\WasmScripts\AppManifest.js" Condition="Exists('WebAssembly\WasmScripts\AppManifest.js')" />
+        <EmbeddedResource Include="Platforms\WebAssembly\WasmScripts\AppManifest.js" Condition="Exists('Platforms\WebAssembly\WasmScripts\AppManifest.js')" />
+    </ItemGroup>
+    
+</Project>

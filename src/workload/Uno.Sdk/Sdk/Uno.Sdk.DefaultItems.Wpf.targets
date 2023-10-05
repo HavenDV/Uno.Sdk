@@ -1,0 +1,29 @@
+<Project>
+
+    <PropertyGroup>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\Wpf\app.manifest')">Platforms\Wpf\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\app.manifest')">Platforms\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Wpf\app.manifest')">Wpf\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('app.manifest')">app.manifest</ApplicationManifest>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Manifest Include="$(ApplicationManifest)" Condition="Exists('$(ApplicationManifest)')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Platforms\Wpf\Package.appxmanifest" Condition="Exists('Platforms\Wpf\Package.appxmanifest')" />
+        <EmbeddedResource Include="Platforms\Package.appxmanifest" Condition="Exists('Platforms\Package.appxmanifest')" />
+        <EmbeddedResource Include="Wpf\Package.appxmanifest" Condition="Exists('Wpf\Package.appxmanifest')" />
+        <EmbeddedResource Include="Package.appxmanifest" Condition="Exists('Package.appxmanifest')" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <ApplicationDefinition Include="Platforms/Wpf/App.xaml"
+                               SubType="Designer"
+                               Generator="MSBuild:Compile"
+                               XamlRuntime="Wpf"
+                               Condition="Exists('Platforms/Wpf/App.xaml')" />
+    </ItemGroup>
+    
+</Project>

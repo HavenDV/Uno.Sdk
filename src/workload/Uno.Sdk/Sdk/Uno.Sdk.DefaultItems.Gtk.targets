@@ -1,0 +1,21 @@
+<Project>
+
+    <PropertyGroup>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\Gtk\app.manifest')">Platforms\Gtk\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\app.manifest')">Platforms\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Gtk\app.manifest')">Gtk\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('app.manifest')">app.manifest</ApplicationManifest>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Manifest Include="$(ApplicationManifest)" Condition="Exists('$(ApplicationManifest)')" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Platforms\Gtk\Package.appxmanifest" Condition="Exists('Platforms\Gtk\Package.appxmanifest')" />
+        <EmbeddedResource Include="Platforms\Package.appxmanifest" Condition="Exists('Platforms\Package.appxmanifest')" />
+        <EmbeddedResource Include="Gtk\Package.appxmanifest" Condition="Exists('Gtk\Package.appxmanifest')" />
+        <EmbeddedResource Include="Package.appxmanifest" Condition="Exists('Package.appxmanifest')" />
+    </ItemGroup>
+    
+</Project>

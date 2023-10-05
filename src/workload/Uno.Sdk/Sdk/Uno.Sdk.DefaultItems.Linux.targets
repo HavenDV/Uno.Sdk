@@ -1,0 +1,14 @@
+<Project>
+
+    <PropertyGroup>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\Linux\app.manifest')">Platforms\Linux\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\app.manifest')">Platforms\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Linux\app.manifest')">Linux\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('app.manifest')">app.manifest</ApplicationManifest>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Manifest Include="$(ApplicationManifest)" Condition="Exists('$(ApplicationManifest)')" />
+    </ItemGroup>
+    
+</Project>
