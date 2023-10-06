@@ -1,7 +1,5 @@
 <Project>
 
-  <Import Project="Uno.Sdk.DetectPlatform.targets" />
-
   <PropertyGroup Condition="'$(TargetFrameworks)' != '' AND '$(TargetFramework)' == ''">
     <IsMultiTargetingBuild>true</IsMultiTargetingBuild>
   </PropertyGroup>

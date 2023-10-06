@@ -1,5 +1,6 @@
 <Project>
 
+    <Import Project="Uno.Sdk.DetectPlatform.targets" />
     <Import Project="BundledVersions.targets" />
     <Import Project="Uno.Sdk.targets" Condition=" '$(UseUno)' == 'true' " />
 
