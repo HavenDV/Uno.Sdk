@@ -11,8 +11,8 @@ Supported platforms:
 - Windows(`net7.0-windows10.0.19041.0` or any other `net7.0-windows10`)
 - WebAssembly(`net7.0-webassembly`)
 - Skia.Gkt(`net7.0-gtk`)
-- Skia.Wpf(`net7.0-windows`)
-- Skia.Linux.Framebuffer(`net7.0-linux`)(this is an implicit indication for `net7.0-windows7`)
+- Skia.Wpf(`net7.0-windows`)(this is an implicit indication for `net7.0-windows7`)
+- Skia.Linux.Framebuffer(`net7.0-linux`)
 - Skia.Tizen(`net7.0-tizen`)(Untested)
 
 ### Usage
