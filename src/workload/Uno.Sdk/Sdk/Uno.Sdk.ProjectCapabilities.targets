@@ -20,7 +20,7 @@ Docs about @(ProjectCapability):
     </ItemGroup>
 
     <!-- SingleProject-specific features -->
-    <ItemGroup Condition=" '$(UnoSingleProject)' == 'true' ">
+    <ItemGroup>
         <ProjectCapability Include="Msix" />
         <ProjectCapability Include="UnoSingleProject" />
         <ProjectCapability Include="LaunchProfiles" />

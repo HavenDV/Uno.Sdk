@@ -13,11 +13,11 @@
   </PropertyGroup>
 
   <!-- The Windows App SDK does not support AnyCPU without a RID, so make sure we pick the "best" one we can -->
-  <PropertyGroup Condition=" '$(UnoSingleProject)' == 'true' and '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'windows' ">
+  <PropertyGroup Condition="'$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'windows' ">
     <_SingleProjectRIDRequired Condition="'$(OutputType)' == 'WinExe'">true</_SingleProjectRIDRequired>
     <_SingleProjectRIDSpecified Condition="'$(RuntimeIdentifier)' != '' or '$(RuntimeIdentifiers)' != ''">true</_SingleProjectRIDSpecified>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(UnoSingleProject)' == 'true' and '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'windows' and '$(_SingleProjectRIDRequired)' == 'true' and '$(_SingleProjectRIDSpecified)' != 'true' ">
+  <PropertyGroup Condition="'$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'windows' and '$(_SingleProjectRIDRequired)' == 'true' and '$(_SingleProjectRIDSpecified)' != 'true' ">
     <_SingleProjectHostArchitecture>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</_SingleProjectHostArchitecture>
     <_SingleProjectHostArchitecture>$(_SingleProjectHostArchitecture.ToLower())</_SingleProjectHostArchitecture>
     <RuntimeIdentifier>win10-$(_SingleProjectHostArchitecture)</RuntimeIdentifier>

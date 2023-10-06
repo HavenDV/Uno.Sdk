@@ -8,34 +8,6 @@
 
   <ItemGroup>
     <None Include="Sdk/*" Pack="true" PackagePath="Sdk" />
-    <None Update="Sdk\BundledVersions.Windows.targets">
-      <Pack>true</Pack>
-      <PackagePath>Sdk</PackagePath>
-    </None>
-    <None Update="Sdk\BundledVersions.Mobile.targets">
-      <Pack>true</Pack>
-      <PackagePath>Sdk</PackagePath>
-    </None>
-    <None Update="Sdk\BundledVersions.Gtk.targets">
-      <Pack>true</Pack>
-      <PackagePath>Sdk</PackagePath>
-    </None>
-    <None Update="Sdk\BundledVersions.Linux.targets">
-      <Pack>true</Pack>
-      <PackagePath>Sdk</PackagePath>
-    </None>
-    <None Update="Sdk\BundledVersions.Wpf.targets">
-      <Pack>true</Pack>
-      <PackagePath>Sdk</PackagePath>
-    </None>
-    <None Update="Sdk\BundledVersions.WebAssembly.targets">
-      <Pack>true</Pack>
-      <PackagePath>Sdk</PackagePath>
-    </None>
-    <None Update="Sdk\BundledVersions.Library.targets">
-      <Pack>true</Pack>
-      <PackagePath>Sdk</PackagePath>
-    </None>
   </ItemGroup>
 
 </Project>
