@@ -11,19 +11,7 @@
   <Import Project="Uno.Sdk.GlobalUsings.targets" />
   
   <Import Project="Uno.Sdk.DisableCheckOfFakePlatforms.targets" Condition="'$(IsUnoWorkloadInstalled)' != 'true'" />
-
-  <Target Name="CleanupMarkupPass1" BeforeTargets="MarkupCompilePass1" Condition="'$(UseUnoWpf)' == 'true' and '$(BuildingProject)' == 'true'">
-    <!--
-    Remove Uno files when building for WPF, and move those files to the
-    UnoPage and UnoApplicationDefinition to avoid conflicts with the WPF ones.
-    -->
-    <ItemGroup>
-      <UnoPage Include="@(Page)" />
-      <UnoApplicationDefinition Include="@(ApplicationDefinition)" />
-    
-      <Page Remove="@(Page)" />
-      <ApplicationDefinition Remove="@(ApplicationDefinition)" />
-    </ItemGroup>
-  </Target>
+  
+  <Import Project="Uno.Sdk.OverrideTargets.targets" />
   
 </Project>

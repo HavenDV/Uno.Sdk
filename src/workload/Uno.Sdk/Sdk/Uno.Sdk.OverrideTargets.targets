@@ -1,0 +1,47 @@
+<Project>
+
+  <Target Name="_RemoveRoslynUnoSourceGenerationWinUI" BeforeTargets="CoreCompile;XamlPreCompile" Condition="'$(UseUnoWindows)' == 'true'">
+    <!---
+    Remove uno source generators when building under WinAppSDK
+    -->
+    <ItemGroup>
+      <Analyzer Remove="@(Analyzer->WithMetadataValue('FileName', 'Uno.UI.SourceGenerators'))"/>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CleanupMarkupPass1" BeforeTargets="MarkupCompilePass1" Condition="'$(UseUnoWpf)' == 'true' and '$(BuildingProject)' == 'true'">
+    <!--
+    Remove Uno files when building for WPF, and move those files to the
+    UnoPage and UnoApplicationDefinition to avoid conflicts with the WPF ones.
+    -->
+    <ItemGroup>
+      <UnoPage Include="@(Page)" />
+      <UnoApplicationDefinition Include="@(ApplicationDefinition)" />
+    
+      <Page Remove="@(Page)" />
+      <ApplicationDefinition Remove="@(ApplicationDefinition)" />
+    </ItemGroup>
+  </Target>
+
+  <PropertyGroup Condition="'$(UseUnoWpf)' == 'True'">
+    <UnoResizetizerIncludeSelfProject>false</UnoResizetizerIncludeSelfProject>
+
+    <UnoResizetizeBeforeTargets>
+      UnoAssetsGeneration;
+      $(UnoResizetizeBeforeTargets);
+      AssignTargetPaths;
+    </UnoResizetizeBeforeTargets>
+
+    <UnoGeneratePackageAppxManifestDependsOnTargets>
+      $(UnoGeneratePackageAppxManifestDependsOnTargets);
+      UnoResizetizeCollectItems;
+    </UnoGeneratePackageAppxManifestDependsOnTargets>
+
+    <UnoGeneratePackageAppxManifestBeforeTargets>
+      $(UnoGeneratePackageAppxManifestDependsOnTargets);
+      SplitResourcesByCulture;
+      AssignTargetPaths;
+    </UnoGeneratePackageAppxManifestBeforeTargets>
+  </PropertyGroup>
+  
+</Project>
