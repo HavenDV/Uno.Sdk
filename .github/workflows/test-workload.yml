@@ -68,16 +68,16 @@ jobs:
 
       - name: "Create new project from template to test MSBuild"
         if: matrix.os == 'windows'
-        run: dotnet new ${{ inputs.template }} --output test-msbuild
+        run: dotnet new ${{ inputs.template }} --output test_msbuild
 
       # net6/net7 - Error: D:\a\Uno.Sdk\Uno.Sdk\test-msbuild\Uno.UI.SourceGenerators\Uno.UI.SourceGenerators.XamlGenerator.XamlCodeGenerator\MainView_aabaadfc0f1dee992664b93ca97e20a4.cs(26,11): error CS8802: Only one compilation unit can have top-level statements. [D:\a\Uno.Sdk\Uno.Sdk\test-msbuild\test-msbuild.csproj::TargetFramework=net7.0-linux]
       - name: "Build new project using MSBuild"
         if: matrix.os == 'windows' && matrix.dotnet.quality != 'preview'
-        run: msbuild /restore test-msbuild
+        run: msbuild /restore test_msbuild /p:EmitCompilerGeneratedFiles=true
         continue-on-error: true
 
       - name: Upload MSBuild artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: test-msbuild-artifacts
-          path: test-msbuild/**/*.*
+          name: test_msbuild-artifacts
+          path: test_msbuild/**/*.*
