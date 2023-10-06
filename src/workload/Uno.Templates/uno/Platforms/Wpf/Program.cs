@@ -1,3 +1,9 @@
+#if __UNO5__
+using Uno.UI.Runtime.Skia.Wpf;
+#else
+using Uno.UI.Skia.Platform;
+#endif
+
 namespace Uno.Sdk.Apps.Uno.Skia.Wpf;
 
 public class Program
@@ -10,7 +16,7 @@ public class Program
 		{
 			Content = new System.Windows.Controls.ContentControl
 			{
-				Content = new global::Uno.UI.Skia.Platform.WpfHost(app.Dispatcher, () => new App()),
+				Content = new WpfHost(app.Dispatcher, () => new App()),
 			}
 		};
 		

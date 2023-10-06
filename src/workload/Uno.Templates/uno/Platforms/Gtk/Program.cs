@@ -1,5 +1,9 @@
 using GLib;
+#if __UNO5__
+using Uno.UI.Runtime.Skia.Gtk;
+#else
 using Uno.UI.Runtime.Skia;
+#endif
 
 namespace Uno.Sdk.Apps.Uno.Skia.Gtk;
 
@@ -13,7 +17,11 @@ public class Program
 			expArgs.ExitApplication = true;
 		};
 
+#if __UNO5__
+		var host = new GtkHost(() => new App());
+#else
 		var host = new GtkHost(() => new App(), args);
+#endif
 
 		host.Run();
 	}
