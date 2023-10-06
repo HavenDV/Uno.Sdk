@@ -19,7 +19,7 @@ jobs:
         dotnet: [
           { version: 6.0.x, quality: ga },
           { version: 7.0.x, quality: ga },
-          # { version: 8.0.x, quality: preview } #- error UXAML0001: Invalid URI: The URI is empty. 
+          { version: 8.0.x, quality: preview } #- error UXAML0001: Invalid URI: The URI is empty. 
         ]
         
     name: ${{ matrix.os }}/${{ matrix.dotnet.version }}/${{ matrix.dotnet.quality }}/${{ inputs.source == '' && 'nuget' || 'local' }}
@@ -64,20 +64,26 @@ jobs:
         run: dotnet new ${{ inputs.template }} --output test
 
       - name: "Build new project using dotnet"
-        run: dotnet build test
+        run: dotnet build test /p:EmitCompilerGeneratedFiles=true
+
+      - name: "Upload dotnet build artifacts"
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: dotnet-build-artifacts
+          path: test/**/*.*
 
       - name: "Create new project from template to test MSBuild"
         if: matrix.os == 'windows'
         run: dotnet new ${{ inputs.template }} --output test_msbuild
 
-      # net6/net7 - Error: D:\a\Uno.Sdk\Uno.Sdk\test-msbuild\Uno.UI.SourceGenerators\Uno.UI.SourceGenerators.XamlGenerator.XamlCodeGenerator\MainView_aabaadfc0f1dee992664b93ca97e20a4.cs(26,11): error CS8802: Only one compilation unit can have top-level statements. [D:\a\Uno.Sdk\Uno.Sdk\test-msbuild\test-msbuild.csproj::TargetFramework=net7.0-linux]
       - name: "Build new project using MSBuild"
         if: matrix.os == 'windows' && matrix.dotnet.quality != 'preview'
         run: msbuild /restore test_msbuild /p:EmitCompilerGeneratedFiles=true
-        continue-on-error: true
 
-      - name: Upload MSBuild artifacts
+      - name: "Upload MSBuild artifacts"
+        if: failure()
         uses: actions/upload-artifact@v3
         with:
-          name: test_msbuild-artifacts
+          name: msbuild-artifacts
           path: test_msbuild/**/*.*
