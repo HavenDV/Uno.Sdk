@@ -74,3 +74,10 @@ jobs:
       - name: "Build new project using MSBuild"
         if: matrix.os == 'windows' && matrix.dotnet.quality != 'preview'
         run: msbuild /restore test-msbuild
+        continue-on-error: true
+
+      - name: Upload MSBuild artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-msbuild-artifacts
+          path: test-msbuild/**/*.*
