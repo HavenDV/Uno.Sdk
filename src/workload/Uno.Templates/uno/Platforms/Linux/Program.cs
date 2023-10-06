@@ -5,7 +5,7 @@ using Uno.UI.Runtime.Skia.Linux.FrameBuffer;
 using Uno.UI.Runtime.Skia;
 #endif
 
-namespace Uno.Sdk.Apps.Uno.Skia.Linux.Framebuffer;
+namespace UnoTemplate.Skia.Linux.Framebuffer;
 
 public class Program
 {

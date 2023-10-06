@@ -7,13 +7,13 @@
 	IgnorableNamespaces="uap rescap">
 
 	<Identity
-		Name="Uno.Sdk.Apps.Uno"
-		Publisher="O=Uno.Sdk.Apps.Uno"
+		Name="UnoTemplate"
+		Publisher="O=UnoTemplate"
 		Version="1.0.0.0" />
 
 	<Properties>
-		<DisplayName>Uno.Sdk.Apps.Uno</DisplayName>
-		<PublisherDisplayName>Uno.Sdk.Apps.Uno</PublisherDisplayName>
+		<DisplayName>UnoTemplate</DisplayName>
+		<PublisherDisplayName>UnoTemplate</PublisherDisplayName>
 	</Properties>
 
 	<Dependencies>
@@ -30,8 +30,8 @@
 			Executable="$targetnametoken$.exe"
 			EntryPoint="$targetentrypoint$">
 			<uap:VisualElements
-				DisplayName="Uno.Sdk.Apps.Uno"
-				Description="Uno.Sdk.Apps.Uno">
+				DisplayName="UnoTemplate"
+				Description="UnoTemplate">
 				<uap:SplashScreen />
 			</uap:VisualElements>
 		</Application>

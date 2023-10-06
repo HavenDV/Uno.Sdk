@@ -4,7 +4,7 @@ using Uno.UI.Runtime.Skia.Wpf;
 using Uno.UI.Skia.Platform;
 #endif
 
-namespace Uno.Sdk.Apps.Uno.Skia.Wpf;
+namespace UnoTemplate.Skia.Wpf;
 
 public class Program
 {

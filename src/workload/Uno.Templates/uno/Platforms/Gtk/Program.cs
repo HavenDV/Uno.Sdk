@@ -5,7 +5,7 @@ using Uno.UI.Runtime.Skia.Gtk;
 using Uno.UI.Runtime.Skia;
 #endif
 
-namespace Uno.Sdk.Apps.Uno.Skia.Gtk;
+namespace UnoTemplate.Skia.Gtk;
 
 public class Program
 {

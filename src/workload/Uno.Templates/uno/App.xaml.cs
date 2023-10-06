@@ -2,7 +2,7 @@ using Microsoft.Extensions.Logging;
 //using Uno.Resizetizer;
 using Uno.Sdk.Apps.Views;
 
-namespace Uno.Sdk.Apps.Uno;
+namespace UnoTemplate;
 
 public sealed partial class App : Application
 {

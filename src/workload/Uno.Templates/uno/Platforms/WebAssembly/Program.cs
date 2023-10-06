@@ -1,4 +1,4 @@
-namespace Uno.Sdk.Apps.Uno.Wasm;
+namespace UnoTemplate.WebAssembly;
 
 public class Program
 {

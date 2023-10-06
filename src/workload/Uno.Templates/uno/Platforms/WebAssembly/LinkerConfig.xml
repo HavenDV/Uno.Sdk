@@ -1,6 +1,5 @@
 <linker>
-	<assembly fullname="Uno.Sdk.Apps.Uno" />
-	<assembly fullname="Uno.Sdk.Apps.Uno.Wasm" />
+	<assembly fullname="UnoTemplate" />
 
 	<!--
   Uncomment this section when using JSON.NET

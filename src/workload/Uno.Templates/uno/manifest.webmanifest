@@ -1,9 +1,9 @@
 {
   "background_color": "#ffffff",
-  "description": "Uno.Sdk.Apps.Uno",
+  "description": "UnoTemplate",
   "display": "standalone",
-  "name": "Uno.Sdk.Apps.Uno",
-  "short_name": "Uno.Sdk.Apps.Uno",
+  "name": "UnoTemplate",
+  "short_name": "UnoTemplate",
   "start_url": "/index.html",
   "theme_color": "#ffffff",
   "scope": "/"
