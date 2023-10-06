@@ -17,6 +17,17 @@ Supported platforms:
 
 ### Usage
 Here are three possible uses:
+- Use local SDK after installing workload
+```xml
+<Project Sdk="H.Uno.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-webassembly;net7.0-gtk;net7.0-linux;net7.0-windows</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+    </PropertyGroup>
+
+</Project>
+```
 - Use SDK via NuGet. A small hack will be used here to disable the error message about missing workloads for webassembly/linux/gtk.
 ```xml
 <Project Sdk="H.Uno.Sdk/0.14.0">
@@ -29,17 +40,6 @@ Here are three possible uses:
 </Project>
 ```
 Note: To restore correctly from NuGet you need to run this in a project where `net7.0-webassembly;net7.0-gtk;net7.0-linux` is missing
-- Use local SDK after installing workload
-```xml
-<Project Sdk="H.Uno.Sdk">
-
-    <PropertyGroup>
-        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-webassembly;net7.0-gtk;net7.0-linux;net7.0-windows</TargetFrameworks>
-        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
-    </PropertyGroup>
-
-</Project>
-```
 - Use via `Microsoft.NET.Sdk` and `<UseUno>true</UseUno>` after installing the workload 
 (the most correct, but currently not supported due to the fact that WebAssembly requires Microsoft.NET.Sdk.Web 
 which will not work with some target frameworks)
@@ -67,7 +67,7 @@ dotnet run --framework net7.0-gtk
 ```
 
 ### Install workload
-Although you don't have to do this, full support for the custom target framework requires installing the appropriate workload:
+Although you don't have to do this for NuGet way, full support for the custom target frameworks requires installing the appropriate workload:
 - On Linux / macOS:
 ```
 curl -sSL https://raw.githubusercontent.com/HavenDV/Uno.Sdk/main/scripts/workload-install.sh | sudo bash
