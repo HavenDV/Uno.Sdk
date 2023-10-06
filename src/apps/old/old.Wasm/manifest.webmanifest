@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "old",
+  "display": "standalone",
+  "name": "old",
+  "short_name": "old",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}

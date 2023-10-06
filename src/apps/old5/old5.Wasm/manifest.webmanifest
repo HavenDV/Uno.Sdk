@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "old5",
+  "display": "standalone",
+  "name": "old5",
+  "short_name": "old5",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}

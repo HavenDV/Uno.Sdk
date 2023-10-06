@@ -1,0 +1,10 @@
+{
+  "profiles": {
+	"old.Windows (Package)": {
+	  "commandName": "MsixPackage"
+	},
+	"old.Windows (Unpackaged)": {
+	  "commandName": "Project"
+	}
+  }
+}

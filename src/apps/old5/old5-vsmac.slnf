@@ -1,0 +1,12 @@
+{
+  "solution": {
+    "path": "old5.sln",
+    "projects": [
+      "old5.Mobile\\old5.Mobile.csproj",
+      "old5.Skia.Gtk\\old5.Skia.Gtk.csproj",
+      "old5.Wasm\\old5.Wasm.csproj",
+      "old5.Base\\old5.Base.csproj",
+      "old5\\old5.csproj"
+    ]
+  }
+}
