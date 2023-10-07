@@ -7,7 +7,7 @@
 
 Single project solution for Uno.
 Supported platforms:
-- Mobile(macOS, MacCatalyst and Android)(`net7.0-maccatalyst;net7.0-android;net7.0-ios`)
+- Mobile(iOS, macOS, MacCatalyst and Android)(`net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-macos`)
 - Windows(`net7.0-windows10.0.19041.0` or any other `net7.0-windows10`)
 - WebAssembly(`net7.0-webassembly`)
 - Skia.Gkt(`net7.0-gtk`)

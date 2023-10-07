@@ -11,7 +11,7 @@
     "Project": {
       "commandName": "Project"
     },
-    "Windows": {
+    "Windows (Package)": {
       "commandName": "MsixPackage"
     },
     "WebAssembly": {
