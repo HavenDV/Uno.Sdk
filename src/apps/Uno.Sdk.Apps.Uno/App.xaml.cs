@@ -1,17 +1,13 @@
 using Microsoft.Extensions.Hosting;
-//using Uno.Resizetizer;
+using Uno.Resizetizer;
 using Uno.Sdk.Apps.Views;
 
 namespace Uno.Sdk.Apps.Uno;
 
 public sealed partial class App : Application
 {
-    #region Properties
-
     private IHost Host { get; }
     private Window? MainWindow { get; set; }
-
-    #endregion
     
 	/// <summary>
 	/// Initializes the singleton application object. This is the first line of authored code
@@ -63,7 +59,7 @@ public sealed partial class App : Application
 		// Ensure the current window is active
 		MainWindow.Activate();
 
-		//MainWindow.SetWindowIcon();
+		MainWindow.SetWindowIcon();
 	}
 	
 	/// <summary>
