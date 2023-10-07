@@ -6,7 +6,7 @@
 
     <Import Project="$(CustomBeforeSdkTargets)" Condition="'$(CustomBeforeSdkTargets)' != ''"/>
 
-    <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk.Web" Condition="'$(TargetFramework)' == '' OR '$(TargetFramework)' == 'net7.0' OR '$(TargetFramework)' == 'net7.0-webassembly'"/>
-    <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" Condition="'$(TargetFramework)' != '' AND '$(TargetFramework)' != 'net7.0' AND '$(TargetFramework)' != 'net7.0-webassembly'"/>
+    <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk.Web" Condition="'$(TargetFramework)' == '' OR '$(TargetFramework)' == 'net7.0' OR '$(TargetFramework)' == 'net8.0' OR '$(TargetFramework)' == 'net7.0-webassembly' OR '$(TargetFramework)' == 'net8.0-webassembly'"/>
+    <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" Condition="'$(TargetFramework)' != '' AND '$(TargetFramework)' != 'net7.0' AND '$(TargetFramework)' != 'net8.0' AND '$(TargetFramework)' != 'net7.0-webassembly' AND '$(TargetFramework)' != 'net8.0-webassembly'"/>
 
 </Project>

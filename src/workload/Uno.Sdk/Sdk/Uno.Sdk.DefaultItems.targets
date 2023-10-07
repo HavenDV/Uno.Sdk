@@ -79,25 +79,31 @@
         </Compile>
     </ItemGroup>
 
-    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-ios')) != true">
+    <ItemGroup Condition="$(TargetFramework.Contains('-ios')) != true">
         <Compile Remove="**\*.ios.cs" />
         <None Include="**\*.ios.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
         <Compile Remove="**\ios\**\*.cs" />
         <None Include="**\ios\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
-    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-maccatalyst')) != true ">
+    <ItemGroup Condition="$(TargetFramework.Contains('-macos')) != true">
+        <Compile Remove="**\*.macos.cs" />
+        <None Include="**\*.macos.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+        <Compile Remove="**\macos\**\*.cs" />
+        <None Include="**\macos\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst')) != true ">
         <Compile Remove="**\*.maccatalyst.cs" />
         <None Include="**\*.maccatalyst.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
         <Compile Remove="**\maccatalyst\**\*.cs" />
         <None Include="**\maccatalyst\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
-    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-ios')) != true AND $(TargetFramework.StartsWith('net7.0-maccatalyst')) != true">
+    <ItemGroup Condition="$(TargetFramework.Contains('-ios')) != true AND $(TargetFramework.Contains('-maccatalyst')) != true">
         <Compile Remove="**\*.macios.cs" />
         <None Include="**\*.macios.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
         <Compile Remove="**\macios\**\*.cs" />
         <None Include="**\macios\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
-    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-android')) != true ">
+    <ItemGroup Condition="$(TargetFramework.Contains('-android')) != true ">
         <Compile Remove="**\*.android.cs" />
         <None Include="**\*.android.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
         <Compile Remove="**\android\**\*.cs" />
