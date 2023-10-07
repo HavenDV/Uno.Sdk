@@ -4,6 +4,25 @@
     <SupportedOSPlatformVersion Condition=" '$(SupportedOSPlatformVersion)' == '' ">10.0.18362.0</SupportedOSPlatformVersion>
     <TargetPlatformMinVersion Condition=" '$(TargetPlatformMinVersion)' == '' ">10.0.18362.0</TargetPlatformMinVersion>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- All Windows apps require WinExe -->
+    <OutputType Condition="'$(OutputType)' == 'Exe'">WinExe</OutputType>
+    <!-- Generate ReadyToRun (AOT) when building for Release -->
+    <PublishReadyToRun Condition=" '$(PublishReadyToRun)' == '' and '$(Configuration)' == 'Release' and '$(OutputType)' == 'WinExe' ">true</PublishReadyToRun>
+  </PropertyGroup>
+
+  <!-- The Windows App SDK does not support AnyCPU without a RID, so make sure we pick the "best" one we can -->
+  <PropertyGroup>
+    <_SingleProjectRIDRequired Condition="'$(OutputType)' == 'WinExe'">true</_SingleProjectRIDRequired>
+    <_SingleProjectRIDSpecified Condition="'$(RuntimeIdentifier)' != '' or '$(RuntimeIdentifiers)' != ''">true</_SingleProjectRIDSpecified>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(_SingleProjectRIDRequired)' == 'true' and '$(_SingleProjectRIDSpecified)' != 'true' ">
+    <_SingleProjectHostArchitecture>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</_SingleProjectHostArchitecture>
+    <_SingleProjectHostArchitecture>$(_SingleProjectHostArchitecture.ToLower())</_SingleProjectHostArchitecture>
+    <RuntimeIdentifier>win10-$(_SingleProjectHostArchitecture)</RuntimeIdentifier>
+    <_UnoUsingDefaultRuntimeIdentifier>true</_UnoUsingDefaultRuntimeIdentifier>
+  </PropertyGroup>
   
   <PropertyGroup>
     <Platforms Condition=" '$(Platforms)' == '' ">x86;x64;arm64</Platforms>
@@ -13,6 +32,12 @@
     <EnableMsixTooling Condition=" '$(EnableMsixTooling)' == '' ">true</EnableMsixTooling>
     <EnableWindowsTargeting Condition=" '$(EnableWindowsTargeting)' == '' ">true</EnableWindowsTargeting>
     <NoWarn>$(NoWarn);CS8785</NoWarn>
+
+    <WindowsPackageType Condition="'$(WindowsPackageType)' == '' and Exists('Platforms/Windows/Package.appxmanifest')">MSIX</WindowsPackageType>
+    <WindowsPackageType Condition="'$(WindowsPackageType)' == '' and Exists('Windows/Package.appxmanifest')">MSIX</WindowsPackageType>
+    <WindowsPackageType Condition="'$(WindowsPackageType)' == '' and Exists('Package.appxmanifest')">MSIX</WindowsPackageType>
+    <WindowsPackageType Condition="'$(WindowsPackageType)' == ''">None</WindowsPackageType>
+    
     <!-- Uncomment for Unpackaged builds -->
     <!-- <WindowsPackageType>None</WindowsPackageType> -->
     <!-- For Unpackaged builds, change version of SDK to previous stable release https://github.com/microsoft/WindowsAppSDK/issues/3591 -->

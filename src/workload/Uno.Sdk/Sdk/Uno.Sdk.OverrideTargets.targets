@@ -22,26 +22,5 @@
       <ApplicationDefinition Remove="@(ApplicationDefinition)" />
     </ItemGroup>
   </Target>
-
-  <PropertyGroup Condition="'$(UseUnoWpf)' == 'True'">
-    <UnoResizetizerIncludeSelfProject>false</UnoResizetizerIncludeSelfProject>
-
-    <UnoResizetizeBeforeTargets>
-      UnoAssetsGeneration;
-      $(UnoResizetizeBeforeTargets);
-      AssignTargetPaths;
-    </UnoResizetizeBeforeTargets>
-
-    <UnoGeneratePackageAppxManifestDependsOnTargets>
-      $(UnoGeneratePackageAppxManifestDependsOnTargets);
-      UnoResizetizeCollectItems;
-    </UnoGeneratePackageAppxManifestDependsOnTargets>
-
-    <UnoGeneratePackageAppxManifestBeforeTargets>
-      $(UnoGeneratePackageAppxManifestDependsOnTargets);
-      SplitResourcesByCulture;
-      AssignTargetPaths;
-    </UnoGeneratePackageAppxManifestBeforeTargets>
-  </PropertyGroup>
   
 </Project>

@@ -1,22 +1,20 @@
 <Project>
 
     <PropertyGroup>
+        <PackageManifest Condition="'$(PackageManifest)' == '' and Exists('Platforms\Windows\Package.appxmanifest')">Platforms\Windows\Package.appxmanifest</PackageManifest>
+        <PackageManifest Condition="'$(PackageManifest)' == '' and Exists('Windows\Package.appxmanifest')">Windows\Package.appxmanifest</PackageManifest>
+        <PackageManifest Condition="'$(PackageManifest)' == '' and Exists('Platforms\Package.appxmanifest')">Platforms\Package.appxmanifest</PackageManifest>
+        <PackageManifest Condition="'$(PackageManifest)' == '' and Exists('Package.appxmanifest')">Package.appxmanifest</PackageManifest>
+        
         <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\Windows\app.manifest')">Platforms\Windows\app.manifest</ApplicationManifest>
-        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\app.manifest')">Platforms\app.manifest</ApplicationManifest>
         <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Windows\app.manifest')">Windows\app.manifest</ApplicationManifest>
+        <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('Platforms\app.manifest')">Platforms\app.manifest</ApplicationManifest>
         <ApplicationManifest Condition="'$(ApplicationManifest)' == '' and Exists('app.manifest')">app.manifest</ApplicationManifest>
     </PropertyGroup>
 
     <ItemGroup>
         <Manifest Include="$(ApplicationManifest)" Condition="Exists('$(ApplicationManifest)')" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(UseUnoWindows)' != 'true'">
-        <EmbeddedResource Include="Platforms\Wpf\Package.appxmanifest" Condition="'$(UseUnoWpf)' == 'true' and Exists('Platforms\Wpf\Package.appxmanifest')" />
-        <EmbeddedResource Include="Wpf\Package.appxmanifest" Condition="'$(UseUnoWpf)' == 'true' and Exists('Wpf\Package.appxmanifest')" />
-        <EmbeddedResource Include="Platforms\Gtk\Package.appxmanifest" Condition="'$(UseUnoGtk)' == 'true' and Exists('Platforms\Gtk\Package.appxmanifest')" />
-        <EmbeddedResource Include="Gtk\Package.appxmanifest" Condition="'$(UseUnoGtk)' == 'true' and Exists('Gtk\Package.appxmanifest')" />
-        <EmbeddedResource Include="Package.appxmanifest" Condition="Exists('Package.appxmanifest')" />
+        <AppxManifest Include="$(PackageManifest)" Condition="Exists('$(PackageManifest)')" />
     </ItemGroup>
     
 </Project>
