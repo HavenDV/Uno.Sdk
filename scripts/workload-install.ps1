@@ -49,7 +49,7 @@ function Ensure-Directory([string]$TestDir) {
 }
 
 function Get-LatestVersion([string]$Id) {
-    return "0.17.1"
+    return "0.17.2"
     
     $attempts=3
     $sleepInSeconds=3
