@@ -176,11 +176,16 @@ function Install-UnoWorkload([string]$DotnetVersion)
 
         Ensure-Directory $ManifestDir
         Write-Host "Removing $ManifestName/$OldVersion from $ManifestDir..."
-        Remove-Pack -Id $ManifestName -Version $OldVersion -Kind "manifest"
-        $ManifestJson.packs.PSObject.Properties | ForEach-Object {
-            Write-Host "Removing $($_.Name)/$($_.Value.version)..."
-            Remove-Pack -Id $_.Name -Version $_.Value.version -Kind $_.Value.kind
-        }
+
+        # The Tizen for Windows script installs each package manually. 
+        # This seems wrong and different from the behavior of the linux script
+        # Remove-Pack -Id $ManifestName -Version $OldVersion -Kind "manifest"
+        # $ManifestJson.packs.PSObject.Properties | ForEach-Object {
+        #     Write-Host "Removing $($_.Name)/$($_.Value.version)..."
+        #     Remove-Pack -Id $_.Name -Version $_.Value.version -Kind $_.Value.kind
+        # }
+
+        Invoke-Expression "& '$DotnetCommand' workload uninstall uno"
     }
 
     Ensure-Directory $ManifestDir
@@ -190,24 +195,44 @@ function Install-UnoWorkload([string]$DotnetVersion)
     Write-Host "Installing $ManifestName/$Version to $ManifestDir..."
     Install-Pack -Id $ManifestName -Version $Version -Kind "manifest" -Source $Source
 
-    # Download and install workload packs.
-    $NewManifestJson = $(Get-Content $UnoManifestFile | ConvertFrom-Json)
-    $NewManifestJson.packs.PSObject.Properties | ForEach-Object {
-        Write-Host "Installing $($_.Name)/$($_.Value.version)..."
-        Install-Pack -Id $_.Name -Version $_.Value.version -Kind $_.Value.kind -Source $Source
+    # Install workload packs.
+    $CacheGlobalJson = Test-Path -Path global.json
+    if ($CacheGlobalJson) {
+        Move-Item -Path global.json -Destination global.json.bak
     }
+    Invoke-Expression "& '$DotnetCommand' new globaljson --sdk-version $DotnetVersion"
+    
+    if ($Source -eq "<auto>") {
+        Invoke-Expression "& '$DotnetCommand' workload install uno --skip-manifest-update"
+    }
+    else {
+        Invoke-Expression "& '$DotnetCommand' workload install uno --skip-manifest-update --source $Source"
+    }
+    
+    # The Tizen for Windows script installs each package manually. 
+    # This seems wrong and different from the behavior of the linux script
+    # Download and install workload packs.
+    # $NewManifestJson = $(Get-Content $UnoManifestFile | ConvertFrom-Json)
+    # $NewManifestJson.packs.PSObject.Properties | ForEach-Object {
+    #     Write-Host "Installing $($_.Name)/$($_.Value.version)..."
+    #     Install-Pack -Id $_.Name -Version $_.Value.version -Kind $_.Value.kind -Source $Source
+    # }
 
     # Add uno to the installed workload metadata.
     # Featured version band for metadata does NOT include any preview specifier.
     # https://github.com/dotnet/sdk/blob/main/documentation/general/workloads/user-local-workloads.md
-    New-Item -Path $(Join-Path -Path $DotnetInstallDir -ChildPath "metadata\workloads\$DotnetVersionBand\InstalledWorkloads\uno") -Force | Out-Null
-    if (Test-Path $(Join-Path -Path $DotnetInstallDir -ChildPath "metadata\workloads\$DotnetVersionBand\InstallerType\msi")) {
-        New-Item -Path "HKLM:\SOFTWARE\Microsoft\dotnet\InstalledWorkloads\Standalone\x64\$DotnetTargetVersionBand\uno" -Force | Out-Null
-    }
+    # New-Item -Path $(Join-Path -Path $DotnetInstallDir -ChildPath "metadata\workloads\$DotnetVersionBand\InstalledWorkloads\uno") -Force | Out-Null
+    # if (Test-Path $(Join-Path -Path $DotnetInstallDir -ChildPath "metadata\workloads\$DotnetVersionBand\InstallerType\msi")) {
+    #     New-Item -Path "HKLM:\SOFTWARE\Microsoft\dotnet\InstalledWorkloads\Standalone\x64\$DotnetTargetVersionBand\uno" -Force | Out-Null
+    # }
 
     # Clean up
     Remove-Item -Path $TempDir -Force -Recurse
-
+    Remove-Item global.json
+    if ($CacheGlobalJson) {
+        Move-Item -Path global.json.bak -Destination global.json
+    }
+    
     Write-Host "Done installing Uno workload $Version"
 }
 
