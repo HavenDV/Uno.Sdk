@@ -42,6 +42,38 @@
         <DisableUnoImplicitPackageReferences Condition=" '$(ManagePackageVersionsCentrally)' == 'true' and '$(DisableUnoImplicitPackageReferences)' == '' ">true</DisableUnoImplicitPackageReferences>
     </PropertyGroup>
 
+    <!-- 
+      It is also worth noting that MAUI starting with net8.0 abandoned implicit packages by default.
+      There are reasons for this, but we're trying to leave it at that for now.
+      https://github.com/dotnet/maui/blob/main/src/Workload/Microsoft.Maui.Sdk/Sdk/BundledVersions.in.targets#L63
+    -->
+
+    <ItemGroup Condition=" '$(DisableUnoImplicitPackageReferences)' != 'true' ">
+        <_UnoImplicitPackageReference Include="Uno.UI" Version="$(UnoVersion)" Condition=" '$(UseUno)' == 'true' and '$(UseUnoUwp)' == 'true' ">
+            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>
+        </_UnoImplicitPackageReference>
+        <_UnoImplicitPackageReference Include="Uno.WinUI" Version="$(UnoVersion)" Condition=" '$(UseUno)' == 'true' and '$(UseUnoUwp)' != 'true' ">
+            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>
+        </_UnoImplicitPackageReference>
+        <_UnoImplicitPackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" PrivateAssets="all" Condition=" '$(UseUnoUwp)' != 'true' " />
+        <_UnoImplicitPackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" Condition=" '$(UseUno)' == 'true' ">
+            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>
+        </_UnoImplicitPackageReference>
+        <_UnoImplicitPackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" Condition=" '$(UseUno)' == 'true' ">
+            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>
+        </_UnoImplicitPackageReference>
+        <_UnoImplicitPackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" Condition=" '$(UseUno)' == 'true' ">
+            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>
+        </_UnoImplicitPackageReference>
+    </ItemGroup>
+
+    <Import Project="BundledVersions.Mobile.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoMobile)' == 'true' " />
+    <Import Project="BundledVersions.Windows.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoWindows)' == 'true' " />
+    <Import Project="BundledVersions.WebAssembly.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoWebAssembly)' == 'true' " />
+    <Import Project="BundledVersions.Gtk.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoGtk)' == 'true' " />
+    <Import Project="BundledVersions.Wpf.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoWpf)' == 'true' " />
+    <Import Project="BundledVersions.Linux.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoLinux)' == 'true' " />
+
     <!--
       These implicit <PackageReference/> pull dependencies from NuGet transitively.
       They are first added to the <_UnoImplicitPackageReference/> item group to list the the desired
@@ -52,33 +84,13 @@
       true. This property allows the user to totally override all the default nugets installed. This
       should not be needed as the $(UnoVersion) should be sufficient. However, there may be a case
       to test various CI builds of .NET Uno.
+      
+      Install the nuget packages if we are allowed to 
     -->
-    <ItemGroup Condition=" '$(DisableUnoImplicitPackageReferences)' != 'true' ">
-<!--        <_UnoImplicitPackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" PrivateAssets="all" Condition=" '$(UseUnoAssets)' == 'true' " />-->
-<!--        <_UnoImplicitPackageReference Include="Uno.WinUI" Version="$(UnoVersion)" Condition=" '$(UseUno)' == 'true' ">-->
-<!--            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>-->
-<!--        </_UnoImplicitPackageReference>-->
-    </ItemGroup>
-    
-    <!-- Install the nuget packages if we are allowed to -->
     <ItemGroup Condition=" '$(DisableUnoImplicitPackageReferences)' != 'true' ">
         <_UnoImplicitPackageReference Remove="@(PackageReference)" />
         <PackageReference Include="@(_UnoImplicitPackageReference)" IsUnoImplicitPackageReference="true" />
         <_UnoImplicitRequiredPackageReference Include="@(_UnoImplicitPackageReference->WithMetadataValue('IsUnoImplicitOptionalPackageReference',''))" />
     </ItemGroup>
-    
-    <!-- 
-      It is also worth noting that MAUI starting with net8.0 abandoned implicit packages by default.
-      There are reasons for this, but we're trying to leave it at that for now.
-      https://github.com/dotnet/maui/blob/main/src/Workload/Microsoft.Maui.Sdk/Sdk/BundledVersions.in.targets#L63
-    -->
-
-    <Import Project="BundledVersions.Mobile.targets" Condition=" '$(UseUnoMobile)' == 'true' " />
-    <Import Project="BundledVersions.Windows.targets" Condition=" '$(UseUnoWindows)' == 'true' " />
-    <Import Project="BundledVersions.WebAssembly.targets" Condition=" '$(UseUnoWebAssembly)' == 'true' " />
-    <Import Project="BundledVersions.Gtk.targets" Condition=" '$(UseUnoGtk)' == 'true' " />
-    <Import Project="BundledVersions.Wpf.targets" Condition=" '$(UseUnoWpf)' == 'true' " />
-    <Import Project="BundledVersions.Linux.targets" Condition=" '$(UseUnoLinux)' == 'true' " />
-    <Import Project="BundledVersions.Library.targets" Condition=" '$(UseUnoLibrary)' == 'true' " />
     
 </Project>

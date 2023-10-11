@@ -1,24 +1,18 @@
 <Project>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="$(UnoExtensionsVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <_UnoImplicitPackageReference Include="Uno.Extensions.Logging.OSLog" Version="$(UnoExtensionsVersion)" />
 
-        <PackageReference Include="Uno.UI" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)' == 'Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <_UnoImplicitPackageReference Include="Uno.UI.RemoteControl" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)' == 'Debug'" Version="$(UnoVersion)" />
 
-        <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)' == 'Debug'" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <_UnoImplicitPackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)' == 'Debug'" Version="$(UnoVersion)" />
     </ItemGroup>
 
     <Choose>
         <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
             <ItemGroup>
-                <PackageReference Include="Xamarin.Google.Android.Material" Version="$(XamarinGoogleAndroidMaterialVersion)" IsImplicitlyDefined="true" />
-                <PackageReference Include="Uno.UniversalImageLoader" Version="$(UnoUniversalImageLoaderVersion)" IsImplicitlyDefined="true" />
+                <_UnoImplicitPackageReference Include="Xamarin.Google.Android.Material" Version="$(XamarinGoogleAndroidMaterialVersion)" />
+                <_UnoImplicitPackageReference Include="Uno.UniversalImageLoader" Version="$(UnoUniversalImageLoaderVersion)" />
             </ItemGroup>
         </When>
         <When Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">

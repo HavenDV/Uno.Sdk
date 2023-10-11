@@ -1,15 +1,11 @@
 <Project>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.WindowsAppSDK" Version="$(MicrosoftWindowsAppSDKVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$(MicrosoftWindowsSDKBuildToolsVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="$(UnoCoreExtensionsLoggingSingletonVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <_UnoImplicitPackageReference Include="Microsoft.WindowsAppSDK" Version="$(MicrosoftWindowsAppSDKVersion)" />
+        <_UnoImplicitPackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$(MicrosoftWindowsSDKBuildToolsVersion)" />
+        <_UnoImplicitPackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="$(UnoCoreExtensionsLoggingSingletonVersion)" />
 
-        <PackageReference Include="Uno.WinUI" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
+        <_UnoImplicitPackageReference Include="Uno.WinUI" Version="$(UnoVersion)" />
     </ItemGroup>
     
 </Project>

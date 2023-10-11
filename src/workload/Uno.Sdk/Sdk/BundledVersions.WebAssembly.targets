@@ -1,20 +1,16 @@
 <Project>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="$(UnoExtensionsVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Microsoft.Windows.Compatibility" Version="$(MicrosoftWindowsCompatibilityVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Wasm.Bootstrap" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="$(UnoWasmBootstrapVersion)" IsImplicitlyDefined="true" GeneratePathProperty="true" />
+        <_UnoImplicitPackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="$(UnoExtensionsVersion)" />
+        <_UnoImplicitPackageReference Include="Microsoft.Windows.Compatibility" Version="$(MicrosoftWindowsCompatibilityVersion)" />
+        <_UnoImplicitPackageReference Include="Uno.Wasm.Bootstrap" Version="$(UnoWasmBootstrapVersion)" />
+        <_UnoImplicitPackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="$(UnoWasmBootstrapVersion)" GeneratePathProperty="true" />
 
-        <PackageReference Include="Uno.UI.WebAssembly" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)' == 'Debug'" IsImplicitlyDefined="true" />
+        <_UnoImplicitPackageReference Include="Uno.UI.WebAssembly" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true'" />
+        <_UnoImplicitPackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' == 'true' and '$(Configuration)' == 'Debug'" />
 
-        <PackageReference Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)' == 'Debug'" IsImplicitlyDefined="true" />
+        <_UnoImplicitPackageReference Include="Uno.WinUI.WebAssembly" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true'" />
+        <_UnoImplicitPackageReference Include="Uno.WinUI.RemoteControl" Version="$(UnoVersion)" Condition="'$(UseUnoUwp)' != 'true' and '$(Configuration)' == 'Debug'" />
     </ItemGroup>
     
 </Project>
