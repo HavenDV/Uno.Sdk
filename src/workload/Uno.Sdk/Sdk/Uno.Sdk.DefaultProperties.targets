@@ -9,11 +9,6 @@
     <DefineConstants Condition="'$(_IsUnoDefined)' != 'true'">__UNO__;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(IsUno5)' == 'true'">
-    <_IsUno5Defined>$([System.Text.RegularExpressions.Regex]::IsMatch('$(DefineConstants.Trim())', '(^|;)__UNO5__($|;)'))</_IsUno5Defined>
-    <DefineConstants Condition="'$(_IsUno5Defined)' != 'true'">__UNO5__;$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-
   <PropertyGroup>
     <ImplicitUsings Condition=" '$(ImplicitUsings)' == '' ">enable</ImplicitUsings>
     <EnableUnoGlobalUsings Condition=" '$(EnableUnoGlobalUsings)' == '' and '$(ImplicitUsings)' == 'enable'">true</EnableUnoGlobalUsings>
@@ -28,6 +23,14 @@
     <NoWarn>$(NoWarn);CA1416;NU1507</NoWarn>
 
     <DefaultLanguage Condition=" '$(DefaultLanguage)' == '' ">en</DefaultLanguage>
+    
+    <IsUno5>false</IsUno5>
+    <IsUno5 Condition="$(UnoVersion.StartsWith('5.'))">true</IsUno5>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsUno5)' == 'true'">
+    <_IsUno5Defined>$([System.Text.RegularExpressions.Regex]::IsMatch('$(DefineConstants.Trim())', '(^|;)__UNO5__($|;)'))</_IsUno5Defined>
+    <DefineConstants Condition="'$(_IsUno5Defined)' != 'true'">__UNO5__;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
   <Import Project="Uno.Sdk.DefaultProperties.Mobile.targets" Condition=" '$(UseUnoMobile)' == 'true' " />

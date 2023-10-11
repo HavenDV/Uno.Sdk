@@ -32,9 +32,6 @@
         <!-- Mobile -->
         <UnoUniversalImageLoaderVersion Condition=" '$(UnoUniversalImageLoaderVersion)' == '' ">1.9.36</UnoUniversalImageLoaderVersion>
         <XamarinGoogleAndroidMaterialVersion Condition=" '$(XamarinGoogleAndroidMaterialVersion)' == '' ">1.9.0.3</XamarinGoogleAndroidMaterialVersion>
-        
-        <IsUno5>false</IsUno5>
-        <IsUno5 Condition="$(UnoVersion.StartsWith('5.'))">true</IsUno5>
     </PropertyGroup>
     
     <PropertyGroup>
