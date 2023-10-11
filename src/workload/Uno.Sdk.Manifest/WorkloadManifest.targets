@@ -10,7 +10,7 @@
   -->
   <ItemGroup>
     <ProjectCapability Condition=" '$(UseUno)' == 'true' " Include="UseUno" />
-    <ProjectCapability Condition=" '$(UseUnoAssets)' == 'true' " Include="UseUnoAssets" />
+    <ProjectCapability Condition=" '$(UseUno)' == 'true' " Include="UseUnoAssets" />
   </ItemGroup>
 
   <!--
@@ -21,7 +21,7 @@
       and we can separate the use of regular Sdk and Web Sdk only through the Project Sdk property
   -->
   <Import
-          Condition=" ('$(UseUno)' == 'true' or '$(UseUnoAssets)' == 'true') and ('$(SkipUnoWorkloadManifest)' != 'true') and '$(UseUnoSdkWay)' != 'true' "
+          Condition=" ('$(UseUno)' == 'true') and ('$(SkipUnoWorkloadManifest)' != 'true') and '$(UseUnoSdkWay)' != 'true' "
           Project="Sdk.targets" Sdk="H.Uno.Sdk" />
   
 </Project>

@@ -13,10 +13,10 @@ Docs about @(ProjectCapability):
 -->
 <Project>
 
-    <!-- .NET Uno features -->
+    <!-- Uno features -->
     <ItemGroup>
         <ProjectCapability Include="Uno"           Condition=" '$(UseUno)' == 'true' " />
-        <ProjectCapability Include="UnoAssets"     Condition=" '$(UseUno)' == 'true' or '$(UseUnoAssets)' == 'true' " />
+        <ProjectCapability Include="UnoAssets"     Condition=" '$(UseUno)' == 'true' " />
     </ItemGroup>
 
     <!-- SingleProject-specific features -->
