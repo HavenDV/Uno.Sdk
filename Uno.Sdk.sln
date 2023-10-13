@@ -120,6 +120,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Msi.x64", "src\work
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Msi.x86", "src\workload\Uno.Sdk.Msi.x86\Uno.Sdk.Msi.x86.csproj", "{874A27FB-359B-445E-9285-060267547DE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Build", "src\workload\Uno.Sdk.Build\Uno.Sdk.Build.csproj", "{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -254,6 +256,10 @@ Global
 		{874A27FB-359B-445E-9285-060267547DE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{874A27FB-359B-445E-9285-060267547DE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{874A27FB-359B-445E-9285-060267547DE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -295,6 +301,7 @@ Global
 		{8A0C555E-8153-403F-A246-61B9191D1379} = {7CC47D4D-B930-4B3F-8164-16E743B7C64C}
 		{ACAD0EE7-2170-40C2-A227-020A08AB4F98} = {7CC47D4D-B930-4B3F-8164-16E743B7C64C}
 		{874A27FB-359B-445E-9285-060267547DE5} = {7CC47D4D-B930-4B3F-8164-16E743B7C64C}
+		{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A} = {7CC47D4D-B930-4B3F-8164-16E743B7C64C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CED9A020-DBA5-4BE6-8096-75E528648EC1}

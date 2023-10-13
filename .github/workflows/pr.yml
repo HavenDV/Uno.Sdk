@@ -14,5 +14,5 @@ jobs:
     uses: ./.github/workflows/test-workload.yml
     with:
       template: uno
-      path: src/workload/Uno.Sdk.Manifest
+      path: src/workload/Uno.Sdk.Build
       source: artifacts/nuget

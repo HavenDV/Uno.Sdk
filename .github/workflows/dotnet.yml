@@ -14,20 +14,20 @@ jobs:
     uses: ./.github/workflows/test-workload.yml
     with:
       template: uno
-      path: src/workload/Uno.Sdk.Manifest
+      path: src/workload/Uno.Sdk.Build
       source: artifacts/nuget
 
   publish:
     needs: test-scripts-with-local-packages
     name: Publish NuGet packages
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
 
       - name: "Build packages"
         run: dotnet build
-          src/workload/Uno.Sdk.Manifest
+          src/workload/Uno.Sdk.Build
           --configuration Release
 
       - name: "Publish"

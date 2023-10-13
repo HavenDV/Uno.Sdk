@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.Build.NoTargets/3.7.0">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Uno.Sdk.Msi.x86\Uno.Sdk.Msi.x86.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" />
+        <ProjectReference Include="..\Uno.Sdk.Msi.x64\Uno.Sdk.Msi.x64.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" />
+        <ProjectReference Include="..\Uno.Sdk.Msi.arm64\Uno.Sdk.Msi.arm64.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+</Project>
