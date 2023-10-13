@@ -1,0 +1,47 @@
+﻿<Project>
+
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  
+  <PropertyGroup>
+    <TargetFramework>net4.8</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <LangVersion>preview</LangVersion>
+    <ImplicitUsings>true</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Uno.Sdk.Manifest\Uno.Sdk.Manifest.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="*.msi" />
+    <None Remove="*.exe" />
+    <None Remove="*.wixpdb" />
+    <None Remove="*.wxs" />
+    <None Remove="*.wixobj" />
+    <None Remove="*.cmd" />
+    <None Remove="*.dll" />
+    <None Remove="*.config" />
+    <None Remove="*.pdb" />
+    <None Remove="wix\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="WixSharp" Version="1.22.1" />
+    <PackageReference Include="WixSharp.wix.bin" Version="3.14.0" />
+  </ItemGroup>
+
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  
+  <!-- Prevent build error on non Windows systems -->
+  <Target Name="MSIAuthoring" AfterTargets="AfterBuild" Condition="'$(MSBuildRuntimeType)' == 'Full'">
+    <Message Importance="high" Text="Building MSI" />
+    <Exec Command="&quot;$(TargetPath)&quot; &quot;/MSBUILD:$(ProjectName)&quot; &quot;/WIXBIN:$(WixBinPackage)&quot; &quot;/Configuration:$(Configuration)&quot; &quot;/Platform:$(Platform)&quot;" WorkingDirectory="$(ProjectDir)"/>
+  </Target>
+  
+</Project>

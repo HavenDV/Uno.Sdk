@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.Build.NoTargets/3.7.0">
+
+  <PropertyGroup>
+    <PackageId>H.Uno.Sdk.Msi.x64</PackageId>
+    <Description>Uno .NET workload installer. Please do not reference directly.</Description>
+    <PackageTags>uno;sdk;workload;installer</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="data/*.*" Pack="true" PackagePath="data" />
+    <None Include="$(MSBuildThisFileDirectory)../Uno.Sdk.Msi/*-x64.msi" Pack="true" PackagePath="data" LinkBase="data" />
+    <None Include="$(PackageOutputPath)../workload-manifest/*.*" Pack="true" PackagePath="data/extractedManifest" LinkBase="data/extractedManifest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Uno.Sdk.Msi\Uno.Sdk.Msi.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+</Project>

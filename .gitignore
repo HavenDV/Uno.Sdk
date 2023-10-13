@@ -399,3 +399,4 @@ FodyWeavers.xsd
 /.idea/
 /example/.idea/
 /new/.idea/
+!src/workload/Uno.Sdk.Msi/

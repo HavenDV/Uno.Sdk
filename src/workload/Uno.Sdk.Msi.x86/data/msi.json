@@ -1,0 +1,25 @@
+{
+  "InstallSize": 10400,
+  "Language": 1033,
+  "Payload": "Uno.Sdk.Manifest-x86.msi",
+  "ProductCode": "{638BD1C3-B6CC-4B5D-BFC2-9F0EE769F920}",
+  "ProductVersion": "64.0.2227",
+  "ProviderKeyName": "Uno.Sdk.Manifest,7.0.400,7.0.401,x86",
+  "UpgradeCode": "{4203F03A-6609-373C-BDF5-4AA27FB8FEA7}",
+  "RelatedProducts": [
+    {
+      "UpgradeCode": "{4203F03A-6609-373C-BDF5-4AA27FB8FEA7}",
+      "VersionMin": null,
+      "VersionMax": "64.0.2227",
+      "Language": "",
+      "Attributes": 1
+    },
+    {
+      "UpgradeCode": "{4203F03A-6609-373C-BDF5-4AA27FB8FEA7}",
+      "VersionMin": "64.0.2227",
+      "VersionMax": null,
+      "Language": "",
+      "Attributes": 2
+    }
+  ]
+}

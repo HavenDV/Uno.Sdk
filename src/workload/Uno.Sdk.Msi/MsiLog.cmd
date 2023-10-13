@@ -1,0 +1,1 @@
+msiexec /i %1 /l*v log.txt

@@ -46,6 +46,7 @@
         DestinationFile="$(WorkloadManifestJsonPath)"
         Replacements="@UNO_WORKLOAD_VERSION@=$(Version);">
     </ReplaceFileContents>
+    <Copy SourceFiles="WorkloadManifest.targets" DestinationFolder="$(PackageOutputPath)../workload-manifest" />
 
     <ItemGroup>
       <_PackageFiles Include="$(WorkloadManifestJsonPath)" PackagePath="data" />
