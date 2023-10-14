@@ -1,15 +1,6 @@
 <Project>
 
-    <!-- 
-      https://github.com/dotnet/designs/blob/main/accepted/2020/workloads/workload-manifest.md#library-packs
-      The design document does not recommend implicit PackageReferences.
-      Moreover, MAUI refuses this too - https://github.com/dotnet/maui/blob/main/src/Workload/Microsoft.Maui.Sdk/Sdk/BundledVersions.in.targets#L73
-      PR: https://github.com/dotnet/maui/pull/14770
-      
-      It's there for now, but we have to take it into account.
-    -->
-
-    <PropertyGroup Label="Versions">
+    <PropertyGroup>
         <!-- Common -->
         <UnoVersion Condition=" '$(UnoVersion)' == '' ">4.10.26</UnoVersion>
         <UnoResizetizerVersion Condition=" '$(UnoResizetizerVersion)' == '' ">1.1.3</UnoResizetizerVersion>
@@ -33,64 +24,5 @@
         <UnoUniversalImageLoaderVersion Condition=" '$(UnoUniversalImageLoaderVersion)' == '' ">1.9.36</UnoUniversalImageLoaderVersion>
         <XamarinGoogleAndroidMaterialVersion Condition=" '$(XamarinGoogleAndroidMaterialVersion)' == '' ">1.9.0.3</XamarinGoogleAndroidMaterialVersion>
     </PropertyGroup>
-    
-    <PropertyGroup>
-        <!--
-          If opted into NuGet Central Package Management, $(DisableUnoImplicitPackageReferences) defaults to true
-          https://learn.microsoft.com/nuget/consume-packages/Central-Package-Management
-        -->
-        <DisableUnoImplicitPackageReferences Condition=" '$(ManagePackageVersionsCentrally)' == 'true' and '$(DisableUnoImplicitPackageReferences)' == '' ">true</DisableUnoImplicitPackageReferences>
-    </PropertyGroup>
-
-    <!-- 
-      It is also worth noting that MAUI starting with net8.0 abandoned implicit packages by default.
-      There are reasons for this, but we're trying to leave it at that for now.
-      https://github.com/dotnet/maui/blob/main/src/Workload/Microsoft.Maui.Sdk/Sdk/BundledVersions.in.targets#L63
-    -->
-
-    <ItemGroup Condition=" '$(DisableUnoImplicitPackageReferences)' != 'true' ">
-        <_UnoImplicitPackageReference Include="Uno.UI" Version="$(UnoVersion)" Condition=" '$(UseUno)' == 'true' and '$(UseUnoUwp)' == 'true' ">
-            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>
-        </_UnoImplicitPackageReference>
-        <_UnoImplicitPackageReference Include="Uno.WinUI" Version="$(UnoVersion)" Condition=" '$(UseUno)' == 'true' and '$(UseUnoUwp)' != 'true' ">
-            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>
-        </_UnoImplicitPackageReference>
-        <_UnoImplicitPackageReference Include="Uno.Resizetizer" Version="$(UnoResizetizerVersion)" PrivateAssets="all" Condition=" '$(UseUnoUwp)' != 'true' " />
-        <_UnoImplicitPackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" Condition=" '$(UseUno)' == 'true' ">
-            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>
-        </_UnoImplicitPackageReference>
-        <_UnoImplicitPackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" Condition=" '$(UseUno)' == 'true' ">
-            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>
-        </_UnoImplicitPackageReference>
-        <_UnoImplicitPackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="$(UnoVersion)" Condition=" '$(UseUno)' == 'true' ">
-            <PrivateAssets Condition=" '$(OutputType)' == 'Library' and '$(UnoApplication)' != 'true' ">all</PrivateAssets>
-        </_UnoImplicitPackageReference>
-    </ItemGroup>
-
-    <Import Project="BundledVersions.Mobile.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoMobile)' == 'true' " />
-    <Import Project="BundledVersions.Windows.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoWindows)' == 'true' " />
-    <Import Project="BundledVersions.WebAssembly.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoWebAssembly)' == 'true' " />
-    <Import Project="BundledVersions.Gtk.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoGtk)' == 'true' " />
-    <Import Project="BundledVersions.Wpf.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoWpf)' == 'true' " />
-    <Import Project="BundledVersions.Linux.targets" Condition=" '$(UnoApplication)' == 'true' and '$(UseUnoLinux)' == 'true' " />
-
-    <!--
-      These implicit <PackageReference/> pull dependencies from NuGet transitively.
-      They are first added to the <_UnoImplicitPackageReference/> item group to list the the desired
-      packages. Then the packages that were specified by the user are removed from the list. Finally,
-      the remaining implicit packages are added into the project.
-  
-      This logic only installs packages if and only if $(DisableUnoImplicitPackageReferences) is not
-      true. This property allows the user to totally override all the default nugets installed. This
-      should not be needed as the $(UnoVersion) should be sufficient. However, there may be a case
-      to test various CI builds of .NET Uno.
-      
-      Install the nuget packages if we are allowed to 
-    -->
-    <ItemGroup Condition=" '$(DisableUnoImplicitPackageReferences)' != 'true' ">
-        <_UnoImplicitPackageReference Remove="@(PackageReference)" />
-        <PackageReference Include="@(_UnoImplicitPackageReference)" IsUnoImplicitPackageReference="true" />
-        <_UnoImplicitRequiredPackageReference Include="@(_UnoImplicitPackageReference->WithMetadataValue('IsUnoImplicitOptionalPackageReference',''))" />
-    </ItemGroup>
     
 </Project>

@@ -2,6 +2,7 @@
 
     <Import Project="Uno.Sdk.DetectPlatform.targets" />
     <Import Project="BundledVersions.targets" />
+    <Import Project="ImplicitPackages.targets" />
     <Import Project="Uno.Sdk.targets" Condition=" '$(UseUno)' == 'true' " />
 
     <Import Project="$(CustomBeforeSdkTargets)" Condition="'$(CustomBeforeSdkTargets)' != ''"/>
