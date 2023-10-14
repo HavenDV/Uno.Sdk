@@ -122,6 +122,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Msi.x86", "src\work
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Sdk.Build", "src\workload\Uno.Sdk.Build\Uno.Sdk.Build.csproj", "{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uno.Maui.Example", "src\apps\Uno.Maui.Example\Uno.Maui.Example.csproj", "{B11B9D39-C516-4B17-A56F-08A0EF5A9C04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -260,6 +262,10 @@ Global
 		{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B11B9D39-C516-4B17-A56F-08A0EF5A9C04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B11B9D39-C516-4B17-A56F-08A0EF5A9C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B11B9D39-C516-4B17-A56F-08A0EF5A9C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B11B9D39-C516-4B17-A56F-08A0EF5A9C04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -302,6 +308,7 @@ Global
 		{ACAD0EE7-2170-40C2-A227-020A08AB4F98} = {7CC47D4D-B930-4B3F-8164-16E743B7C64C}
 		{874A27FB-359B-445E-9285-060267547DE5} = {7CC47D4D-B930-4B3F-8164-16E743B7C64C}
 		{8F4C4307-C2F0-44B2-8B7A-6ABF6BF47E5A} = {7CC47D4D-B930-4B3F-8164-16E743B7C64C}
+		{B11B9D39-C516-4B17-A56F-08A0EF5A9C04} = {4CA75328-5D8C-46F5-9B4C-E84A50145139}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CED9A020-DBA5-4BE6-8096-75E528648EC1}
