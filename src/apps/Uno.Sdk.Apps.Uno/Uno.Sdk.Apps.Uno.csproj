@@ -10,8 +10,8 @@
 		<!-- <UseUnoUwp>true</UseUnoUwp> -->
 	</PropertyGroup>
 
-	<PropertyGroup Label="Test Uno 5.0">
-<!--		<UnoVersion>5.0.0-dev.2770</UnoVersion>-->
+	<PropertyGroup Label="Test Uno 5.1">
+<!--		<UnoVersion>5.1.0-dev.2770</UnoVersion>-->
 <!--		<UnoWasmBootstrapVersion>7.0.27</UnoWasmBootstrapVersion>-->
 <!--		<UnoResizetizerVersion>1.2.0-dev.39</UnoResizetizerVersion>-->
 <!--		<UnoExtensionsVersion>1.4.0</UnoExtensionsVersion>-->
