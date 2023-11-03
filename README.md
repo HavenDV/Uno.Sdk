@@ -49,7 +49,7 @@ Here are three possible uses:
 ```
 - Use SDK via NuGet. A small hack will be used here to disable the error message about missing workloads for webassembly/linux/gtk.
 ```xml
-<Project Sdk="H.Uno.Sdk/0.18.0">
+<Project Sdk="H.Uno.Sdk/0.19.0">
 
     <PropertyGroup>
         <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-webassembly;net7.0-gtk;net7.0-linux;net7.0-windows</TargetFrameworks>
