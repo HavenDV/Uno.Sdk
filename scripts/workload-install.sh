@@ -185,14 +185,26 @@ function install_uno_workload() {
     fi
 
     # Install workload packs.
-    if [[ "$SOURCE" == "<auto>" ]]; then
-      $DOTNET_INSTALL_DIR/dotnet workload install $WORKLOAD --skip-manifest-update --sdk-version $DOTNET_VERSION
+    if [ -f global.json ]; then
+        CACHE_GLOBAL_JSON="true"
+        mv global.json global.json.bak
     else
-      $DOTNET_INSTALL_DIR/dotnet workload install $WORKLOAD --skip-manifest-update --sdk-version $DOTNET_VERSION --source $SOURCE
+        CACHE_GLOBAL_JSON="false"
+    fi
+    dotnet new globaljson --sdk-version $DOTNET_VERSION
+    
+    if [[ "$SOURCE" == "<auto>" ]]; then
+      $DOTNET_INSTALL_DIR/dotnet workload install $WORKLOAD --skip-manifest-update
+    else
+      $DOTNET_INSTALL_DIR/dotnet workload install $WORKLOAD --skip-manifest-update --source $SOURCE
     fi
     
     # Clean-up
     rm -fr $TMPDIR
+    rm global.json
+    if [[ "$CACHE_GLOBAL_JSON" == "true" ]]; then
+        mv global.json.bak global.json
+    fi
 
     echo "Done installing Uno workload $MANIFEST_VERSION"
     echo ""
