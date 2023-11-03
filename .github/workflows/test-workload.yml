@@ -78,7 +78,7 @@ jobs:
         run: dotnet new ${{ inputs.template }} --output test_msbuild
 
       - name: "Build new project using MSBuild"
-        if: matrix.os == 'windows' && matrix.dotnet.quality != 'preview'
+        if: matrix.os == 'windows' && matrix.dotnet.quality != 'ga'
         run: msbuild /restore test_msbuild /p:EmitCompilerGeneratedFiles=true
 
       - name: "Upload MSBuild artifacts"
