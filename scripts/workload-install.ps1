@@ -180,7 +180,6 @@ function Install-UnoWorkload([string]$DotnetVersion)
         # The Tizen for Windows script installs each package manually. 
         # This seems wrong and different from the behavior of the linux script
         # But, as it turned out, after the release of MSI packages - during installation they require that the code be signed
-        
         Remove-Pack -Id $ManifestName -Version $OldVersion -Kind "manifest"
         $ManifestJson.packs.PSObject.Properties | ForEach-Object {
             Write-Host "Removing $($_.Name)/$($_.Value.version)..."
@@ -197,18 +196,23 @@ function Install-UnoWorkload([string]$DotnetVersion)
     Write-Host "Installing $ManifestName/$Version to $ManifestDir..."
     Install-Pack -Id $ManifestName -Version $Version -Kind "manifest" -Source $Source
 
+    # Install workload packs.
+    # $CacheGlobalJson = Test-Path -Path global.json
+    # if ($CacheGlobalJson) {
+    #     Move-Item -Path global.json -Destination global.json.bak
+    # }
+    # Invoke-Expression "& '$DotnetCommand' new globaljson --sdk-version $DotnetVersion"
+    # 
+    # if ($Source -eq "<auto>") {
+    #     Invoke-Expression "& '$DotnetCommand' workload install uno --skip-manifest-update"
+    # }
+    # else {
+    #     Invoke-Expression "& '$DotnetCommand' workload install uno --skip-manifest-update --source $Source"
+    # }
+    
     # The Tizen for Windows script installs each package manually. 
     # This seems wrong and different from the behavior of the linux script
     # But, as it turned out, after the release of MSI packages - during installation they require that the code be signed
-
-    # Install workload packs.
-    
-    # if ($Source -eq "<auto>") {
-    #     Invoke-Expression "& '$DotnetCommand' workload install uno --sdk-version $DotnetVersion --skip-manifest-update"
-    # }
-    # else {
-    #     Invoke-Expression "& '$DotnetCommand' workload install uno --sdk-version $DotnetVersion --skip-manifest-update --source $Source"
-    # }
     
     # Download and install workload packs.
     $NewManifestJson = $(Get-Content $UnoManifestFile | ConvertFrom-Json)
@@ -227,6 +231,11 @@ function Install-UnoWorkload([string]$DotnetVersion)
 
     # Clean up
     Remove-Item -Path $TempDir -Force -Recurse
+    
+    # Remove-Item global.json
+    # if ($CacheGlobalJson) {
+    #     Move-Item -Path global.json.bak -Destination global.json
+    # }
 
     Write-Host "Done installing Uno workload $Version"
 }
