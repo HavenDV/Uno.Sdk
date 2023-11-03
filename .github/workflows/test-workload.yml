@@ -19,7 +19,7 @@ jobs:
         dotnet: [
           { version: 6.0.x, quality: ga },
           { version: 7.0.x, quality: ga },
-          # { version: 8.0.x, quality: preview } #- error UXAML0001: Invalid URI: The URI is empty. 
+          { version: 8.0.x, quality: preview }
         ]
         
     name: ${{ matrix.os }}/${{ matrix.dotnet.version }}/${{ matrix.dotnet.quality }}/${{ inputs.source == '' && 'nuget' || 'local' }}
