@@ -1,8 +1,4 @@
-#if __UNO5__
 using Uno.UI.Runtime.Skia.Wpf;
-#else
-using Uno.UI.Skia.Platform;
-#endif
 
 namespace UnoTemplate.Skia.Wpf;
 
