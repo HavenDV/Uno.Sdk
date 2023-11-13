@@ -129,3 +129,6 @@ Official documentation regarding the design of Workloads and Sdks:
 Priority place for bugs: https://github.com/HavenDV/Uno.Sdk/issues  
 Priority place for ideas and general questions: https://github.com/HavenDV/Uno.Sdk/discussions  
 Discord: https://discord.gg/g8u2t9dKgE  
+
+## Cons
+- Allows you to use [UnsupportedOSPlatform("gtk") attributes, which will replace the custom generator and custom attributes for unsupported methods
