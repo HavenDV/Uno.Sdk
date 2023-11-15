@@ -11,7 +11,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 		<PackageReference Include="Uno.WinUI" Version="5.0.41" />
-		<PackageReference Include="Uno.Resizetizer" Version="1.2.0" PrivateAssets="all" />
+		<PackageReference Include="Uno.Resizetizer" Version="1.2.1" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
 	</ItemGroup>
 
