@@ -72,6 +72,18 @@
                 BaseSize="128,128"
                 Color="#086AD1"
                 Condition="Exists('$(ProjectDir)Resources\Splash\splash_screen.svg')" />
+        <UnoIcon Include="$(ProjectDir)Icons\iconapp.svg"
+                 ForegroundScale="0.65"
+                 Color="#00000000"
+                 Condition="Exists('$(ProjectDir)Icons\iconapp.svg')" />
+        <UnoIcon Update="$(ProjectDir)Icons/iconapp.svg"
+                 ForegroundFile="$(ProjectDir)Icons/appconfig.svg"
+                 Condition="Exists('$(ProjectDir)Icons/iconapp.svg') AND Exists('$(ProjectDir)Icons/appconfig.svg')" />
+        <UnoSplashScreen
+                Include="$(ProjectDir)Splash\splash_screen.svg"
+                BaseSize="128,128"
+                Color="#086AD1"
+                Condition="Exists('$(ProjectDir)Splash\splash_screen.svg')" />
         <UnoImage Include="$(ProjectDir)Assets\**\*.svg" Condition="'$(UseUnoLibrary)' != 'true'" Exclude="@(UnoIcon);@(UnoSplashScreen)" />
         <UnoImage Include="$(ProjectDir)Resources\**\*.svg" Exclude="@(UnoIcon);@(UnoSplashScreen)" />
         <Compile Update="**/*.xaml.cs">

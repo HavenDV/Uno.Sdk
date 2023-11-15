@@ -2,18 +2,18 @@
 
     <PropertyGroup>
         <!-- Common -->
-        <UnoVersion Condition=" '$(UnoVersion)' == '' ">5.0.19</UnoVersion>
+        <UnoVersion Condition=" '$(UnoVersion)' == '' ">5.0.41</UnoVersion>
         <UnoResizetizerVersion Condition=" '$(UnoResizetizerVersion)' == '' ">1.2.0</UnoResizetizerVersion>
         <UnoExtensionsVersion Condition=" '$(UnoExtensionsVersion)' == '' ">1.7.0</UnoExtensionsVersion>
-        <MicrosoftExtensionsHostingVersion Condition=" '$(MicrosoftExtensionsHostingVersion)' == '' ">7.0.1</MicrosoftExtensionsHostingVersion>
-        <MicrosoftExtensionsLoggingConsoleVersion Condition=" '$(MicrosoftExtensionsLoggingConsoleVersion)' == '' ">7.0.0</MicrosoftExtensionsLoggingConsoleVersion>
+        <MicrosoftExtensionsHostingVersion Condition=" '$(MicrosoftExtensionsHostingVersion)' == '' ">8.0.0</MicrosoftExtensionsHostingVersion>
+        <MicrosoftExtensionsLoggingConsoleVersion Condition=" '$(MicrosoftExtensionsLoggingConsoleVersion)' == '' ">8.0.0</MicrosoftExtensionsLoggingConsoleVersion>
         
         <!-- Skia -->
         <SkiaVersion Condition=" '$(SkiaVersion)' == '' ">2.88.6</SkiaVersion>
 
         <!-- WebAssembly -->
-        <MicrosoftWindowsCompatibilityVersion Condition=" '$(MicrosoftWindowsCompatibilityVersion)' == '' ">7.0.5</MicrosoftWindowsCompatibilityVersion>
-        <UnoWasmBootstrapVersion Condition=" '$(UnoWasmBootstrapVersion)' == '' ">8.0.0</UnoWasmBootstrapVersion>
+        <MicrosoftWindowsCompatibilityVersion Condition=" '$(MicrosoftWindowsCompatibilityVersion)' == '' ">8.0.0</MicrosoftWindowsCompatibilityVersion>
+        <UnoWasmBootstrapVersion Condition=" '$(UnoWasmBootstrapVersion)' == '' ">8.0.3</UnoWasmBootstrapVersion>
 
         <!-- Windows -->
         <MicrosoftWindowsAppSDKVersion Condition=" '$(MicrosoftWindowsAppSDKVersion)' == '' ">1.4.231008000</MicrosoftWindowsAppSDKVersion>
@@ -22,7 +22,7 @@
 
         <!-- Mobile -->
         <UnoUniversalImageLoaderVersion Condition=" '$(UnoUniversalImageLoaderVersion)' == '' ">1.9.36</UnoUniversalImageLoaderVersion>
-        <XamarinGoogleAndroidMaterialVersion Condition=" '$(XamarinGoogleAndroidMaterialVersion)' == '' ">1.9.0.3</XamarinGoogleAndroidMaterialVersion>
+        <XamarinGoogleAndroidMaterialVersion Condition=" '$(XamarinGoogleAndroidMaterialVersion)' == '' ">1.10.0.1</XamarinGoogleAndroidMaterialVersion>
     </PropertyGroup>
     
 </Project>

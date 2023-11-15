@@ -3,7 +3,7 @@
   <Import Project="$(MSBuildThisFileDirectory)..\..\workload\Uno.Sdk\Sdk\Sdk.props" />
 
   <PropertyGroup>
-    <TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
     <OutputType>Exe</OutputType>
 <!--    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>-->
     <UseUnoWindows>true</UseUnoWindows>

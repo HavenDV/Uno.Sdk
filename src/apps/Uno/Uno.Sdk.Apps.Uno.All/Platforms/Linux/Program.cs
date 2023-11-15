@@ -1,5 +1,5 @@
 using Windows.UI.Core;
-using Uno.UI.Runtime.Skia;
+using Uno.UI.Runtime.Skia.Linux.FrameBuffer;
 
 namespace Uno.Sdk.Apps.Uno.Skia.Linux.Framebuffer;
 

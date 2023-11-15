@@ -7,13 +7,13 @@
 
 Single project solution for Uno.
 Supported platforms:
-- Mobile(iOS, macOS, MacCatalyst and Android)(`net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-macos`)
-- Windows(`net7.0-windows10.0.19041.0` or any other `net7.0-windows10`)
-- WebAssembly(`net7.0-webassembly`)
-- Skia.Gkt(`net7.0-gtk`)
-- Skia.Wpf(`net7.0-windows`)(this is an implicit indication for `net7.0-windows7`)
-- Skia.Linux.Framebuffer(`net7.0-linux`)
-- Skia.Tizen(`net7.0-tizen`)(Untested)
+- Mobile(iOS, macOS, MacCatalyst and Android)(`net8.0-maccatalyst;net8.0-android;net8.0-ios;net8.0-macos`)
+- Windows(`net8.0-windows10.0.19041.0` or any other `net8.0-windows10`)
+- WebAssembly(`net8.0-webassembly`)
+- Skia.Gkt(`net8.0-gtk`)
+- Skia.Wpf(`net8.0-windows`)(this is an implicit indication for `net8.0-windows7`)
+- Skia.Linux.Framebuffer(`net8.0-linux`)
+- Skia.Tizen(`net8.0-tizen`)(Untested)
 
 Project Structure like MAUI:
 - Platforms
@@ -41,24 +41,24 @@ Here are three possible uses:
 <Project Sdk="H.Uno.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-webassembly;net7.0-gtk;net7.0-linux;net7.0-windows</TargetFrameworks>
-        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+        <TargetFrameworks>net8.0-maccatalyst;net8.0-android;net8.0-ios;net8.0-webassembly;net8.0-gtk;net8.0-linux;net8.0-windows</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
     </PropertyGroup>
 
 </Project>
 ```
 - Use SDK via NuGet. A small hack will be used here to disable the error message about missing workloads for webassembly/linux/gtk.
 ```xml
-<Project Sdk="H.Uno.Sdk/0.20.0">
+<Project Sdk="H.Uno.Sdk/0.21.0">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-webassembly;net7.0-gtk;net7.0-linux;net7.0-windows</TargetFrameworks>
-        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+        <TargetFrameworks>net8.0-maccatalyst;net8.0-android;net8.0-ios;net8.0-webassembly;net8.0-gtk;net8.0-linux;net8.0-windows</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
     </PropertyGroup>
 
 </Project>
 ```
-Note: To restore correctly from NuGet you need to run this in a project where `net7.0-webassembly;net7.0-gtk;net7.0-linux` is missing
+Note: To restore correctly from NuGet you need to run this in a project where `net8.0-webassembly;net8.0-gtk;net8.0-linux` is missing
 - Use via `Microsoft.NET.Sdk` and `<UseUno>true</UseUno>` after installing the workload 
 (the most correct, but currently not supported due to the fact that WebAssembly requires Microsoft.NET.Sdk.Web 
 which will not work with some target frameworks)
@@ -66,8 +66,8 @@ which will not work with some target frameworks)
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios;net7.0-webassembly;net7.0-gtk;net7.0-linux;net7.0-windows</TargetFrameworks>
-        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+        <TargetFrameworks>net8.0-maccatalyst;net8.0-android;net8.0-ios;net8.0-webassembly;net8.0-gtk;net8.0-linux;net8.0-windows</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
         <UseUno>true</UseUno> <!-- or UseUnoUwp -->
     </PropertyGroup>
 
@@ -82,7 +82,7 @@ mkdir SingleProjectSolution
 cd SingleProjectSolution
 dotnet new uno
 dotnet build
-dotnet run --framework net7.0-gtk
+dotnet run --framework net8.0-gtk
 ```
 
 ### Install workload
