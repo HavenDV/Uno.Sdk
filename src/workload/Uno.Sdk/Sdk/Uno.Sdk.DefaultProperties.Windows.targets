@@ -20,14 +20,15 @@
   <PropertyGroup Condition="'$(_SingleProjectRIDRequired)' == 'true' and '$(_SingleProjectRIDSpecified)' != 'true' ">
     <_SingleProjectHostArchitecture>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</_SingleProjectHostArchitecture>
     <_SingleProjectHostArchitecture>$(_SingleProjectHostArchitecture.ToLower())</_SingleProjectHostArchitecture>
-    <RuntimeIdentifier>win10-$(_SingleProjectHostArchitecture)</RuntimeIdentifier>
+    <RuntimeIdentifier>win-$(_SingleProjectHostArchitecture)</RuntimeIdentifier>
+    <PlatformTarget>$(_SingleProjectHostArchitecture)</PlatformTarget>
     <_UnoUsingDefaultRuntimeIdentifier>true</_UnoUsingDefaultRuntimeIdentifier>
   </PropertyGroup>
   
   <PropertyGroup>
     <Platforms Condition=" '$(Platforms)' == '' ">x86;x64;arm64</Platforms>
-    <RuntimeIdentifiers Condition=" '$(RuntimeIdentifiers)' == '' ">win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
-    <PublishProfile Condition=" '$(PublishProfile)' == '' ">win10-$(Platform).pubxml</PublishProfile>
+    <RuntimeIdentifiers Condition=" '$(RuntimeIdentifiers)' == '' ">win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <PublishProfile Condition=" '$(PublishProfile)' == '' ">win-$(Platform).pubxml</PublishProfile>
     <UseWinUI Condition=" '$(UseWinUI)' == '' ">true</UseWinUI>
     <EnableMsixTooling Condition=" '$(EnableMsixTooling)' == '' ">true</EnableMsixTooling>
     <EnableWindowsTargeting Condition=" '$(EnableWindowsTargeting)' == '' ">true</EnableWindowsTargeting>
