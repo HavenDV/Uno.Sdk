@@ -4,8 +4,6 @@
         <_UnoImplicitPackageReference Include="Microsoft.WindowsAppSDK" Version="$(MicrosoftWindowsAppSDKVersion)" />
         <_UnoImplicitPackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$(MicrosoftWindowsSDKBuildToolsVersion)" />
         <_UnoImplicitPackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="$(UnoCoreExtensionsLoggingSingletonVersion)" />
-
-        <_UnoImplicitPackageReference Include="Uno.WinUI" Version="$(UnoVersion)" />
     </ItemGroup>
     
 </Project>
