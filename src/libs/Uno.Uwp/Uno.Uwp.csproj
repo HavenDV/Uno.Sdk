@@ -1,0 +1,64 @@
+﻿<Project>
+
+  <Import Project="$(MSBuildThisFileDirectory)../../workload/Uno.Sdk/Sdk/Sdk.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0-maccatalyst;net8.0-ios;net8.0-android;net8.0-webassembly;net8.0-gtk;net8.0-linux;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks Condition="'$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <PackageId>H.Uno.Uwp</PackageId>
+    <IsPackable>true</IsPackable>
+    <DisableUnoResizetizer>true</DisableUnoResizetizer>
+    <DisableUnoImplicitPackageReferences>true</DisableUnoImplicitPackageReferences>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.UI" Version="$(UnoVersion)" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="$(UnoVersion)" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0-gtk' or '$(TargetFramework)' == 'net8.0-linux' or '$(TargetFramework)' == 'net8.0-windows' ">
+    <PackageReference Include="SkiaSharp.Skottie" Version="$(SkiaVersion)" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="$(SkiaVersion)" />
+
+    <PackageReference Include="Uno.UI.Skia.Gtk" Version="$(UnoVersion)" Condition=" '$(TargetFramework)' == 'net8.0-gtk' " />
+    <PackageReference Include="Uno.UI.Skia.Linux.Framebuffer" Version="$(UnoVersion)" Condition=" '$(TargetFramework)' == 'net8.0-linux' " />
+    <PackageReference Include="Uno.UI.Skia.Wpf" Version="$(UnoVersion)" Condition=" '$(TargetFramework)' == 'net8.0-windows' " />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0-maccatalyst' OR '$(TargetFramework)' == 'net8.0-ios' OR '$(TargetFramework)' == 'net8.0-android' ">
+    <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="$(UnoExtensionsVersion)" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="$(XamarinGoogleAndroidMaterialVersion)" Condition=" '$(TargetFramework)' == 'net8.0-android' " />
+    <PackageReference Include="Uno.UniversalImageLoader" Version="$(UnoUniversalImageLoaderVersion)" Condition=" '$(TargetFramework)' == 'net8.0-android' " />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0-webassembly' ">
+    <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="$(UnoExtensionsVersion)" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="$(MicrosoftWindowsCompatibilityVersion)" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="$(UnoWasmBootstrapVersion)" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="$(UnoWasmBootstrapVersion)" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="$(UnoVersion)" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0-windows10.0.19041.0' ">
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="$(MicrosoftWindowsAppSDKVersion)" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$(MicrosoftWindowsSDKBuildToolsVersion)" />
+    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="$(UnoCoreExtensionsLoggingSingletonVersion)" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)../../workload/Uno.Sdk/Sdk/Sdk.targets" />
+
+  <ItemGroup>
+    <PackageReference Update="@(PackageReference)" PrivateAssets="contentfiles;analyzers;build"/>
+    <PackageReference Update="@(PackageReference->WithMetadataValue('Identity','DotNet.ReproducibleBuilds'))" PrivateAssets="all"/>
+  </ItemGroup>
+  
+  <Target Name="BuildDist"/>
+
+<!--  <Target Name="ShowPackageReferences" BeforeTargets="CoreBuild">-->
+<!--    <Message Text="$(TargetFramework) %(PackageReference.Identity) %(PackageReference.PrivateAssets)" Importance="high" />-->
+<!--  </Target>-->
+  
+</Project>
