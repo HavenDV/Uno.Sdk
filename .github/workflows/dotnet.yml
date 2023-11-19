@@ -54,7 +54,7 @@ jobs:
       template: uno
   
   build-test-publish-uno:
-    name: Build, test and publish
+    name: Uno WinUI meta package
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-latest
@@ -66,7 +66,7 @@ jobs:
       nuget-key: ${{ secrets.NUGET_KEY }}
       
   build-test-publish-uno-uwp:
-    name: Build, test and publish
+    name: Uno UWP meta package
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
       os: windows-latest
