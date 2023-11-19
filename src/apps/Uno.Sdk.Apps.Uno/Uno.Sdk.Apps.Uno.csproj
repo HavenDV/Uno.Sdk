@@ -7,6 +7,7 @@
 		<TargetFrameworks>net8.0-gtk;net8.0-webassembly;net8.0-linux;net8.0-windows</TargetFrameworks>
 		<TargetFrameworks Condition="'$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<OutputType>Exe</OutputType>
+		<DebugUnoSdk>true</DebugUnoSdk>
 		<!-- <UseUnoUwp>true</UseUnoUwp> -->
 	</PropertyGroup>
 

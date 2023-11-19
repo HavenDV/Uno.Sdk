@@ -11,7 +11,8 @@
   <Import Project="Uno.Sdk.GlobalUsings.targets" />
   
   <Import Project="Uno.Sdk.DisableCheckOfFakePlatforms.targets" Condition="'$(IsUnoWorkloadInstalled)' != 'true'" />
-  
+
+  <Import Project="Uno.Sdk.Debug.targets" />
   <Import Project="Uno.Sdk.OverrideTargets.targets" />
   
 </Project>
