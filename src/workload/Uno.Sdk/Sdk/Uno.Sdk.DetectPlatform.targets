@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-<!--    <UseUnoLibrary Condition=" '$(UseUnoLibrary)' == '' and '$(UnoApplication)' != 'true' ">true</UseUnoLibrary>-->
+    <UseUnoLibrary Condition=" '$(UseUnoLibrary)' == '' and '$(UnoApplication)' != 'true' ">true</UseUnoLibrary>
     <UseUnoLibrary Condition=" '$(UseUnoLibrary)' == '' ">false</UseUnoLibrary>
   </PropertyGroup>
 
