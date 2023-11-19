@@ -52,3 +52,27 @@ jobs:
     uses: ./.github/workflows/test-workload.yml
     with:
       template: uno
+  
+  build-test-publish-uno:
+    name: Build, test and publish
+    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+    with:
+      os: windows-latest
+      project-path: src/libs/Uno
+      workloads: maui
+      generate-build-number: false
+      conventional-commits-publish-conditions: false
+    secrets:
+      nuget-key: ${{ secrets.NUGET_KEY }}
+      
+  build-test-publish-uno-uwp:
+    name: Build, test and publish
+    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+    with:
+      os: windows-latest
+      project-path: src/libs/Uno.Uwp
+      workloads: maui
+      generate-build-number: false
+      conventional-commits-publish-conditions: false
+    secrets:
+      nuget-key: ${{ secrets.NUGET_KEY }}
