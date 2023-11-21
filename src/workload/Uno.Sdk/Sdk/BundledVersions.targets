@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <!-- Common -->
-        <UnoVersion Condition=" '$(UnoVersion)' == '' ">5.0.41</UnoVersion>
-        <UnoResizetizerVersion Condition=" '$(UnoResizetizerVersion)' == '' ">1.2.0</UnoResizetizerVersion>
+        <UnoVersion Condition=" '$(UnoVersion)' == '' ">5.0.48</UnoVersion>
+        <UnoResizetizerVersion Condition=" '$(UnoResizetizerVersion)' == '' ">1.2.1</UnoResizetizerVersion>
         <UnoExtensionsVersion Condition=" '$(UnoExtensionsVersion)' == '' ">1.7.0</UnoExtensionsVersion>
         <MicrosoftExtensionsHostingVersion Condition=" '$(MicrosoftExtensionsHostingVersion)' == '' ">8.0.0</MicrosoftExtensionsHostingVersion>
         <MicrosoftExtensionsLoggingConsoleVersion Condition=" '$(MicrosoftExtensionsLoggingConsoleVersion)' == '' ">8.0.0</MicrosoftExtensionsLoggingConsoleVersion>
@@ -13,10 +13,10 @@
 
         <!-- WebAssembly -->
         <MicrosoftWindowsCompatibilityVersion Condition=" '$(MicrosoftWindowsCompatibilityVersion)' == '' ">8.0.0</MicrosoftWindowsCompatibilityVersion>
-        <UnoWasmBootstrapVersion Condition=" '$(UnoWasmBootstrapVersion)' == '' ">8.0.3</UnoWasmBootstrapVersion>
+        <UnoWasmBootstrapVersion Condition=" '$(UnoWasmBootstrapVersion)' == '' ">8.0.4</UnoWasmBootstrapVersion>
 
         <!-- Windows -->
-        <MicrosoftWindowsAppSDKVersion Condition=" '$(MicrosoftWindowsAppSDKVersion)' == '' ">1.4.231008000</MicrosoftWindowsAppSDKVersion>
+        <MicrosoftWindowsAppSDKVersion Condition=" '$(MicrosoftWindowsAppSDKVersion)' == '' ">1.4.231115000</MicrosoftWindowsAppSDKVersion>
         <MicrosoftWindowsSDKBuildToolsVersion Condition=" '$(MicrosoftWindowsSDKBuildToolsVersion)' == '' ">10.0.25936-preview</MicrosoftWindowsSDKBuildToolsVersion>
         <UnoCoreExtensionsLoggingSingletonVersion Condition=" '$(UnoCoreExtensionsLoggingSingletonVersion)' == '' ">4.0.1</UnoCoreExtensionsLoggingSingletonVersion>
 
