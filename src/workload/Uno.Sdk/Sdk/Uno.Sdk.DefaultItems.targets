@@ -121,7 +121,7 @@
         <Compile Remove="**\android\**\*.cs" />
         <None Include="**\android\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     </ItemGroup>
-    <ItemGroup Condition="$(TargetFramework.Contains('-windows')) != true ">
+    <ItemGroup Condition="$(TargetFramework.Contains('-windows10')) != true ">
         <Compile Remove="**\*.windows.cs" />
         <None Include="**\*.windows.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
         <Compile Remove="**\windows\**\*.cs" />
