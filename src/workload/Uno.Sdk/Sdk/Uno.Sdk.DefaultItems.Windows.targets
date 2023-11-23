@@ -16,5 +16,13 @@
         <Manifest Include="$(ApplicationManifest)" Condition="Exists('$(ApplicationManifest)')" />
         <AppxManifest Include="$(PackageManifest)" Condition="Exists('$(PackageManifest)')" />
     </ItemGroup>
+
+    <Target Name="FixUnoGeneratePackageAppxManifest" BeforeTargets="UnoGeneratePackageAppxManifest">
+        <ItemGroup>
+            <NewAppxManifest Include="@(AppxManifest->Distinct())" />
+            <AppxManifest Remove="@(AppxManifest)" />
+            <AppxManifest Include="@(NewAppxManifest)" />
+        </ItemGroup>
+    </Target>
     
 </Project>

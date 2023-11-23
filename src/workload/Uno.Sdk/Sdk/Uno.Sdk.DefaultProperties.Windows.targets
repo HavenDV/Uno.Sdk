@@ -21,7 +21,7 @@
     <_SingleProjectHostArchitecture>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</_SingleProjectHostArchitecture>
     <_SingleProjectHostArchitecture>$(_SingleProjectHostArchitecture.ToLower())</_SingleProjectHostArchitecture>
     <RuntimeIdentifier>win-$(_SingleProjectHostArchitecture)</RuntimeIdentifier>
-    <!--<PlatformTarget>$(_SingleProjectHostArchitecture)</PlatformTarget>-->
+    <PlatformTarget>$(_SingleProjectHostArchitecture)</PlatformTarget>
     <AllowNeutralPackageWithAppHost>true</AllowNeutralPackageWithAppHost>
     <_UnoUsingDefaultRuntimeIdentifier>true</_UnoUsingDefaultRuntimeIdentifier>
   </PropertyGroup>

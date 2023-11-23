@@ -2,12 +2,12 @@
 
     <Target Name="DebugUnoSdk" BeforeTargets="CoreCompile;Compile;Build;CoreBuild" Condition=" '$(DebugUnoSdk)' == 'true' ">
         
+        <Message Importance="high" Text="TargetPlatformIdentifier: $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))" />
         <Message Importance="high" Text="UseUno: $(UseUno)" />
         <Message Importance="high" Text="UseUnoUwp: $(UseUnoUwp)" />
         <Message Importance="high" Text="UnoApplication: $(UnoApplication)" />
         <Message Importance="high" Text="UseUnoLibrary: $(UseUnoLibrary)" />
         <Message Importance="high" Text="OutputType: $(OutputType)" />
-        <Message Importance="high" Text="TargetPlatformIdentifier: $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))" />
         
     </Target>
 
