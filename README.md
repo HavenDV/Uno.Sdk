@@ -47,7 +47,7 @@ Here are three possible uses:
 
 </Project>
 ```
-- Use SDK via NuGet. A small hack will be used here to disable the error message about missing workloads for webassembly/linux/gtk.
+- Use SDK via NuGet. A small hack will be used here to disable the error message about missing workloads for webassembly/linux/gtk. But it's better if you install workload also.
 ```xml
 <Project Sdk="H.Uno.Sdk/0.25.0">
 
@@ -58,7 +58,7 @@ Here are three possible uses:
 
 </Project>
 ```
-Note: To restore correctly from NuGet you need to run this in a project where `net8.0-webassembly;net8.0-gtk;net8.0-linux` is missing
+Note: For some cases to restore correctly from NuGet you need to run this in a project where `net8.0-webassembly;net8.0-gtk;net8.0-linux` is missing
 - Use via `Microsoft.NET.Sdk` and `<UseUno>true</UseUno>` after installing the workload 
 (the most correct, but currently not supported due to the fact that WebAssembly requires Microsoft.NET.Sdk.Web 
 which will not work with some target frameworks)
