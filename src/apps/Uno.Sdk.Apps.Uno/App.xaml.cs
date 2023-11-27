@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Hosting;
 using Uno.Resizetizer;
 using Uno.Sdk.Apps.Views;
+using Uno.UI;
 
 namespace Uno.Sdk.Apps.Uno;
 
@@ -32,7 +33,11 @@ public sealed partial class App : Application
 #else
 		MainWindow = Microsoft.UI.Xaml.Window.Current;
 #endif
-
+		
+#if DEBUG
+		MainWindow.EnableHotReload();
+#endif
+		
 		// Do not repeat app initialization when the Window already has content,
 		// just ensure that the window is active
 		if (MainWindow.Content is not Frame rootFrame)
