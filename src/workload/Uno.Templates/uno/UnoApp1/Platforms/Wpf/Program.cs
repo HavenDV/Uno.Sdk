@@ -8,15 +8,8 @@ public class Program
 	public static void Main(string[] args)
 	{
 		var app = new System.Windows.Application();
-		var window = new System.Windows.Window
-		{
-			Content = new System.Windows.Controls.ContentControl
-			{
-				Content = new WpfHost(app.Dispatcher, () => new App()),
-			}
-		};
-		
-		window.Show();
+		var host = new WpfHost(app.Dispatcher, () => new App());
+		host.Run();
 		app.Run();
 	}
 }
