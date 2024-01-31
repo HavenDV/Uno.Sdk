@@ -16,7 +16,6 @@
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.uno.maui.example</ApplicationId>
-		<ApplicationIdGuid>868c86f2-51eb-4a91-b873-30045ec7d077</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -50,10 +49,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Platforms\Gtk\" />
 	</ItemGroup>
 
 </Project>

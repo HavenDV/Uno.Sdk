@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget">
-    <Version>5.0.48</Version>
+    <Version>5.1.31</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <Authors>Uno Platform</Authors>
